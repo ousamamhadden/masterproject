@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "src"
+version = "0.0.1"
+description = "A short description of the project."
+authors = [{ name = ": Group 47", email = "your@email.com" }]
+license = { file = "LICENSE" }
+readme = "README.md"
+requires-python = ">=3.11.5"
+dynamic = ["dependencies", "optional-dependencies"]
+
+[tool.setuptools]
+packages = ["src"]
+
+[tool.setuptools.dynamic]
+dependencies = { file = ["requirements.txt"] }
+
+[tool.setuptools.dynamic.optional-dependencies]
+dev = { file = ['requirements_dev.txt'] }
+
+[tool.ruff]
+line-length = 120
+select = [
+  # pycodestyle
+  "E",
+  # Pyflakes
+  "F",
+  # isort
+  "I",
+  # pep8-naming
+  "N",
+  # Warning
+  "W",
+  # Error
+  "E",
+]
+extend-select = ["D203", "D212"]
+ignore = ["N812"]
+[tool.coverage.run]
+omit = ["*/tests/*", "*/private/*", "*/__init__.py", "*/.cache/*"]

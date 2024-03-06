@@ -1,0 +1,7 @@
+batch_size: 8
+lr: 0.001
+epochs: 1
+seed: 123
+dataset_path: './data/processed/train_fast.csv'
+model_path: 'models/model/'
+metric_tracker: 'wandb'

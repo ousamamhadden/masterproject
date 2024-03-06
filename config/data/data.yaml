@@ -1,0 +1,2 @@
+dataset_path: 'data/processed/train.csv'
+n_examples: 10000
