@@ -2,35 +2,41 @@ import csv
 import logging
 import os
 
+import pandas as pd
 import hydra
 from datasets import IterableDataset, load_dataset
 from omegaconf import DictConfig
-
+import math
+import string
+from sklearn.model_selection import train_test_split
 # Setting up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
+def replaceempty(x):
+    if x == "":
+        return "@"
+    else:
+        return x
+def numtoClass(x):
+    if x > 9:
+        return 10
+    else:
+        return math.ceil(x)
 
-def generate_csv(csv_path: str | os.PathLike,
-                 dataset: IterableDataset
-                 ) -> None:
-    """Generate a CSV file from the given dataset that conforms with
-    HappyTransformers Text2Text transformers training data format.
 
-    Args:
-        csv_path (str | os.PathLike): The path to the CSV file to be generated.
-        dataset (IterableDataset): The dataset to be converted to CSV.
+def is_english_char(char):
+    # Check if the character is a letter, digit, common punctuation, space, or newline in English
+    return char.isascii() and (char.isalnum() or char in string.punctuation or char.isspace())
 
-    Returns:
-        None
-    """
-    with open(csv_path, 'w', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(["input", "target"])
-        for example in dataset:
-            input_text = f"grammar: {example['input']}"
-            target_text = example["output"]
-            writer.writerow([input_text, target_text])
+def filter_non_english(text):
+    # Filter out non-English characters from the text
+    english_chars = [char for char in text if is_english_char(char)]
+    return ''.join(english_chars)
 
-    logging.info('Dataset converted to CSV and saved to %s', csv_path)
+def cleancolumn(df, columnname):
+    cleancolumnname = columnname + 'Clean'
+    df[cleancolumnname] = df[columnname].fillna('@').map(lambda x : filter_non_english(x))
+    df[cleancolumnname] = df[cleancolumnname].map(lambda x : replaceempty(x))
+
 
 @hydra.main(config_path='../../config', config_name="default_config.yaml", version_base = None)
 def make_dataset(cfg: DictConfig) -> None:
@@ -52,12 +58,31 @@ def make_dataset(cfg: DictConfig) -> None:
         raise ValueError("Configuration file must be present.")
     if cfg.n_examples <= 0:
         raise ValueError("n_examples must be a non-zero, positive integer.")
-    dataset_train = load_dataset('liweili/c4_200m', split='train', streaming=True, trust_remote_code=True)
+    df = pd.read_csv('airbnb-listings.csv', sep=';')
+    df_us = df[df['Country']=='United States']
+    df = df_us
+    df['Reviews per Month'] = df['Reviews per Month'].fillna(0)
+    df['ReviewClass'] = df['Reviews per Month'].map(lambda x: numtoClass(x))
+    cleancolumn(df,'Summary')
+    cleancolumn(df,'Space')
+    df['allCleanText'] = df['SummaryClean'] + ' ' + df['SpaceClean']
+    df['SummaryClean'] = df['Summary'].fillna('.').map(lambda x : filter_non_english(x))
+    df['SummaryClean'] = df['SummaryClean'].map(lambda x : replaceempty(x))
+    dffinal = df[['allCleanText','ReviewClass']]
+    dffinal.rename(columns={'allCleanText': 'text', 'ReviewClass': 'label'}, inplace=True)
+    X = dffinal['text']
+    Y = dffinal['label']
+    X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.1, random_state = 42)
     dataset_train = dataset_train.take(cfg.n_examples)
+    dfTraincombined = pd.concat([X_train,y_train], axis = 1)
+    dfTestcombined = pd.concat([X_test,y_test], axis = 1)
     logging.debug('os.getcwd(): %s', os.getcwd())
     # dataset_path = os.path.join(hydra.utils.get_original_cwd(), cfg.dataset_path) #Hydra changes cwd
     logging.info('Generating CSV file from dataset...')
-    generate_csv(cfg.dataset_path, dataset_train)
+    dfTraincombined.to_csv('traindata.csv', index=False)
+    dfTestcombined.to_csv('testdata.csv', index=False)
+    logging.info('Dataset converted to CSV and saved to %s', cfg.dataset_path)
+    #generate_csv(cfg.dataset_path, dataset_train)
     logging.info('CSV file generated successfully.')
 
 if __name__=='__main__':

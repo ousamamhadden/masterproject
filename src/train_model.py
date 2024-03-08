@@ -5,7 +5,7 @@ import random
 import hydra
 import numpy as np
 import torch
-from happytransformer import HappyTextToText, TTTrainArgs
+from happytransformer import HappyTextClassification, TTTrainArgs
 from omegaconf import DictConfig
 
 os.environ["WANDB_PROJECT"] = "mlops-proj47"
@@ -29,7 +29,7 @@ def set_seed(seed: int):
 def train(config: DictConfig) -> None:
     """Train the model using the provided configuration."""
     cfg = config.training
-    model = HappyTextToText("t5-small")
+    model = HappyTextClassification("DISTILBERT", "distilbert-bert-uncased", num_labels=11)
 
     if cfg.metric_tracker != "wandb":  # necessary for unit testing
         args = TTTrainArgs(batch_size=cfg.batch_size, learning_rate=cfg.lr, num_train_epochs=cfg.epochs)
