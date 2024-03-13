@@ -54,11 +54,13 @@ def make_dataset(cfg: DictConfig) -> None:
     """
     cfg = cfg.data
 
+    print(os.getcwd())
+    print(cfg)
     if not cfg:
         raise ValueError("Configuration file must be present.")
     if cfg.n_examples <= 0:
         raise ValueError("n_examples must be a non-zero, positive integer.")
-    df = pd.read_csv('airbnb-listings.csv', sep=';')
+    df = pd.read_csv(cfg.dataset_path, sep=';')
     df_us = df[df['Country']=='United States']
     df = df_us
     df['Reviews per Month'] = df['Reviews per Month'].fillna(0)
@@ -70,18 +72,18 @@ def make_dataset(cfg: DictConfig) -> None:
     df['SummaryClean'] = df['SummaryClean'].map(lambda x : replaceempty(x))
     dffinal = df[['allCleanText','ReviewClass']]
     dffinal.rename(columns={'allCleanText': 'text', 'ReviewClass': 'label'}, inplace=True)
+    dffinal = dffinal.sample(n=cfg.n_examples, random_state=cfg.random_state) 
     X = dffinal['text']
     Y = dffinal['label']
-    X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.1, random_state = 42)
-    dataset_train = dataset_train.take(cfg.n_examples)
+    X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.1, random_state = cfg.random_state)
     dfTraincombined = pd.concat([X_train,y_train], axis = 1)
     dfTestcombined = pd.concat([X_test,y_test], axis = 1)
     logging.debug('os.getcwd(): %s', os.getcwd())
     # dataset_path = os.path.join(hydra.utils.get_original_cwd(), cfg.dataset_path) #Hydra changes cwd
     logging.info('Generating CSV file from dataset...')
-    dfTraincombined.to_csv('traindata.csv', index=False)
-    dfTestcombined.to_csv('testdata.csv', index=False)
-    logging.info('Dataset converted to CSV and saved to %s', cfg.dataset_path)
+    dfTraincombined.to_csv('data/processed/traindata.csv', index=False)
+    dfTestcombined.to_csv('data/processed/testdata.csv', index=False)
+    #logging.info('Dataset converted to CSV and saved to %s', cfg.dataset_path)
     #generate_csv(cfg.dataset_path, dataset_train)
     logging.info('CSV file generated successfully.')
 

@@ -1,2 +1,3 @@
-dataset_path: 'data/processed/train.csv'
-n_examples: 10000
+dataset_path: 'data/raw/airbnb-listings.csv'
+n_examples: 1000
+random_state: 42

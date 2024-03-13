@@ -1,5 +1,14 @@
 # Name me
 
+
+# HOW TO RUN
+make create_environment
+conda activate src
+make requirements
+pip install dvc
+pip install dvc_gdrrive
+dvc pull (might be messy with loggin stuff)
+
 ## Project structure
 
 The directory structure of the project looks like this:
