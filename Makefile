@@ -21,6 +21,13 @@ requirements:
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 	$(PYTHON_INTERPRETER) -m pip install -e .
+    
+## Install Python Dependencies
+requirements_cnn:
+	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
+	$(PYTHON_INTERPRETER) -m pip install -r requirements_cnn.txt
+	$(PYTHON_INTERPRETER) -m pip install -e .
+
 
 ## Install Developer Python Dependencies
 dev_requirements: requirements
@@ -47,7 +54,7 @@ train: requirements
 
 ## Make train model
 .PHONY: train_cnn
-train_cnn: requirements
+train_cnn: requirements_cnn
 	$(PYTHON_INTERPRETER) $(PROJECT_NAME)/train_cnn_model.py
 
 ## Use model to predict
