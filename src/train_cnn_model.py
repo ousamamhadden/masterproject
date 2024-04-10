@@ -13,7 +13,7 @@ import torchvision.transforms as transforms
 from datetime import datetime
 
 csv_file = 'data/raw/airbnb-listings.csv'
-image_folder = 'data/images'
+image_folder = 'data/raw/images'
 
 
 ####################
