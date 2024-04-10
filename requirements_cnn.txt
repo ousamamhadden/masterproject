@@ -182,8 +182,8 @@ python-dateutil==2.8.2
 python-json-logger==2.0.7
 pytz==2024.1
 pyviz_comms==3.0.2
-pywin32==306
-pywinpty==2.0.12
+pywin32==306; sys_platform == 'win32'
+pywinpty==2.0.12; sys_platform == 'win32'
 PyYAML==6.0.1
 pyzmq==25.1.2
 qtconsole==5.5.1
