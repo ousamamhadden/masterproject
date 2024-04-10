@@ -224,9 +224,9 @@ tinycss2==1.2.1
 tokenizers==0.15.2
 tomlkit==0.12.4
 toolz==0.12.1
-torch==2.2.1+cu121
-torchaudio==2.2.1+cu121
-torchvision==0.17.1+cu121
+torch==2.2.1
+torchaudio==2.2.1
+torchvision==0.17.1
 tornado==6.4
 tqdm==4.66.2
 traitlets==5.14.1
