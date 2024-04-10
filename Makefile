@@ -45,6 +45,11 @@ data:
 train: requirements
 	$(PYTHON_INTERPRETER) $(PROJECT_NAME)/train_model.py
 
+## Make train model
+.PHONY: train_cnn
+train_cnn: requirements
+	$(PYTHON_INTERPRETER) $(PROJECT_NAME)/train_cnn_model.py
+
 ## Use model to predict
 .PHONY: predict
 predict: requirements
