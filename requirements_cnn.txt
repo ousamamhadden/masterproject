@@ -1,8 +1,9 @@
---index-url https://download.pytorch.org/whl/cu118
+--index-url https://pypi.org/simple/
 numpy
 pandas
+scikit-learn
+tqdm
+--index-url https://download.pytorch.org/whl/cu118
 torch
 torchaudio
 torchvision
-scikit-learn
-tqdm
