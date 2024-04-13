@@ -12,17 +12,17 @@ from PIL import Image
 import torchvision.transforms as transforms
 from datetime import datetime
 
-csv_file = 'data/raw/airbnb-listings.csv'
-image_folder = 'data/raw/images'
+CSV_FILE = 'data/raw/airbnb-listings.csv'
+IMAGE_FOLDER = 'data/raw/images'
 
 
 ####################
 # Data preparation #
 ####################
-df = util.load_data_airbnb(csv_file, pbar_size=494954)
+df = util.load_data_airbnb(CSV_FILE, pbar_size=494954)
 
 indices_to_remove = []
-existing_images = set(os.listdir(image_folder))
+existing_images = set(os.listdir(IMAGE_FOLDER))
 
 # Remove rows with no corresponding image from df
 print("Removing rows without images...")
@@ -125,10 +125,10 @@ df_sample = df
 
 train_df, test_df = train_test_split(df_sample, test_size=0.2, random_state=42)
 
-train_dataset = ImageDataset(train_df, image_folder='images', transform=transform)
+train_dataset = ImageDataset(train_df, image_folder=IMAGE_FOLDER, transform=transform)
 train_dataloader = DataLoader(train_dataset, batch_size=64, shuffle=True)
 
-test_dataset = ImageDataset(test_df, image_folder='images', transform=transform)
+test_dataset = ImageDataset(test_df, image_folder=IMAGE_FOLDER, transform=transform)
 test_dataloader = DataLoader(test_dataset, batch_size=64, shuffle=True)
 
 if torch.cuda.is_available():
