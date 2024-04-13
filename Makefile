@@ -27,7 +27,6 @@ requirements:
 requirements_cnn:
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
 	$(PYTHON_INTERPRETER) -m pip install -r requirements_cnn.txt
-	$(PYTHON_INTERPRETER) -m pip install -e .
 
 
 ## Install Developer Python Dependencies
