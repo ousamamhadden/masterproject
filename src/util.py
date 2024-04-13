@@ -1,18 +1,14 @@
 import os
 import pandas as pd
-from tqdm.notebook import tqdm
 
 def load_data_airbnb(csv, pbar_size=0):
 
     # Load .csv
     print("Loading .csv...")
-    pbar = tqdm(total=pbar_size) # Progress bar
     chunks = []
     for chunk in pd.read_csv(csv, sep=';', chunksize=1000):
-        pbar.update(1000)
         chunks.append(chunk)
     df = pd.concat(chunks)
-    pbar.close()
 
     # Drop duplicates
     print("Dropping duplicate rows...")
