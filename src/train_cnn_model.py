@@ -15,6 +15,10 @@ from datetime import datetime
 CSV_FILE = 'data/raw/airbnb-listings.csv'
 IMAGE_FOLDER = 'data/raw/images'
 
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+torch.set_num_threads()
+
 
 ####################
 # Data preparation #
@@ -110,14 +114,14 @@ class ImageDataset(Dataset):
             image = self.transform(image)
         
         if torch.cuda.is_available():
-            label = label.cuda()
-            image = image.cuda()
+            label = label.cuda(device=DEVICE)
+            image = image.cuda() # Convert to tensor before cuda?
 
         return image, label
 
 transform = transforms.Compose([
-    transforms.Resize((216, 144)),
-    transforms.ToTensor()
+    transforms.ToTensor(),
+    transforms.Resize((216, 144))
 ])
 
 #df_sample = df.sample(n=1000, random_state=42)
@@ -133,8 +137,8 @@ test_dataloader = DataLoader(test_dataset, batch_size=64, shuffle=True)
 
 if torch.cuda.is_available():
     print("Using CUDA")
-    model = CNNClassLabels().to("cuda")
-    criterion = nn.CrossEntropyLoss().to("cuda")
+    model = CNNClassLabels().to(device=DEVICE)
+    criterion = nn.CrossEntropyLoss().to(device=DEVICE)
     optimizer = optim.Adam(model.parameters(), lr=0.01)
 else:
     print("Not using CUDA")
