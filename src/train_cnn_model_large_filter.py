@@ -17,7 +17,7 @@ IMAGE_FOLDER = 'data/raw/images'
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-torch.set_num_threads()
+#torch.set_num_threads()
 
 
 ####################
