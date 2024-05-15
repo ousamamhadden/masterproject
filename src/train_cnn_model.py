@@ -139,12 +139,12 @@ if torch.cuda.is_available():
     print("Using CUDA")
     model = CNNClassLabels().to(device=DEVICE)
     criterion = nn.CrossEntropyLoss().to(device=DEVICE)
-    optimizer = optim.Adam(model.parameters(), lr=0.01)
+    optimizer = optim.Adam(model.parameters(), lr=0.00001)
 else:
     print("Not using CUDA")
     model = CNNClassLabels()
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(model.parameters(), lr=0.01)
+    optimizer = optim.Adam(model.parameters(), lr=0.00001)
 
 # Create directory to save trained models in
 models_dir = "models"
