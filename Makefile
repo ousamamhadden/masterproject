@@ -65,6 +65,10 @@ train_cnn_extra_layers: requirements_cnn
 train_cnn_large_filter: requirements_cnn
 	$(PYTHON_INTERPRETER) $(PROJECT_NAME)/train_cnn_model_large_filter.py
 
+.PHONY: train_cnn_4clases
+train_cnn_4classes: requirements_cnn
+	$(PYTHON_INTERPRETER) $(PROJECT_NAME)/train_cnn_model_4classes.py
+
 ## Use model to predict
 .PHONY: predict
 predict: requirements
