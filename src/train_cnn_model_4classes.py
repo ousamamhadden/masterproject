@@ -172,4 +172,4 @@ for epoch in range(num_epochs):
             running_loss = 0.0
     
     dt_string = datetime.now().strftime("%Y%m%d-%H%M%S")
-    torch.save(model.state_dict(), os.path.join(models_dir, f"cnn_classlabels_e{epoch+1}_d{dt_string}_s{len(train_dataset)}"))
+    torch.save(model.state_dict(), os.path.join(models_dir, f"cnn_classlabels_4classes_e{epoch+1}_d{dt_string}_s{len(train_dataset)}"))
