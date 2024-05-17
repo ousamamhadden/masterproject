@@ -73,7 +73,7 @@ train_cnn_4classes: requirements_cnn
 	$(PYTHON_INTERPRETER) $(PROJECT_NAME)/train_cnn_model_4classes.py
 
 .PHONY: train_vit
-train_vit: requirements_vit
+train_vit: requirements_cnn
 	$(PYTHON_INTERPRETER) $(PROJECT_NAME)/train_vit_model.py
 
 ## Use model to predict

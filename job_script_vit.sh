@@ -35,4 +35,4 @@ module load cuda/11.6
 echo "Starting executable..."
 
 echo "Running: conda init and script"
-eval "$(conda shell.bash hook)" && conda activate vit && make train_vit
+eval "$(conda shell.bash hook)" && conda activate cnn && make train_vit
