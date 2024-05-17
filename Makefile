@@ -16,18 +16,21 @@ PYTHON_INTERPRETER = python
 create_environment:
 	conda create --name $(PROJECT_NAME) python=$(PYTHON_VERSION) --no-default-packages -y
 	conda create --name cnn python=$(PYTHON_VERSION) --no-default-packages -y
+	conda create --name vit python=$(PYTHON_VERSION) --no-default-packages -y
 
 ## Install Python Dependencies
 requirements:
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 	$(PYTHON_INTERPRETER) -m pip install -e .
-    
-## Install Python Dependencies
+
 requirements_cnn:
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
 	$(PYTHON_INTERPRETER) -m pip install -r requirements_cnn.txt
 
+requirements_vit:
+	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
+	$(PYTHON_INTERPRETER) -m pip install -r requirements_vit.txt
 
 ## Install Developer Python Dependencies
 dev_requirements: requirements
@@ -68,6 +71,10 @@ train_cnn_large_filter: requirements_cnn
 .PHONY: train_cnn_4clases
 train_cnn_4classes: requirements_cnn
 	$(PYTHON_INTERPRETER) $(PROJECT_NAME)/train_cnn_model_4classes.py
+
+.PHONY: train_vit
+train_vit: requirements_vit
+	$(PYTHON_INTERPRETER) $(PROJECT_NAME)/train_vit_model.py
 
 ## Use model to predict
 .PHONY: predict
