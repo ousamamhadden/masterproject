@@ -16,6 +16,7 @@ from torchvision.transforms import (
 )
 from transformers import AutoModelForImageClassification, TrainingArguments, Trainer
 import torch
+from datetime import datetime
 
 CSV_FILE = 'data/raw/airbnb-listings.csv'
 IMAGE_FOLDER = 'data/raw/images'
@@ -154,8 +155,10 @@ model = AutoModelForImageClassification.from_pretrained(
 
 model_name = MODEL_CHECKPOINT.split("/")[-1]
 
+dt_string = datetime.now().strftime("%Y%m%d-%H%M%S")
+
 args = TrainingArguments(
-    f"{model_name}-finetuned-eurosat",
+    f"{model_name}-{dt_string}",
     remove_unused_columns=False,
     evaluation_strategy = "epoch",
     save_strategy = "epoch",
@@ -163,7 +166,7 @@ args = TrainingArguments(
     per_device_train_batch_size=BATCH_SIZE,
     gradient_accumulation_steps=4,
     per_device_eval_batch_size=BATCH_SIZE,
-    num_train_epochs=5,
+    num_train_epochs=10,
     warmup_ratio=0.1,
     logging_steps=10,
     load_best_model_at_end=True,
