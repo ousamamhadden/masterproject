@@ -22,7 +22,7 @@ CSV_FILE = 'data/raw/airbnb-listings.csv'
 IMAGE_FOLDER = 'data/raw/images'
 IMAGE_CLASS_FOLDER = 'data/vit_images'
 
-MODEL_CHECKPOINT = "microsoft/beit-large-patch16-224" # pre-trained model from which to fine-tune
+MODEL_CHECKPOINT = "microsoft/beit-base-patch16-224" # pre-trained model from which to fine-tune
 BATCH_SIZE = 32 # batch size for training and evaluation
 
 
