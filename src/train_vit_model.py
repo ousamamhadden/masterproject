@@ -132,7 +132,7 @@ def preprocess_test(batch):
     return batch
 
 # split up training into training + validation
-splits = dataset["train"].train_test_split(test_size=0.1)
+splits = dataset["train"].train_test_split(test_size=0.1, seed=42)
 train_data = splits['train']
 test_data = splits['test']
 
