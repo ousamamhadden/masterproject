@@ -1,0 +1,29 @@
+Loaded module: python3/3.6.2
+Loaded dependency [numpy/1.13.1-python-3.6.2-openblas-0.2.20]: openblas/0.2.20
+Loaded module: numpy/1.13.1-python-3.6.2-openblas-0.2.20
+
+Loading numpy/1.13.1-python-3.6.2-openblas-0.2.20
+  Loading requirement: openblas/0.2.20
+Loaded module: scipy/0.19.1-python-3.6.2
+Loaded module: matplotlib/2.0.2-python-3.6.2
+Loaded module: cuda/11.6
+The `load_in_4bit` and `load_in_8bit` arguments are deprecated and will be removed in the future versions. Please, pass a `BitsAndBytesConfig` object in `quantization_config` argument instead.
+`low_cpu_mem_usage` was None, now set to True since model is quantized.
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:22<00:22, 22.11s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:23<00:00,  9.77s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:23<00:00, 11.62s/it]
+Some weights of GemmaForSequenceClassification were not initialized from the model checkpoint at google/gemma-2b and are newly initialized: ['score.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/peft/utils/other.py:143: FutureWarning: prepare_model_for_int8_training is deprecated and will be removed in a future version. Use prepare_model_for_kbit_training instead.
+  warnings.warn(
+Traceback (most recent call last):
+  File "/zhome/8d/a/147395/masterproject/masterproject/src/finetunegemma.py", line 84, in <module>
+    train()
+  File "/zhome/8d/a/147395/masterproject/masterproject/src/finetunegemma.py", line 47, in train
+    args=TrainingArguments(
+         ^^^^^^^^^^^^^^^^^^
+  File "<string>", line 123, in __init__
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/transformers/training_args.py", line 1423, in __post_init__
+    raise ValueError(
+ValueError: --load_best_model_at_end requires the save and eval strategy to match, but found
+- Evaluation strategy: IntervalStrategy.EPOCH
+- Save strategy: IntervalStrategy.STEPS
+make: *** [finetunegemma] Error 1

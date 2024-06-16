@@ -1,0 +1,6 @@
+peft==0.8.2
+bitsandbytes==0.42.0
+accelerate==0.26.1
+datasets==2.16.1
+GPUtil
+transformers==4.38.0

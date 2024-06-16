@@ -11,11 +11,32 @@ import string
 from sklearn.model_selection import train_test_split
 # Setting up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
+from langdetect import detect_langs
+
 def replaceempty(x):
     if x == "":
-        return "@"
+        return "^"
     else:
         return x
+
+def detectlang(x):
+    try:
+        return detect_langs(str(x))
+    except:
+        return None
+
+def isEnglish(x):
+    if x == None:
+        return False
+    
+    if len(x) > 1:
+        return False
+    
+    if x[0].lang == "en":
+        return True
+    else:
+        return False
+
 def numtoClass(x):
     if x > 9:
         return 10
@@ -34,7 +55,7 @@ def filter_non_english(text):
 
 def cleancolumn(df, columnname):
     cleancolumnname = columnname + 'Clean'
-    df[cleancolumnname] = df[columnname].fillna('@').map(lambda x : filter_non_english(x))
+    df[cleancolumnname] = df[columnname].fillna('^').map(lambda x : filter_non_english(x))
     df[cleancolumnname] = df[cleancolumnname].map(lambda x : replaceempty(x))
 
 
@@ -61,18 +82,28 @@ def make_dataset(cfg: DictConfig) -> None:
     if cfg.n_examples <= 0:
         raise ValueError("n_examples must be a non-zero, positive integer.")
     df = pd.read_csv(cfg.dataset_path, sep=';')
-    df_us = df[df['Country']=='United States']
+    df = df[df['Country']=='United States']
+    df['language'] = df['Description'].map(lambda x: detectlang(x))
+    df_us = df[df['language'].map(lambda x : isEnglish(x))]
     df = df_us
-    df['Reviews per Month'] = df['Reviews per Month'].fillna(0)
-    df['ReviewClass'] = df['Reviews per Month'].map(lambda x: numtoClass(x))
+    df= df[df['First Review'] <= '2016-12-31']
+    quantile_labels = [0, 1]
+    df['ReviewClass'] = pd.qcut(df['Reviews per Month'], q=2, labels=quantile_labels)
     cleancolumn(df,'Summary')
     cleancolumn(df,'Space')
-    df['allCleanText'] = df['SummaryClean'] + ' ' + df['SpaceClean']
-    df['SummaryClean'] = df['Summary'].fillna('.').map(lambda x : filter_non_english(x))
-    df['SummaryClean'] = df['SummaryClean'].map(lambda x : replaceempty(x))
+    cleancolumn(df,'Experiences Offered')
+    cleancolumn(df,'Neighborhood Overview')
+    cleancolumn(df,'Notes')
+    cleancolumn(df,'Transit')
+    cleancolumn(df,'Access')
+    cleancolumn(df,'Interaction')
+    cleancolumn(df,'House Rules')
+    df['allCleanText'] = df['SummaryClean'] + ' ' + df['SpaceClean'] + ' '+ df['Experiences OfferedClean']+ ' '+ df['Neighborhood OverviewClean']+ ' '+ df['NotesClean']+ ' '+ df['TransitClean']+ ' '+ df['AccessClean']+ ' '+ df['InteractionClean']+ ' '+ df['House RulesClean']
+    #df['SummaryClean'] = df['Summary'].fillna('.').map(lambda x : filter_non_english(x))
+    #df['SummaryClean'] = df['SummaryClean'].map(lambda x : replaceempty(x))
     dffinal = df[['allCleanText','ReviewClass']]
     dffinal.rename(columns={'allCleanText': 'text', 'ReviewClass': 'label'}, inplace=True)
-    dffinal = dffinal.sample(n=cfg.n_examples, random_state=cfg.random_state) 
+    #dffinal = dffinal.sample(n=cfg.n_examples, random_state=cfg.random_state) 
     X = dffinal['text']
     Y = dffinal['label']
     X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.1, random_state = cfg.random_state)
@@ -81,8 +112,8 @@ def make_dataset(cfg: DictConfig) -> None:
     logging.debug('os.getcwd(): %s', os.getcwd())
     # dataset_path = os.path.join(hydra.utils.get_original_cwd(), cfg.dataset_path) #Hydra changes cwd
     logging.info('Generating CSV file from dataset...')
-    dfTraincombined.to_csv('data/processed/traindata.csv', index=False)
-    dfTestcombined.to_csv('data/processed/testdata.csv', index=False)
+    dfTraincombined.to_csv('data/processed/traindata2labels.csv', index=False)
+    dfTestcombined.to_csv('data/processed/testdata2labels.csv', index=False)
     #logging.info('Dataset converted to CSV and saved to %s', cfg.dataset_path)
     #generate_csv(cfg.dataset_path, dataset_train)
     logging.info('CSV file generated successfully.')

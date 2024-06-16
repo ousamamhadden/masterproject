@@ -1,0 +1,31 @@
+Loaded module: python3/3.6.2
+Loaded dependency [numpy/1.13.1-python-3.6.2-openblas-0.2.20]: openblas/0.2.20
+Loaded module: numpy/1.13.1-python-3.6.2-openblas-0.2.20
+
+Loading numpy/1.13.1-python-3.6.2-openblas-0.2.20
+  Loading requirement: openblas/0.2.20
+Loaded module: scipy/0.19.1-python-3.6.2
+Loaded module: matplotlib/2.0.2-python-3.6.2
+Loaded module: cuda/11.6
+Map:   0%|          | 0/1000 [00:00<?, ? examples/s]Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.
+Map: 100%|██████████| 1000/1000 [00:01<00:00, 831.82 examples/s]Map: 100%|██████████| 1000/1000 [00:01<00:00, 793.81 examples/s]
+The `load_in_4bit` and `load_in_8bit` arguments are deprecated and will be removed in the future versions. Please, pass a `BitsAndBytesConfig` object in `quantization_config` argument instead.
+`low_cpu_mem_usage` was None, now set to True since model is quantized.
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:45<00:45, 45.48s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:46<00:00, 19.28s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:46<00:00, 23.21s/it]
+Some weights of GemmaForSequenceClassification were not initialized from the model checkpoint at google/gemma-2b and are newly initialized: ['score.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/peft/utils/other.py:143: FutureWarning: prepare_model_for_int8_training is deprecated and will be removed in a future version. Use prepare_model_for_kbit_training instead.
+  warnings.warn(
+/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/peft/tuners/lora/bnb.py:71: UserWarning: Merge lora module to 8-bit linear may get different generations due to rounding errors.
+  warnings.warn(
+Detected kernel version 5.4.268, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+Traceback (most recent call last):
+  File "/zhome/8d/a/147395/masterproject/masterproject/src/finetunegemmaepoch2.py", line 93, in <module>
+    train()
+  File "/zhome/8d/a/147395/masterproject/masterproject/src/finetunegemmaepoch2.py", line 54, in train
+    trainer = Trainer(
+              ^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/transformers/trainer.py", line 440, in __init__
+    raise ValueError(
+ValueError: You cannot perform fine-tuning on purely quantized models. Please attach trainable adapters on top of the quantized model to correctly perform fine-tuning. Please see: https://huggingface.co/docs/transformers/peft for more details
+make: *** [finetunegemmaepoch2] Error 1

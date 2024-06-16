@@ -1,0 +1,107 @@
+Loaded module: python3/3.6.2
+Loaded dependency [numpy/1.13.1-python-3.6.2-openblas-0.2.20]: openblas/0.2.20
+Loaded module: numpy/1.13.1-python-3.6.2-openblas-0.2.20
+
+Loading numpy/1.13.1-python-3.6.2-openblas-0.2.20
+  Loading requirement: openblas/0.2.20
+Loaded module: scipy/0.19.1-python-3.6.2
+Loaded module: matplotlib/2.0.2-python-3.6.2
+Loaded module: cuda/11.6
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+dvc-objects 5.1.0 requires fsspec>=2024.2.0, but you have fsspec 2023.10.0 which is incompatible.
+dvc-data 3.14.1 requires fsspec>=2024.2.0, but you have fsspec 2023.10.0 which is incompatible.
+scmrepo 3.3.0 requires fsspec[tqdm]>=2024.2.0, but you have fsspec 2023.10.0 which is incompatible.
+Some weights of DistilBertForSequenceClassification were not initialized from the model checkpoint at distilbert-base-uncased and are newly initialized: ['classifier.bias', 'classifier.weight', 'pre_classifier.bias', 'pre_classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Generating train split: 0 examples [00:00, ? examples/s]/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/datasets/download/streaming_download_manager.py:778: FutureWarning: The 'verbose' keyword in pd.read_csv is deprecated and will be removed in a future version.
+  return pd.read_csv(xopen(filepath_or_buffer, "rb", download_config=download_config), **kwargs)
+Generating train split: 10000 examples [00:00, 21709.32 examples/s]Generating train split: 20000 examples [00:00, 24451.26 examples/s]Generating train split: 30000 examples [00:01, 27091.70 examples/s]Generating train split: 40000 examples [00:01, 29519.65 examples/s]Generating train split: 50000 examples [00:01, 31512.90 examples/s]Generating train split: 60000 examples [00:02, 32483.90 examples/s]Generating train split: 70000 examples [00:02, 33566.22 examples/s]Generating train split: 80000 examples [00:02, 33819.67 examples/s]Generating train split: 81152 examples [00:03, 20888.00 examples/s]
+Tokenizing data:   0%|          | 0/73036 [00:00<?, ? examples/s]Tokenizing data:   1%|▏         | 1000/73036 [00:01<02:10, 553.36 examples/s]Tokenizing data:   3%|▎         | 2000/73036 [00:02<01:38, 719.99 examples/s]Tokenizing data:   4%|▍         | 3000/73036 [00:03<01:21, 859.01 examples/s]Tokenizing data:   5%|▌         | 4000/73036 [00:04<01:10, 983.07 examples/s]Tokenizing data:   7%|▋         | 5000/73036 [00:05<01:02, 1087.53 examples/s]Tokenizing data:   8%|▊         | 6000/73036 [00:06<00:56, 1196.16 examples/s]Tokenizing data:  10%|▉         | 7000/73036 [00:06<00:52, 1253.75 examples/s]Tokenizing data:  11%|█         | 8000/73036 [00:07<00:49, 1313.57 examples/s]Tokenizing data:  12%|█▏        | 9000/73036 [00:08<00:47, 1356.71 examples/s]Tokenizing data:  14%|█▎        | 10000/73036 [00:08<00:45, 1398.57 examples/s]Tokenizing data:  15%|█▌        | 11000/73036 [00:09<00:43, 1411.66 examples/s]Tokenizing data:  16%|█▋        | 12000/73036 [00:10<00:41, 1454.12 examples/s]Tokenizing data:  18%|█▊        | 13000/73036 [00:10<00:41, 1463.10 examples/s]Tokenizing data:  19%|█▉        | 14000/73036 [00:11<00:40, 1475.78 examples/s]Tokenizing data:  21%|██        | 15000/73036 [00:12<00:39, 1482.97 examples/s]Tokenizing data:  22%|██▏       | 16000/73036 [00:12<00:38, 1487.47 examples/s]Tokenizing data:  23%|██▎       | 17000/73036 [00:13<00:37, 1500.99 examples/s]Tokenizing data:  25%|██▍       | 18000/73036 [00:14<00:37, 1485.68 examples/s]Tokenizing data:  26%|██▌       | 19000/73036 [00:14<00:36, 1487.36 examples/s]Tokenizing data:  27%|██▋       | 20000/73036 [00:15<00:35, 1494.65 examples/s]Tokenizing data:  29%|██▉       | 21000/73036 [00:16<00:35, 1483.38 examples/s]Tokenizing data:  30%|███       | 22000/73036 [00:16<00:34, 1485.02 examples/s]Tokenizing data:  31%|███▏      | 23000/73036 [00:17<00:36, 1360.62 examples/s]Tokenizing data:  33%|███▎      | 24000/73036 [00:18<00:34, 1404.67 examples/s]Tokenizing data:  34%|███▍      | 25000/73036 [00:18<00:33, 1437.56 examples/s]Tokenizing data:  36%|███▌      | 26000/73036 [00:19<00:32, 1454.07 examples/s]Tokenizing data:  37%|███▋      | 27000/73036 [00:20<00:31, 1466.25 examples/s]Tokenizing data:  38%|███▊      | 28000/73036 [00:21<00:30, 1464.62 examples/s]Tokenizing data:  40%|███▉      | 29000/73036 [00:21<00:29, 1474.76 examples/s]Tokenizing data:  41%|████      | 30000/73036 [00:22<00:29, 1483.40 examples/s]Tokenizing data:  42%|████▏     | 31000/73036 [00:23<00:28, 1487.89 examples/s]Tokenizing data:  44%|████▍     | 32000/73036 [00:23<00:27, 1500.39 examples/s]Tokenizing data:  45%|████▌     | 33000/73036 [00:24<00:26, 1498.55 examples/s]Tokenizing data:  47%|████▋     | 34000/73036 [00:25<00:26, 1490.73 examples/s]Tokenizing data:  48%|████▊     | 35000/73036 [00:25<00:25, 1490.14 examples/s]Tokenizing data:  49%|████▉     | 36000/73036 [00:26<00:24, 1501.79 examples/s]Tokenizing data:  51%|█████     | 37000/73036 [00:27<00:23, 1506.13 examples/s]Tokenizing data:  52%|█████▏    | 38000/73036 [00:27<00:23, 1505.19 examples/s]Tokenizing data:  53%|█████▎    | 39000/73036 [00:28<00:22, 1511.91 examples/s]Tokenizing data:  55%|█████▍    | 40000/73036 [00:28<00:20, 1581.60 examples/s]Tokenizing data:  56%|█████▌    | 41000/73036 [00:29<00:19, 1620.76 examples/s]Tokenizing data:  58%|█████▊    | 42000/73036 [00:30<00:18, 1689.56 examples/s]Tokenizing data:  59%|█████▉    | 43000/73036 [00:30<00:18, 1655.49 examples/s]Tokenizing data:  60%|██████    | 44000/73036 [00:31<00:18, 1589.25 examples/s]Tokenizing data:  62%|██████▏   | 45000/73036 [00:32<00:18, 1550.93 examples/s]Tokenizing data:  63%|██████▎   | 46000/73036 [00:32<00:17, 1518.88 examples/s]Tokenizing data:  64%|██████▍   | 47000/73036 [00:33<00:21, 1205.43 examples/s]Tokenizing data:  66%|██████▌   | 48000/73036 [00:34<00:19, 1284.01 examples/s]Tokenizing data:  67%|██████▋   | 49000/73036 [00:35<00:17, 1337.99 examples/s]Tokenizing data:  68%|██████▊   | 50000/73036 [00:35<00:16, 1377.06 examples/s]Tokenizing data:  70%|██████▉   | 51000/73036 [00:36<00:15, 1429.57 examples/s]Tokenizing data:  71%|███████   | 52000/73036 [00:37<00:15, 1353.59 examples/s]Tokenizing data:  73%|███████▎  | 53000/73036 [00:38<00:14, 1406.04 examples/s]Tokenizing data:  74%|███████▍  | 54000/73036 [00:38<00:13, 1425.55 examples/s]Tokenizing data:  75%|███████▌  | 55000/73036 [00:39<00:12, 1431.94 examples/s]Tokenizing data:  77%|███████▋  | 56000/73036 [00:40<00:11, 1466.39 examples/s]Tokenizing data:  78%|███████▊  | 57000/73036 [00:40<00:10, 1480.15 examples/s]Tokenizing data:  79%|███████▉  | 58000/73036 [00:41<00:10, 1479.69 examples/s]Tokenizing data:  81%|████████  | 59000/73036 [00:42<00:09, 1494.94 examples/s]Tokenizing data:  82%|████████▏ | 60000/73036 [00:42<00:08, 1504.77 examples/s]Tokenizing data:  84%|████████▎ | 61000/73036 [00:43<00:07, 1511.17 examples/s]Tokenizing data:  85%|████████▍ | 62000/73036 [00:44<00:07, 1516.93 examples/s]Tokenizing data:  86%|████████▋ | 63000/73036 [00:44<00:06, 1528.99 examples/s]Tokenizing data:  88%|████████▊ | 64000/73036 [00:45<00:05, 1511.43 examples/s]Tokenizing data:  89%|████████▉ | 65000/73036 [00:45<00:05, 1522.63 examples/s]Tokenizing data:  90%|█████████ | 66000/73036 [00:46<00:04, 1524.33 examples/s]Tokenizing data:  92%|█████████▏| 67000/73036 [00:47<00:03, 1518.49 examples/s]Tokenizing data:  93%|█████████▎| 68000/73036 [00:47<00:03, 1526.31 examples/s]Tokenizing data:  94%|█████████▍| 69000/73036 [00:48<00:02, 1520.68 examples/s]Tokenizing data:  96%|█████████▌| 70000/73036 [00:49<00:02, 1503.83 examples/s]Tokenizing data:  97%|█████████▋| 71000/73036 [00:49<00:01, 1486.22 examples/s]Tokenizing data:  99%|█████████▊| 72000/73036 [00:50<00:00, 1495.35 examples/s]Tokenizing data: 100%|█████████▉| 73000/73036 [00:51<00:00, 1489.98 examples/s]Tokenizing data: 100%|██████████| 73036/73036 [00:52<00:00, 1400.43 examples/s]
+Tokenizing data:   0%|          | 0/8116 [00:00<?, ? examples/s]Tokenizing data:  12%|█▏        | 1000/8116 [00:00<00:04, 1495.57 examples/s]Tokenizing data:  25%|██▍       | 2000/8116 [00:01<00:04, 1519.92 examples/s]Tokenizing data:  37%|███▋      | 3000/8116 [00:01<00:03, 1504.85 examples/s]Tokenizing data:  49%|████▉     | 4000/8116 [00:02<00:02, 1510.19 examples/s]Tokenizing data:  62%|██████▏   | 5000/8116 [00:03<00:02, 1500.51 examples/s]Tokenizing data:  74%|███████▍  | 6000/8116 [00:03<00:01, 1502.80 examples/s]Tokenizing data:  86%|████████▌ | 7000/8116 [00:04<00:00, 1391.06 examples/s]Tokenizing data:  99%|█████████▊| 8000/8116 [00:05<00:00, 1431.22 examples/s]Tokenizing data: 100%|██████████| 8116/8116 [00:05<00:00, 1407.79 examples/s]
+/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/accelerate/accelerator.py:432: FutureWarning: Passing the following arguments to `Accelerator` is deprecated and will be removed in version 1.0 of Accelerate: dict_keys(['dispatch_batches', 'split_batches', 'even_batches', 'use_seedable_sampler']). Please pass an `accelerate.DataLoaderConfiguration` instead: 
+dataloader_config = DataLoaderConfiguration(dispatch_batches=None, split_batches=False, even_batches=True, use_seedable_sampler=True)
+  warnings.warn(
+  0%|          | 0/571 [00:00<?, ?it/s]Error executing job with overrides: []
+Traceback (most recent call last):
+  File "/zhome/8d/a/147395/masterproject/masterproject/src/train_model.py", line 46, in train
+    model.train(cfg.dataset_path, args=args)
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/happytransformer/happy_text_classification.py", line 51, in train
+    super(HappyTextClassification, self).train(input_filepath, args, eval_filepath)
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/happytransformer/happy_transformer.py", line 110, in train
+    self._run_train(train_tok_data, eval_tok_data, args,  self._data_collator)
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/happytransformer/happy_transformer.py", line 272, in _run_train
+    trainer.train()
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/transformers/trainer.py", line 1624, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/transformers/trainer.py", line 1961, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/transformers/trainer.py", line 2902, in training_step
+    loss = self.compute_loss(model, inputs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/transformers/trainer.py", line 2925, in compute_loss
+    outputs = model(**inputs)
+              ^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/transformers/models/distilbert/modeling_distilbert.py", line 1002, in forward
+    distilbert_output = self.distilbert(
+                        ^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/transformers/models/distilbert/modeling_distilbert.py", line 822, in forward
+    return self.transformer(
+           ^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/transformers/models/distilbert/modeling_distilbert.py", line 587, in forward
+    layer_outputs = layer_module(
+                    ^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/transformers/models/distilbert/modeling_distilbert.py", line 513, in forward
+    sa_output = self.attention(
+                ^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/transformers/models/distilbert/modeling_distilbert.py", line 250, in forward
+    weights = self.dropout(weights)  # (bs, n_heads, q_length, k_length)
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/torch/nn/modules/dropout.py", line 58, in forward
+    return F.dropout(input, self.p, self.training, self.inplace)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/torch/nn/functional.py", line 1266, in dropout
+    return _VF.dropout_(input, p, training) if inplace else _VF.dropout(input, p, training)
+                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 1.50 GiB. GPU 0 has a total capacty of 31.73 GiB of which 666.69 MiB is free. Including non-PyTorch memory, this process has 31.08 GiB memory in use. Of the allocated memory 30.69 GiB is allocated by PyTorch, and 23.03 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.
+  0%|          | 0/571 [00:04<?, ?it/s]
+make: *** [train] Error 1

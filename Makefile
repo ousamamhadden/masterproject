@@ -20,6 +20,7 @@ create_environment:
 requirements:
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
+	$(PYTHON_INTERPRETER) -m pip install -r requirementsgemma.txt
 	$(PYTHON_INTERPRETER) -m pip install -e .
 
 ## Install Developer Python Dependencies
@@ -45,6 +46,25 @@ data:
 train: requirements
 	$(PYTHON_INTERPRETER) $(PROJECT_NAME)/train_model.py
 
+## Make train model
+.PHONY: umapmodel
+umapmodel: requirements
+	$(PYTHON_INTERPRETER) $(PROJECT_NAME)/umapmodel.py
+
+
+.PHONY: allscoreseval
+allscoreseval: requirements
+	$(PYTHON_INTERPRETER) $(PROJECT_NAME)/allscoreseval.py
+
+## Make train model
+.PHONY: finetunegemma
+finetunegemma: requirements
+	$(PYTHON_INTERPRETER) $(PROJECT_NAME)/finetunegemma.py
+
+
+.PHONY: finetunegemmaepoch2
+finetunegemmaepoch2: requirements
+	$(PYTHON_INTERPRETER) $(PROJECT_NAME)/finetunegemmaepoch2.py
 ## Use model to predict
 .PHONY: predict
 predict: requirements

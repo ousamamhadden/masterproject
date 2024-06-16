@@ -1,0 +1,51 @@
+{
+  "_name_or_path": "mymodel",
+  "activation": "gelu",
+  "architectures": [
+    "DistilBertWithTabular"
+  ],
+  "attention_dropout": 0.1,
+  "dim": 768,
+  "dropout": 0.1,
+  "hidden_dim": 3072,
+  "id2label": {
+    "0": "LABEL_0",
+    "1": "LABEL_1",
+    "2": "LABEL_2",
+    "3": "LABEL_3"
+  },
+  "initializer_range": 0.02,
+  "label2id": {
+    "LABEL_0": 0,
+    "LABEL_1": 1,
+    "LABEL_2": 2,
+    "LABEL_3": 3
+  },
+  "max_position_embeddings": 2048,
+  "model_type": "distilbert",
+  "n_heads": 12,
+  "n_layers": 6,
+  "pad_token_id": 0,
+  "qa_dropout": 0.1,
+  "seq_classif_dropout": 0.2,
+  "sinusoidal_pos_embds": false,
+  "tabular_config": {
+    "cat_feat_dim": 0,
+    "categorical_bn": true,
+    "combine_feat_method": "attention_on_cat_and_numerical_feats",
+    "gating_beta": 0.2,
+    "hidden_dropout_prob": 0.2,
+    "mlp_act": "relu",
+    "mlp_division": 4,
+    "mlp_dropout": 0.1,
+    "num_labels": 4,
+    "numerical_bn": true,
+    "numerical_feat_dim": 4,
+    "text_feat_dim": 768,
+    "use_simple_classifier": true
+  },
+  "tie_weights_": true,
+  "torch_dtype": "float32",
+  "transformers_version": "4.40.1",
+  "vocab_size": 30522
+}

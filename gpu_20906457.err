@@ -1,0 +1,30 @@
+Loaded module: python3/3.6.2
+Loaded dependency [numpy/1.13.1-python-3.6.2-openblas-0.2.20]: openblas/0.2.20
+Loaded module: numpy/1.13.1-python-3.6.2-openblas-0.2.20
+
+Loading numpy/1.13.1-python-3.6.2-openblas-0.2.20
+  Loading requirement: openblas/0.2.20
+Loaded module: scipy/0.19.1-python-3.6.2
+Loaded module: matplotlib/2.0.2-python-3.6.2
+Loaded module: cuda/11.6
+Generating train split: 0 examples [00:00, ? examples/s]/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/datasets/download/streaming_download_manager.py:778: FutureWarning: The 'verbose' keyword in pd.read_csv is deprecated and will be removed in a future version.
+  return pd.read_csv(xopen(filepath_or_buffer, "rb", download_config=download_config), **kwargs)
+Generating train split: 10000 examples [00:00, 15278.19 examples/s]Generating train split: 20000 examples [00:01, 18883.68 examples/s]Generating train split: 30000 examples [00:01, 21151.63 examples/s]Generating train split: 40000 examples [00:02, 17757.49 examples/s]Generating train split: 50000 examples [00:02, 23030.99 examples/s]Generating train split: 60000 examples [00:02, 28252.14 examples/s]Generating train split: 70000 examples [00:02, 33064.07 examples/s]Generating train split: 80000 examples [00:02, 37624.01 examples/s]Generating train split: 80683 examples [00:03, 24304.56 examples/s]
+Map:   0%|          | 0/10000 [00:00<?, ? examples/s]Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.
+Map:  10%|█         | 1000/10000 [00:01<00:10, 862.41 examples/s]Map:  20%|██        | 2000/10000 [00:02<00:08, 891.34 examples/s]Map:  30%|███       | 3000/10000 [00:03<00:07, 896.39 examples/s]Map:  40%|████      | 4000/10000 [00:04<00:06, 905.74 examples/s]Map:  50%|█████     | 5000/10000 [00:05<00:05, 906.31 examples/s]Map:  60%|██████    | 6000/10000 [00:06<00:04, 911.38 examples/s]Map:  70%|███████   | 7000/10000 [00:07<00:03, 902.20 examples/s]Map:  80%|████████  | 8000/10000 [00:08<00:02, 908.12 examples/s]Map:  90%|█████████ | 9000/10000 [00:09<00:01, 910.15 examples/s]Map: 100%|██████████| 10000/10000 [00:11<00:00, 903.54 examples/s]Map: 100%|██████████| 10000/10000 [00:11<00:00, 894.29 examples/s]
+The `load_in_4bit` and `load_in_8bit` arguments are deprecated and will be removed in the future versions. Please, pass a `BitsAndBytesConfig` object in `quantization_config` argument instead.
+`low_cpu_mem_usage` was None, now set to True since model is quantized.
+Downloading shards:   0%|          | 0/2 [00:00<?, ?it/s]Downloading shards:  50%|█████     | 1/2 [00:33<00:33, 33.92s/it]Downloading shards: 100%|██████████| 2/2 [00:34<00:00, 14.50s/it]Downloading shards: 100%|██████████| 2/2 [00:34<00:00, 17.41s/it]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:18<00:18, 18.06s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:18<00:00,  7.63s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:18<00:00,  9.20s/it]
+Some weights of GemmaForSequenceClassification were not initialized from the model checkpoint at google/gemma-2b and are newly initialized: ['score.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/peft/utils/other.py:143: FutureWarning: prepare_model_for_int8_training is deprecated and will be removed in a future version. Use prepare_model_for_kbit_training instead.
+  warnings.warn(
+Traceback (most recent call last):
+  File "/zhome/8d/a/147395/masterproject/masterproject/src/finetunegemma.py", line 84, in <module>
+    train()
+  File "/zhome/8d/a/147395/masterproject/masterproject/src/finetunegemma.py", line 60, in train
+    eval_dataset=tokenized_dataset["test"],
+                 ~~~~~~~~~~~~~~~~~^^^^^^^^
+KeyError: 'test'
+make: *** [finetunegemma] Error 1

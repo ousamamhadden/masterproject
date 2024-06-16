@@ -1,0 +1,701 @@
+Fri Mar 15 10:42:35 2024       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 550.54.14              Driver Version: 550.54.14      CUDA Version: 12.4     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  Tesla V100-SXM2-32GB           On  |   00000000:3B:00.0 Off |                    0 |
+| N/A   43C    P0             45W /  300W |       0MiB /  32768MiB |      0%   E. Process |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+/appl/cuda/11.6.0/samples/bin/x86_64/linux/release/deviceQuery Starting...
+
+ CUDA Device Query (Runtime API) version (CUDART static linking)
+
+Detected 1 CUDA Capable device(s)
+
+Device 0: "Tesla V100-SXM2-32GB"
+  CUDA Driver Version / Runtime Version          12.4 / 11.6
+  CUDA Capability Major/Minor version number:    7.0
+  Total amount of global memory:                 32494 MBytes (34072559616 bytes)
+  (080) Multiprocessors, (064) CUDA Cores/MP:    5120 CUDA Cores
+  GPU Max Clock rate:                            1530 MHz (1.53 GHz)
+  Memory Clock rate:                             877 Mhz
+  Memory Bus Width:                              4096-bit
+  L2 Cache Size:                                 6291456 bytes
+  Maximum Texture Dimension Size (x,y,z)         1D=(131072), 2D=(131072, 65536), 3D=(16384, 16384, 16384)
+  Maximum Layered 1D Texture Size, (num) layers  1D=(32768), 2048 layers
+  Maximum Layered 2D Texture Size, (num) layers  2D=(32768, 32768), 2048 layers
+  Total amount of constant memory:               65536 bytes
+  Total amount of shared memory per block:       49152 bytes
+  Total shared memory per multiprocessor:        98304 bytes
+  Total number of registers available per block: 65536
+  Warp size:                                     32
+  Maximum number of threads per multiprocessor:  2048
+  Maximum number of threads per block:           1024
+  Max dimension size of a thread block (x,y,z): (1024, 1024, 64)
+  Max dimension size of a grid size    (x,y,z): (2147483647, 65535, 65535)
+  Maximum memory pitch:                          2147483647 bytes
+  Texture alignment:                             512 bytes
+  Concurrent copy and kernel execution:          Yes with 5 copy engine(s)
+  Run time limit on kernels:                     No
+  Integrated GPU sharing Host Memory:            No
+  Support host page-locked memory mapping:       Yes
+  Alignment requirement for Surfaces:            Yes
+  Device has ECC support:                        Enabled
+  Device supports Unified Addressing (UVA):      Yes
+  Device supports Managed Memory:                Yes
+  Device supports Compute Preemption:            Yes
+  Supports Cooperative Kernel Launch:            Yes
+  Supports MultiDevice Co-op Kernel Launch:      Yes
+  Device PCI Domain ID / Bus ID / location ID:   0 / 59 / 0
+  Compute Mode:
+     < Exclusive Process (many threads in one process is able to use ::cudaSetDevice() with this device) >
+
+deviceQuery, CUDA Driver = CUDART, CUDA Driver Version = 12.4, CUDA Runtime Version = 11.6, NumDevs = 1
+Result = PASS
+Starting executable...
+Running: conda init and script
+python -m pip install -U pip setuptools wheel
+Requirement already satisfied: pip in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (23.3.1)
+Collecting pip
+  Downloading pip-24.0-py3-none-any.whl.metadata (3.6 kB)
+Requirement already satisfied: setuptools in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (68.2.2)
+Collecting setuptools
+  Downloading setuptools-69.2.0-py3-none-any.whl.metadata (6.3 kB)
+Requirement already satisfied: wheel in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (0.41.2)
+Collecting wheel
+  Downloading wheel-0.43.0-py3-none-any.whl.metadata (2.2 kB)
+Downloading pip-24.0-py3-none-any.whl (2.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 17.7 MB/s eta 0:00:00
+Downloading setuptools-69.2.0-py3-none-any.whl (821 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 821.5/821.5 kB 28.7 MB/s eta 0:00:00
+Downloading wheel-0.43.0-py3-none-any.whl (65 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 65.8/65.8 kB 3.6 MB/s eta 0:00:00
+Installing collected packages: wheel, setuptools, pip
+  Attempting uninstall: wheel
+    Found existing installation: wheel 0.41.2
+    Uninstalling wheel-0.41.2:
+      Successfully uninstalled wheel-0.41.2
+  Attempting uninstall: setuptools
+    Found existing installation: setuptools 68.2.2
+    Uninstalling setuptools-68.2.2:
+      Successfully uninstalled setuptools-68.2.2
+  Attempting uninstall: pip
+    Found existing installation: pip 23.3.1
+    Uninstalling pip-23.3.1:
+      Successfully uninstalled pip-23.3.1
+Successfully installed pip-24.0 setuptools-69.2.0 wheel-0.43.0
+python -m pip install -r requirements.txt
+Collecting click==8.1.7 (from -r requirements.txt (line 1))
+  Downloading click-8.1.7-py3-none-any.whl.metadata (3.0 kB)
+Collecting dash==2.14.2 (from -r requirements.txt (line 2))
+  Downloading dash-2.14.2-py3-none-any.whl.metadata (11 kB)
+Collecting datasets==2.16.1 (from -r requirements.txt (line 3))
+  Downloading datasets-2.16.1-py3-none-any.whl.metadata (20 kB)
+Collecting fastapi==0.109.0 (from -r requirements.txt (line 4))
+  Downloading fastapi-0.109.0-py3-none-any.whl.metadata (24 kB)
+Collecting happytransformer==3.0.0 (from -r requirements.txt (line 5))
+  Downloading happytransformer-3.0.0-py3-none-any.whl.metadata (4.4 kB)
+Collecting hydra-core==1.3.2 (from -r requirements.txt (line 6))
+  Downloading hydra_core-1.3.2-py3-none-any.whl.metadata (5.5 kB)
+Collecting Markdown==3.5.1 (from -r requirements.txt (line 7))
+  Downloading Markdown-3.5.1-py3-none-any.whl.metadata (7.1 kB)
+Collecting matplotlib==3.8.2 (from -r requirements.txt (line 8))
+  Downloading matplotlib-3.8.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.8 kB)
+Collecting numpy==1.26.3 (from -r requirements.txt (line 9))
+  Downloading numpy-1.26.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 61.2/61.2 kB 1.9 MB/s eta 0:00:00
+Collecting omegaconf==2.3.0 (from -r requirements.txt (line 10))
+  Downloading omegaconf-2.3.0-py3-none-any.whl.metadata (3.9 kB)
+Collecting prometheus_fastapi_instrumentator==6.1.0 (from -r requirements.txt (line 11))
+  Downloading prometheus_fastapi_instrumentator-6.1.0-py3-none-any.whl.metadata (13 kB)
+Collecting pydantic==2.5.3 (from -r requirements.txt (line 12))
+  Downloading pydantic-2.5.3-py3-none-any.whl.metadata (65 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 65.6/65.6 kB 3.5 MB/s eta 0:00:00
+Collecting pytest==7.4.4 (from -r requirements.txt (line 13))
+  Downloading pytest-7.4.4-py3-none-any.whl.metadata (7.9 kB)
+Collecting pytorch_lightning==2.1.3 (from -r requirements.txt (line 14))
+  Downloading pytorch_lightning-2.1.3-py3-none-any.whl.metadata (21 kB)
+Collecting Requests==2.31.0 (from -r requirements.txt (line 15))
+  Downloading requests-2.31.0-py3-none-any.whl.metadata (4.6 kB)
+Collecting scikit_learn==1.3.2 (from -r requirements.txt (line 16))
+  Downloading scikit_learn-1.3.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (11 kB)
+Collecting torch==2.1.2 (from -r requirements.txt (line 17))
+  Downloading torch-2.1.2-cp311-cp311-manylinux1_x86_64.whl.metadata (25 kB)
+Collecting Flask<3.1,>=1.0.4 (from dash==2.14.2->-r requirements.txt (line 2))
+  Downloading flask-3.0.2-py3-none-any.whl.metadata (3.6 kB)
+Collecting Werkzeug<3.1 (from dash==2.14.2->-r requirements.txt (line 2))
+  Downloading werkzeug-3.0.1-py3-none-any.whl.metadata (4.1 kB)
+Collecting plotly>=5.0.0 (from dash==2.14.2->-r requirements.txt (line 2))
+  Downloading plotly-5.20.0-py3-none-any.whl.metadata (7.0 kB)
+Collecting dash-html-components==2.0.0 (from dash==2.14.2->-r requirements.txt (line 2))
+  Downloading dash_html_components-2.0.0-py3-none-any.whl.metadata (3.8 kB)
+Collecting dash-core-components==2.0.0 (from dash==2.14.2->-r requirements.txt (line 2))
+  Downloading dash_core_components-2.0.0-py3-none-any.whl.metadata (2.9 kB)
+Collecting dash-table==5.0.0 (from dash==2.14.2->-r requirements.txt (line 2))
+  Downloading dash_table-5.0.0-py3-none-any.whl.metadata (2.4 kB)
+Collecting typing-extensions>=4.1.1 (from dash==2.14.2->-r requirements.txt (line 2))
+  Downloading typing_extensions-4.10.0-py3-none-any.whl.metadata (3.0 kB)
+Collecting retrying (from dash==2.14.2->-r requirements.txt (line 2))
+  Downloading retrying-1.3.4-py3-none-any.whl.metadata (6.9 kB)
+Collecting ansi2html (from dash==2.14.2->-r requirements.txt (line 2))
+  Downloading ansi2html-1.9.1-py3-none-any.whl.metadata (3.7 kB)
+Collecting nest-asyncio (from dash==2.14.2->-r requirements.txt (line 2))
+  Downloading nest_asyncio-1.6.0-py3-none-any.whl.metadata (2.8 kB)
+Requirement already satisfied: setuptools in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->-r requirements.txt (line 2)) (69.2.0)
+Collecting importlib-metadata (from dash==2.14.2->-r requirements.txt (line 2))
+  Downloading importlib_metadata-7.0.2-py3-none-any.whl.metadata (4.6 kB)
+Collecting filelock (from datasets==2.16.1->-r requirements.txt (line 3))
+  Downloading filelock-3.13.1-py3-none-any.whl.metadata (2.8 kB)
+Collecting pyarrow>=8.0.0 (from datasets==2.16.1->-r requirements.txt (line 3))
+  Downloading pyarrow-15.0.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (3.0 kB)
+Collecting pyarrow-hotfix (from datasets==2.16.1->-r requirements.txt (line 3))
+  Downloading pyarrow_hotfix-0.6-py3-none-any.whl.metadata (3.6 kB)
+Collecting dill<0.3.8,>=0.3.0 (from datasets==2.16.1->-r requirements.txt (line 3))
+  Downloading dill-0.3.7-py3-none-any.whl.metadata (9.9 kB)
+Collecting pandas (from datasets==2.16.1->-r requirements.txt (line 3))
+  Downloading pandas-2.2.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (19 kB)
+Collecting tqdm>=4.62.1 (from datasets==2.16.1->-r requirements.txt (line 3))
+  Downloading tqdm-4.66.2-py3-none-any.whl.metadata (57 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 57.6/57.6 kB 3.4 MB/s eta 0:00:00
+Collecting xxhash (from datasets==2.16.1->-r requirements.txt (line 3))
+  Downloading xxhash-3.4.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (12 kB)
+Collecting multiprocess (from datasets==2.16.1->-r requirements.txt (line 3))
+  Downloading multiprocess-0.70.16-py311-none-any.whl.metadata (7.2 kB)
+Collecting fsspec<=2023.10.0,>=2023.1.0 (from fsspec[http]<=2023.10.0,>=2023.1.0->datasets==2.16.1->-r requirements.txt (line 3))
+  Downloading fsspec-2023.10.0-py3-none-any.whl.metadata (6.8 kB)
+Collecting aiohttp (from datasets==2.16.1->-r requirements.txt (line 3))
+  Downloading aiohttp-3.9.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.4 kB)
+Collecting huggingface-hub>=0.19.4 (from datasets==2.16.1->-r requirements.txt (line 3))
+  Downloading huggingface_hub-0.21.4-py3-none-any.whl.metadata (13 kB)
+Collecting packaging (from datasets==2.16.1->-r requirements.txt (line 3))
+  Downloading packaging-24.0-py3-none-any.whl.metadata (3.2 kB)
+Collecting pyyaml>=5.1 (from datasets==2.16.1->-r requirements.txt (line 3))
+  Downloading PyYAML-6.0.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.1 kB)
+Collecting starlette<0.36.0,>=0.35.0 (from fastapi==0.109.0->-r requirements.txt (line 4))
+  Downloading starlette-0.35.1-py3-none-any.whl.metadata (5.8 kB)
+Collecting transformers<5.0.0,>=4.30.1 (from happytransformer==3.0.0->-r requirements.txt (line 5))
+  Downloading transformers-4.38.2-py3-none-any.whl.metadata (130 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 130.7/130.7 kB 5.9 MB/s eta 0:00:00
+Collecting sentencepiece (from happytransformer==3.0.0->-r requirements.txt (line 5))
+  Downloading sentencepiece-0.2.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.7 kB)
+Collecting protobuf (from happytransformer==3.0.0->-r requirements.txt (line 5))
+  Downloading protobuf-5.26.0-cp37-abi3-manylinux2014_x86_64.whl.metadata (592 bytes)
+Collecting accelerate<1.0.0,>=0.20.1 (from happytransformer==3.0.0->-r requirements.txt (line 5))
+  Downloading accelerate-0.28.0-py3-none-any.whl.metadata (18 kB)
+Collecting tokenizers<1.0.0,>=0.13.3 (from happytransformer==3.0.0->-r requirements.txt (line 5))
+  Downloading tokenizers-0.15.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.7 kB)
+Collecting wandb (from happytransformer==3.0.0->-r requirements.txt (line 5))
+  Downloading wandb-0.16.4-py3-none-any.whl.metadata (10 kB)
+Collecting antlr4-python3-runtime==4.9.* (from hydra-core==1.3.2->-r requirements.txt (line 6))
+  Downloading antlr4-python3-runtime-4.9.3.tar.gz (117 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 117.0/117.0 kB 7.4 MB/s eta 0:00:00
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Collecting contourpy>=1.0.1 (from matplotlib==3.8.2->-r requirements.txt (line 8))
+  Downloading contourpy-1.2.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.8 kB)
+Collecting cycler>=0.10 (from matplotlib==3.8.2->-r requirements.txt (line 8))
+  Downloading cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)
+Collecting fonttools>=4.22.0 (from matplotlib==3.8.2->-r requirements.txt (line 8))
+  Downloading fonttools-4.49.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (159 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 159.1/159.1 kB 9.0 MB/s eta 0:00:00
+Collecting kiwisolver>=1.3.1 (from matplotlib==3.8.2->-r requirements.txt (line 8))
+  Downloading kiwisolver-1.4.5-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.4 kB)
+Collecting pillow>=8 (from matplotlib==3.8.2->-r requirements.txt (line 8))
+  Downloading pillow-10.2.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (9.7 kB)
+Collecting pyparsing>=2.3.1 (from matplotlib==3.8.2->-r requirements.txt (line 8))
+  Downloading pyparsing-3.1.2-py3-none-any.whl.metadata (5.1 kB)
+Collecting python-dateutil>=2.7 (from matplotlib==3.8.2->-r requirements.txt (line 8))
+  Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+Collecting prometheus-client<1.0.0,>=0.8.0 (from prometheus_fastapi_instrumentator==6.1.0->-r requirements.txt (line 11))
+  Downloading prometheus_client-0.20.0-py3-none-any.whl.metadata (1.8 kB)
+Collecting annotated-types>=0.4.0 (from pydantic==2.5.3->-r requirements.txt (line 12))
+  Downloading annotated_types-0.6.0-py3-none-any.whl.metadata (12 kB)
+Collecting pydantic-core==2.14.6 (from pydantic==2.5.3->-r requirements.txt (line 12))
+  Downloading pydantic_core-2.14.6-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.5 kB)
+Collecting iniconfig (from pytest==7.4.4->-r requirements.txt (line 13))
+  Downloading iniconfig-2.0.0-py3-none-any.whl.metadata (2.6 kB)
+Collecting pluggy<2.0,>=0.12 (from pytest==7.4.4->-r requirements.txt (line 13))
+  Downloading pluggy-1.4.0-py3-none-any.whl.metadata (4.3 kB)
+Collecting torchmetrics>=0.7.0 (from pytorch_lightning==2.1.3->-r requirements.txt (line 14))
+  Downloading torchmetrics-1.3.1-py3-none-any.whl.metadata (19 kB)
+Collecting lightning-utilities>=0.8.0 (from pytorch_lightning==2.1.3->-r requirements.txt (line 14))
+  Downloading lightning_utilities-0.10.1-py3-none-any.whl.metadata (4.8 kB)
+Collecting charset-normalizer<4,>=2 (from Requests==2.31.0->-r requirements.txt (line 15))
+  Downloading charset_normalizer-3.3.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (33 kB)
+Collecting idna<4,>=2.5 (from Requests==2.31.0->-r requirements.txt (line 15))
+  Downloading idna-3.6-py3-none-any.whl.metadata (9.9 kB)
+Collecting urllib3<3,>=1.21.1 (from Requests==2.31.0->-r requirements.txt (line 15))
+  Downloading urllib3-2.2.1-py3-none-any.whl.metadata (6.4 kB)
+Collecting certifi>=2017.4.17 (from Requests==2.31.0->-r requirements.txt (line 15))
+  Downloading certifi-2024.2.2-py3-none-any.whl.metadata (2.2 kB)
+Collecting scipy>=1.5.0 (from scikit_learn==1.3.2->-r requirements.txt (line 16))
+  Downloading scipy-1.12.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (60 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 60.4/60.4 kB 4.3 MB/s eta 0:00:00
+Collecting joblib>=1.1.1 (from scikit_learn==1.3.2->-r requirements.txt (line 16))
+  Downloading joblib-1.3.2-py3-none-any.whl.metadata (5.4 kB)
+Collecting threadpoolctl>=2.0.0 (from scikit_learn==1.3.2->-r requirements.txt (line 16))
+  Downloading threadpoolctl-3.3.0-py3-none-any.whl.metadata (13 kB)
+Collecting sympy (from torch==2.1.2->-r requirements.txt (line 17))
+  Downloading sympy-1.12-py3-none-any.whl.metadata (12 kB)
+Collecting networkx (from torch==2.1.2->-r requirements.txt (line 17))
+  Downloading networkx-3.2.1-py3-none-any.whl.metadata (5.2 kB)
+Collecting jinja2 (from torch==2.1.2->-r requirements.txt (line 17))
+  Downloading Jinja2-3.1.3-py3-none-any.whl.metadata (3.3 kB)
+Collecting nvidia-cuda-nvrtc-cu12==12.1.105 (from torch==2.1.2->-r requirements.txt (line 17))
+  Downloading nvidia_cuda_nvrtc_cu12-12.1.105-py3-none-manylinux1_x86_64.whl.metadata (1.5 kB)
+Collecting nvidia-cuda-runtime-cu12==12.1.105 (from torch==2.1.2->-r requirements.txt (line 17))
+  Downloading nvidia_cuda_runtime_cu12-12.1.105-py3-none-manylinux1_x86_64.whl.metadata (1.5 kB)
+Collecting nvidia-cuda-cupti-cu12==12.1.105 (from torch==2.1.2->-r requirements.txt (line 17))
+  Downloading nvidia_cuda_cupti_cu12-12.1.105-py3-none-manylinux1_x86_64.whl.metadata (1.6 kB)
+Collecting nvidia-cudnn-cu12==8.9.2.26 (from torch==2.1.2->-r requirements.txt (line 17))
+  Downloading nvidia_cudnn_cu12-8.9.2.26-py3-none-manylinux1_x86_64.whl.metadata (1.6 kB)
+Collecting nvidia-cublas-cu12==12.1.3.1 (from torch==2.1.2->-r requirements.txt (line 17))
+  Downloading nvidia_cublas_cu12-12.1.3.1-py3-none-manylinux1_x86_64.whl.metadata (1.5 kB)
+Collecting nvidia-cufft-cu12==11.0.2.54 (from torch==2.1.2->-r requirements.txt (line 17))
+  Downloading nvidia_cufft_cu12-11.0.2.54-py3-none-manylinux1_x86_64.whl.metadata (1.5 kB)
+Collecting nvidia-curand-cu12==10.3.2.106 (from torch==2.1.2->-r requirements.txt (line 17))
+  Downloading nvidia_curand_cu12-10.3.2.106-py3-none-manylinux1_x86_64.whl.metadata (1.5 kB)
+Collecting nvidia-cusolver-cu12==11.4.5.107 (from torch==2.1.2->-r requirements.txt (line 17))
+  Downloading nvidia_cusolver_cu12-11.4.5.107-py3-none-manylinux1_x86_64.whl.metadata (1.6 kB)
+Collecting nvidia-cusparse-cu12==12.1.0.106 (from torch==2.1.2->-r requirements.txt (line 17))
+  Downloading nvidia_cusparse_cu12-12.1.0.106-py3-none-manylinux1_x86_64.whl.metadata (1.6 kB)
+Collecting nvidia-nccl-cu12==2.18.1 (from torch==2.1.2->-r requirements.txt (line 17))
+  Downloading nvidia_nccl_cu12-2.18.1-py3-none-manylinux1_x86_64.whl.metadata (1.8 kB)
+Collecting nvidia-nvtx-cu12==12.1.105 (from torch==2.1.2->-r requirements.txt (line 17))
+  Downloading nvidia_nvtx_cu12-12.1.105-py3-none-manylinux1_x86_64.whl.metadata (1.7 kB)
+Collecting triton==2.1.0 (from torch==2.1.2->-r requirements.txt (line 17))
+  Downloading triton-2.1.0-0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (1.3 kB)
+Collecting nvidia-nvjitlink-cu12 (from nvidia-cusolver-cu12==11.4.5.107->torch==2.1.2->-r requirements.txt (line 17))
+  Downloading nvidia_nvjitlink_cu12-12.4.99-py3-none-manylinux2014_x86_64.whl.metadata (1.5 kB)
+Collecting psutil (from accelerate<1.0.0,>=0.20.1->happytransformer==3.0.0->-r requirements.txt (line 5))
+  Downloading psutil-5.9.8-cp36-abi3-manylinux_2_12_x86_64.manylinux2010_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (21 kB)
+Collecting safetensors>=0.3.1 (from accelerate<1.0.0,>=0.20.1->happytransformer==3.0.0->-r requirements.txt (line 5))
+  Downloading safetensors-0.4.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (3.8 kB)
+Collecting itsdangerous>=2.1.2 (from Flask<3.1,>=1.0.4->dash==2.14.2->-r requirements.txt (line 2))
+  Downloading itsdangerous-2.1.2-py3-none-any.whl.metadata (2.9 kB)
+Collecting blinker>=1.6.2 (from Flask<3.1,>=1.0.4->dash==2.14.2->-r requirements.txt (line 2))
+  Downloading blinker-1.7.0-py3-none-any.whl.metadata (1.9 kB)
+Collecting aiosignal>=1.1.2 (from aiohttp->datasets==2.16.1->-r requirements.txt (line 3))
+  Downloading aiosignal-1.3.1-py3-none-any.whl.metadata (4.0 kB)
+Collecting attrs>=17.3.0 (from aiohttp->datasets==2.16.1->-r requirements.txt (line 3))
+  Downloading attrs-23.2.0-py3-none-any.whl.metadata (9.5 kB)
+Collecting frozenlist>=1.1.1 (from aiohttp->datasets==2.16.1->-r requirements.txt (line 3))
+  Downloading frozenlist-1.4.1-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (12 kB)
+Collecting multidict<7.0,>=4.5 (from aiohttp->datasets==2.16.1->-r requirements.txt (line 3))
+  Downloading multidict-6.0.5-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.2 kB)
+Collecting yarl<2.0,>=1.0 (from aiohttp->datasets==2.16.1->-r requirements.txt (line 3))
+  Downloading yarl-1.9.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (31 kB)
+Collecting MarkupSafe>=2.0 (from jinja2->torch==2.1.2->-r requirements.txt (line 17))
+  Downloading MarkupSafe-2.1.5-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (3.0 kB)
+Collecting tenacity>=6.2.0 (from plotly>=5.0.0->dash==2.14.2->-r requirements.txt (line 2))
+  Downloading tenacity-8.2.3-py3-none-any.whl.metadata (1.0 kB)
+Collecting six>=1.5 (from python-dateutil>=2.7->matplotlib==3.8.2->-r requirements.txt (line 8))
+  Downloading six-1.16.0-py2.py3-none-any.whl.metadata (1.8 kB)
+Collecting anyio<5,>=3.4.0 (from starlette<0.36.0,>=0.35.0->fastapi==0.109.0->-r requirements.txt (line 4))
+  Downloading anyio-4.3.0-py3-none-any.whl.metadata (4.6 kB)
+Collecting regex!=2019.12.17 (from transformers<5.0.0,>=4.30.1->happytransformer==3.0.0->-r requirements.txt (line 5))
+  Downloading regex-2023.12.25-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (40 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 40.9/40.9 kB 2.3 MB/s eta 0:00:00
+Collecting zipp>=0.5 (from importlib-metadata->dash==2.14.2->-r requirements.txt (line 2))
+  Downloading zipp-3.18.1-py3-none-any.whl.metadata (3.5 kB)
+INFO: pip is looking at multiple versions of multiprocess to determine which version is compatible with other requirements. This could take a while.
+Collecting multiprocess (from datasets==2.16.1->-r requirements.txt (line 3))
+  Downloading multiprocess-0.70.15-py311-none-any.whl.metadata (7.2 kB)
+Collecting pytz>=2020.1 (from pandas->datasets==2.16.1->-r requirements.txt (line 3))
+  Downloading pytz-2024.1-py2.py3-none-any.whl.metadata (22 kB)
+Collecting tzdata>=2022.7 (from pandas->datasets==2.16.1->-r requirements.txt (line 3))
+  Downloading tzdata-2024.1-py2.py3-none-any.whl.metadata (1.4 kB)
+Collecting mpmath>=0.19 (from sympy->torch==2.1.2->-r requirements.txt (line 17))
+  Downloading mpmath-1.3.0-py3-none-any.whl.metadata (8.6 kB)
+Collecting GitPython!=3.1.29,>=1.0.0 (from wandb->happytransformer==3.0.0->-r requirements.txt (line 5))
+  Downloading GitPython-3.1.42-py3-none-any.whl.metadata (12 kB)
+Collecting sentry-sdk>=1.0.0 (from wandb->happytransformer==3.0.0->-r requirements.txt (line 5))
+  Downloading sentry_sdk-1.42.0-py2.py3-none-any.whl.metadata (9.8 kB)
+Collecting docker-pycreds>=0.4.0 (from wandb->happytransformer==3.0.0->-r requirements.txt (line 5))
+  Downloading docker_pycreds-0.4.0-py2.py3-none-any.whl.metadata (1.8 kB)
+Collecting setproctitle (from wandb->happytransformer==3.0.0->-r requirements.txt (line 5))
+  Downloading setproctitle-1.3.3-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (9.9 kB)
+Collecting appdirs>=1.4.3 (from wandb->happytransformer==3.0.0->-r requirements.txt (line 5))
+  Downloading appdirs-1.4.4-py2.py3-none-any.whl.metadata (9.0 kB)
+Collecting protobuf (from happytransformer==3.0.0->-r requirements.txt (line 5))
+  Downloading protobuf-4.25.3-cp37-abi3-manylinux2014_x86_64.whl.metadata (541 bytes)
+Collecting sniffio>=1.1 (from anyio<5,>=3.4.0->starlette<0.36.0,>=0.35.0->fastapi==0.109.0->-r requirements.txt (line 4))
+  Downloading sniffio-1.3.1-py3-none-any.whl.metadata (3.9 kB)
+Collecting gitdb<5,>=4.0.1 (from GitPython!=3.1.29,>=1.0.0->wandb->happytransformer==3.0.0->-r requirements.txt (line 5))
+  Downloading gitdb-4.0.11-py3-none-any.whl.metadata (1.2 kB)
+Collecting smmap<6,>=3.0.1 (from gitdb<5,>=4.0.1->GitPython!=3.1.29,>=1.0.0->wandb->happytransformer==3.0.0->-r requirements.txt (line 5))
+  Downloading smmap-5.0.1-py3-none-any.whl.metadata (4.3 kB)
+Downloading click-8.1.7-py3-none-any.whl (97 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 97.9/97.9 kB 7.2 MB/s eta 0:00:00
+Downloading dash-2.14.2-py3-none-any.whl (10.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.2/10.2 MB 46.5 MB/s eta 0:00:00
+Downloading datasets-2.16.1-py3-none-any.whl (507 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 507.1/507.1 kB 23.0 MB/s eta 0:00:00
+Downloading fastapi-0.109.0-py3-none-any.whl (92 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 92.0/92.0 kB 6.8 MB/s eta 0:00:00
+Downloading happytransformer-3.0.0-py3-none-any.whl (24 kB)
+Downloading hydra_core-1.3.2-py3-none-any.whl (154 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 154.5/154.5 kB 11.2 MB/s eta 0:00:00
+Downloading Markdown-3.5.1-py3-none-any.whl (102 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 102.2/102.2 kB 7.5 MB/s eta 0:00:00
+Downloading matplotlib-3.8.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (11.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.6/11.6 MB 49.0 MB/s eta 0:00:00
+Downloading numpy-1.26.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (18.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 18.3/18.3 MB 37.7 MB/s eta 0:00:00
+Downloading omegaconf-2.3.0-py3-none-any.whl (79 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 79.5/79.5 kB 5.2 MB/s eta 0:00:00
+Downloading prometheus_fastapi_instrumentator-6.1.0-py3-none-any.whl (18 kB)
+Downloading pydantic-2.5.3-py3-none-any.whl (381 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 381.9/381.9 kB 21.9 MB/s eta 0:00:00
+Downloading pytest-7.4.4-py3-none-any.whl (325 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 325.3/325.3 kB 18.2 MB/s eta 0:00:00
+Downloading pytorch_lightning-2.1.3-py3-none-any.whl (777 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 777.7/777.7 kB 30.0 MB/s eta 0:00:00
+Downloading requests-2.31.0-py3-none-any.whl (62 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.6/62.6 kB 4.3 MB/s eta 0:00:00
+Downloading scikit_learn-1.3.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (10.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.9/10.9 MB 50.4 MB/s eta 0:00:00
+Downloading torch-2.1.2-cp311-cp311-manylinux1_x86_64.whl (670.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 670.2/670.2 MB 1.6 MB/s eta 0:00:00
+Downloading dash_core_components-2.0.0-py3-none-any.whl (3.8 kB)
+Downloading dash_html_components-2.0.0-py3-none-any.whl (4.1 kB)
+Downloading dash_table-5.0.0-py3-none-any.whl (3.9 kB)
+Downloading nvidia_cublas_cu12-12.1.3.1-py3-none-manylinux1_x86_64.whl (410.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 410.6/410.6 MB 2.6 MB/s eta 0:00:00
+Downloading nvidia_cuda_cupti_cu12-12.1.105-py3-none-manylinux1_x86_64.whl (14.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 14.1/14.1 MB 43.7 MB/s eta 0:00:00
+Downloading nvidia_cuda_nvrtc_cu12-12.1.105-py3-none-manylinux1_x86_64.whl (23.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 23.7/23.7 MB 31.5 MB/s eta 0:00:00
+Downloading nvidia_cuda_runtime_cu12-12.1.105-py3-none-manylinux1_x86_64.whl (823 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 823.6/823.6 kB 28.6 MB/s eta 0:00:00
+Downloading nvidia_cudnn_cu12-8.9.2.26-py3-none-manylinux1_x86_64.whl (731.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 731.7/731.7 MB 1.5 MB/s eta 0:00:00
+Downloading nvidia_cufft_cu12-11.0.2.54-py3-none-manylinux1_x86_64.whl (121.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 121.6/121.6 MB 8.3 MB/s eta 0:00:00
+Downloading nvidia_curand_cu12-10.3.2.106-py3-none-manylinux1_x86_64.whl (56.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 56.5/56.5 MB 16.1 MB/s eta 0:00:00
+Downloading nvidia_cusolver_cu12-11.4.5.107-py3-none-manylinux1_x86_64.whl (124.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 124.2/124.2 MB 7.9 MB/s eta 0:00:00
+Downloading nvidia_cusparse_cu12-12.1.0.106-py3-none-manylinux1_x86_64.whl (196.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 196.0/196.0 MB 5.3 MB/s eta 0:00:00
+Downloading nvidia_nccl_cu12-2.18.1-py3-none-manylinux1_x86_64.whl (209.8 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 209.8/209.8 MB 4.9 MB/s eta 0:00:00
+Downloading nvidia_nvtx_cu12-12.1.105-py3-none-manylinux1_x86_64.whl (99 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 99.1/99.1 kB 5.6 MB/s eta 0:00:00
+Downloading pydantic_core-2.14.6-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 31.3 MB/s eta 0:00:00
+Downloading triton-2.1.0-0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (89.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 89.2/89.2 MB 10.4 MB/s eta 0:00:00
+Downloading accelerate-0.28.0-py3-none-any.whl (290 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 290.1/290.1 kB 13.1 MB/s eta 0:00:00
+Downloading annotated_types-0.6.0-py3-none-any.whl (12 kB)
+Downloading certifi-2024.2.2-py3-none-any.whl (163 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 163.8/163.8 kB 9.8 MB/s eta 0:00:00
+Downloading charset_normalizer-3.3.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (140 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 140.3/140.3 kB 6.8 MB/s eta 0:00:00
+Downloading contourpy-1.2.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (313 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 313.4/313.4 kB 11.5 MB/s eta 0:00:00
+Downloading cycler-0.12.1-py3-none-any.whl (8.3 kB)
+Downloading dill-0.3.7-py3-none-any.whl (115 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 115.3/115.3 kB 6.8 MB/s eta 0:00:00
+Downloading flask-3.0.2-py3-none-any.whl (101 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 101.3/101.3 kB 5.3 MB/s eta 0:00:00
+Downloading fonttools-4.49.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (4.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.9/4.9 MB 36.9 MB/s eta 0:00:00
+Downloading fsspec-2023.10.0-py3-none-any.whl (166 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 166.4/166.4 kB 7.8 MB/s eta 0:00:00
+Downloading aiohttp-3.9.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 28.1 MB/s eta 0:00:00
+Downloading huggingface_hub-0.21.4-py3-none-any.whl (346 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 346.4/346.4 kB 15.3 MB/s eta 0:00:00
+Downloading idna-3.6-py3-none-any.whl (61 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 61.6/61.6 kB 3.3 MB/s eta 0:00:00
+Downloading Jinja2-3.1.3-py3-none-any.whl (133 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 133.2/133.2 kB 7.5 MB/s eta 0:00:00
+Downloading joblib-1.3.2-py3-none-any.whl (302 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 302.2/302.2 kB 13.9 MB/s eta 0:00:00
+Downloading kiwisolver-1.4.5-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.4/1.4 MB 27.9 MB/s eta 0:00:00
+Downloading lightning_utilities-0.10.1-py3-none-any.whl (24 kB)
+Downloading packaging-24.0-py3-none-any.whl (53 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 53.5/53.5 kB 2.6 MB/s eta 0:00:00
+Downloading pillow-10.2.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (4.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.4/4.4 MB 39.2 MB/s eta 0:00:00
+Downloading plotly-5.20.0-py3-none-any.whl (15.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 15.7/15.7 MB 15.0 MB/s eta 0:00:00
+Downloading pluggy-1.4.0-py3-none-any.whl (20 kB)
+Downloading prometheus_client-0.20.0-py3-none-any.whl (54 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 54.5/54.5 kB 2.7 MB/s eta 0:00:00
+Downloading pyarrow-15.0.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (38.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 38.4/38.4 MB 12.8 MB/s eta 0:00:00
+Downloading pyparsing-3.1.2-py3-none-any.whl (103 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 103.2/103.2 kB 5.8 MB/s eta 0:00:00
+Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 229.9/229.9 kB 10.5 MB/s eta 0:00:00
+Downloading PyYAML-6.0.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (757 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 757.7/757.7 kB 14.1 MB/s eta 0:00:00
+Downloading scipy-1.12.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (38.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 38.4/38.4 MB 14.0 MB/s eta 0:00:00
+Downloading starlette-0.35.1-py3-none-any.whl (71 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 71.1/71.1 kB 4.2 MB/s eta 0:00:00
+Downloading threadpoolctl-3.3.0-py3-none-any.whl (17 kB)
+Downloading tokenizers-0.15.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.6/3.6 MB 20.7 MB/s eta 0:00:00
+Downloading torchmetrics-1.3.1-py3-none-any.whl (840 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 840.4/840.4 kB 17.2 MB/s eta 0:00:00
+Downloading tqdm-4.66.2-py3-none-any.whl (78 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 78.3/78.3 kB 4.2 MB/s eta 0:00:00
+Downloading transformers-4.38.2-py3-none-any.whl (8.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.5/8.5 MB 22.4 MB/s eta 0:00:00
+Downloading typing_extensions-4.10.0-py3-none-any.whl (33 kB)
+Downloading urllib3-2.2.1-py3-none-any.whl (121 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 121.1/121.1 kB 6.2 MB/s eta 0:00:00
+Downloading werkzeug-3.0.1-py3-none-any.whl (226 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 226.7/226.7 kB 9.9 MB/s eta 0:00:00
+Downloading ansi2html-1.9.1-py3-none-any.whl (17 kB)
+Downloading filelock-3.13.1-py3-none-any.whl (11 kB)
+Downloading importlib_metadata-7.0.2-py3-none-any.whl (24 kB)
+Downloading iniconfig-2.0.0-py3-none-any.whl (5.9 kB)
+Downloading multiprocess-0.70.15-py311-none-any.whl (135 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 135.4/135.4 kB 7.8 MB/s eta 0:00:00
+Downloading nest_asyncio-1.6.0-py3-none-any.whl (5.2 kB)
+Downloading networkx-3.2.1-py3-none-any.whl (1.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.6/1.6 MB 19.8 MB/s eta 0:00:00
+Downloading pandas-2.2.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (13.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.0/13.0 MB 21.7 MB/s eta 0:00:00
+Downloading pyarrow_hotfix-0.6-py3-none-any.whl (7.9 kB)
+Downloading retrying-1.3.4-py3-none-any.whl (11 kB)
+Downloading sentencepiece-0.2.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 19.6 MB/s eta 0:00:00
+Downloading sympy-1.12-py3-none-any.whl (5.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.7/5.7 MB 23.4 MB/s eta 0:00:00
+Downloading wandb-0.16.4-py3-none-any.whl (2.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.2/2.2 MB 21.1 MB/s eta 0:00:00
+Downloading protobuf-4.25.3-cp37-abi3-manylinux2014_x86_64.whl (294 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 294.6/294.6 kB 11.1 MB/s eta 0:00:00
+Downloading xxhash-3.4.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (194 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 194.8/194.8 kB 9.0 MB/s eta 0:00:00
+Downloading aiosignal-1.3.1-py3-none-any.whl (7.6 kB)
+Downloading anyio-4.3.0-py3-none-any.whl (85 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 85.6/85.6 kB 4.5 MB/s eta 0:00:00
+Downloading appdirs-1.4.4-py2.py3-none-any.whl (9.6 kB)
+Downloading attrs-23.2.0-py3-none-any.whl (60 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 60.8/60.8 kB 3.5 MB/s eta 0:00:00
+Downloading blinker-1.7.0-py3-none-any.whl (13 kB)
+Downloading docker_pycreds-0.4.0-py2.py3-none-any.whl (9.0 kB)
+Downloading frozenlist-1.4.1-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (272 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 272.3/272.3 kB 11.4 MB/s eta 0:00:00
+Downloading GitPython-3.1.42-py3-none-any.whl (195 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 195.4/195.4 kB 9.7 MB/s eta 0:00:00
+Downloading itsdangerous-2.1.2-py3-none-any.whl (15 kB)
+Downloading MarkupSafe-2.1.5-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (28 kB)
+Downloading mpmath-1.3.0-py3-none-any.whl (536 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 536.2/536.2 kB 14.3 MB/s eta 0:00:00
+Downloading multidict-6.0.5-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (128 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 128.7/128.7 kB 7.4 MB/s eta 0:00:00
+Downloading psutil-5.9.8-cp36-abi3-manylinux_2_12_x86_64.manylinux2010_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (288 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 288.2/288.2 kB 12.5 MB/s eta 0:00:00
+Downloading pytz-2024.1-py2.py3-none-any.whl (505 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 505.5/505.5 kB 14.3 MB/s eta 0:00:00
+Downloading regex-2023.12.25-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (785 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 785.1/785.1 kB 17.7 MB/s eta 0:00:00
+Downloading safetensors-0.4.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 19.3 MB/s eta 0:00:00
+Downloading sentry_sdk-1.42.0-py2.py3-none-any.whl (263 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 263.5/263.5 kB 10.4 MB/s eta 0:00:00
+Downloading six-1.16.0-py2.py3-none-any.whl (11 kB)
+Downloading tenacity-8.2.3-py3-none-any.whl (24 kB)
+Downloading tzdata-2024.1-py2.py3-none-any.whl (345 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 345.4/345.4 kB 14.0 MB/s eta 0:00:00
+Downloading yarl-1.9.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (328 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 328.1/328.1 kB 13.5 MB/s eta 0:00:00
+Downloading zipp-3.18.1-py3-none-any.whl (8.2 kB)
+Downloading nvidia_nvjitlink_cu12-12.4.99-py3-none-manylinux2014_x86_64.whl (21.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 21.1/21.1 MB 20.2 MB/s eta 0:00:00
+Downloading setproctitle-1.3.3-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (31 kB)
+Downloading gitdb-4.0.11-py3-none-any.whl (62 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.7/62.7 kB 3.5 MB/s eta 0:00:00
+Downloading sniffio-1.3.1-py3-none-any.whl (10 kB)
+Downloading smmap-5.0.1-py3-none-any.whl (24 kB)
+Building wheels for collected packages: antlr4-python3-runtime
+  Building wheel for antlr4-python3-runtime (setup.py): started
+  Building wheel for antlr4-python3-runtime (setup.py): finished with status 'done'
+  Created wheel for antlr4-python3-runtime: filename=antlr4_python3_runtime-4.9.3-py3-none-any.whl size=144554 sha256=6cb55cac08c9e4bb58923b2b11c05d85fd99ae0b143c29283e1cd43d67e7e780
+  Stored in directory: /zhome/8d/a/147395/.cache/pip/wheels/1a/97/32/461f837398029ad76911109f07047fde1d7b661a147c7c56d1
+Successfully built antlr4-python3-runtime
+Installing collected packages: sentencepiece, pytz, mpmath, dash-table, dash-html-components, dash-core-components, appdirs, antlr4-python3-runtime, zipp, xxhash, urllib3, tzdata, typing-extensions, tqdm, threadpoolctl, tenacity, sympy, sniffio, smmap, six, setproctitle, safetensors, regex, pyyaml, pyparsing, pyarrow-hotfix, psutil, protobuf, prometheus-client, pluggy, pillow, packaging, nvidia-nvtx-cu12, nvidia-nvjitlink-cu12, nvidia-nccl-cu12, nvidia-curand-cu12, nvidia-cufft-cu12, nvidia-cuda-runtime-cu12, nvidia-cuda-nvrtc-cu12, nvidia-cuda-cupti-cu12, nvidia-cublas-cu12, numpy, networkx, nest-asyncio, multidict, MarkupSafe, Markdown, kiwisolver, joblib, itsdangerous, iniconfig, idna, fsspec, frozenlist, fonttools, filelock, dill, cycler, click, charset-normalizer, certifi, blinker, attrs, ansi2html, annotated-types, yarl, Werkzeug, triton, sentry-sdk, scipy, retrying, Requests, python-dateutil, pytest, pydantic-core, pyarrow, plotly, omegaconf, nvidia-cusparse-cu12, nvidia-cudnn-cu12, multiprocess, lightning-utilities, jinja2, importlib-metadata, gitdb, docker-pycreds, contourpy, anyio, aiosignal, starlette, scikit_learn, pydantic, pandas, nvidia-cusolver-cu12, matplotlib, hydra-core, huggingface-hub, GitPython, Flask, aiohttp, wandb, torch, tokenizers, fastapi, dash, transformers, torchmetrics, prometheus_fastapi_instrumentator, datasets, accelerate, pytorch_lightning, happytransformer
+Successfully installed Flask-3.0.2 GitPython-3.1.42 Markdown-3.5.1 MarkupSafe-2.1.5 Requests-2.31.0 Werkzeug-3.0.1 accelerate-0.28.0 aiohttp-3.9.3 aiosignal-1.3.1 annotated-types-0.6.0 ansi2html-1.9.1 antlr4-python3-runtime-4.9.3 anyio-4.3.0 appdirs-1.4.4 attrs-23.2.0 blinker-1.7.0 certifi-2024.2.2 charset-normalizer-3.3.2 click-8.1.7 contourpy-1.2.0 cycler-0.12.1 dash-2.14.2 dash-core-components-2.0.0 dash-html-components-2.0.0 dash-table-5.0.0 datasets-2.16.1 dill-0.3.7 docker-pycreds-0.4.0 fastapi-0.109.0 filelock-3.13.1 fonttools-4.49.0 frozenlist-1.4.1 fsspec-2023.10.0 gitdb-4.0.11 happytransformer-3.0.0 huggingface-hub-0.21.4 hydra-core-1.3.2 idna-3.6 importlib-metadata-7.0.2 iniconfig-2.0.0 itsdangerous-2.1.2 jinja2-3.1.3 joblib-1.3.2 kiwisolver-1.4.5 lightning-utilities-0.10.1 matplotlib-3.8.2 mpmath-1.3.0 multidict-6.0.5 multiprocess-0.70.15 nest-asyncio-1.6.0 networkx-3.2.1 numpy-1.26.3 nvidia-cublas-cu12-12.1.3.1 nvidia-cuda-cupti-cu12-12.1.105 nvidia-cuda-nvrtc-cu12-12.1.105 nvidia-cuda-runtime-cu12-12.1.105 nvidia-cudnn-cu12-8.9.2.26 nvidia-cufft-cu12-11.0.2.54 nvidia-curand-cu12-10.3.2.106 nvidia-cusolver-cu12-11.4.5.107 nvidia-cusparse-cu12-12.1.0.106 nvidia-nccl-cu12-2.18.1 nvidia-nvjitlink-cu12-12.4.99 nvidia-nvtx-cu12-12.1.105 omegaconf-2.3.0 packaging-24.0 pandas-2.2.1 pillow-10.2.0 plotly-5.20.0 pluggy-1.4.0 prometheus-client-0.20.0 prometheus_fastapi_instrumentator-6.1.0 protobuf-4.25.3 psutil-5.9.8 pyarrow-15.0.1 pyarrow-hotfix-0.6 pydantic-2.5.3 pydantic-core-2.14.6 pyparsing-3.1.2 pytest-7.4.4 python-dateutil-2.9.0.post0 pytorch_lightning-2.1.3 pytz-2024.1 pyyaml-6.0.1 regex-2023.12.25 retrying-1.3.4 safetensors-0.4.2 scikit_learn-1.3.2 scipy-1.12.0 sentencepiece-0.2.0 sentry-sdk-1.42.0 setproctitle-1.3.3 six-1.16.0 smmap-5.0.1 sniffio-1.3.1 starlette-0.35.1 sympy-1.12 tenacity-8.2.3 threadpoolctl-3.3.0 tokenizers-0.15.2 torch-2.1.2 torchmetrics-1.3.1 tqdm-4.66.2 transformers-4.38.2 triton-2.1.0 typing-extensions-4.10.0 tzdata-2024.1 urllib3-2.2.1 wandb-0.16.4 xxhash-3.4.1 yarl-1.9.4 zipp-3.18.1
+python -m pip install -e .
+Obtaining file:///zhome/8d/a/147395/masterproject/masterproject
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Installing backend dependencies: started
+  Installing backend dependencies: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: click==8.1.7 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (8.1.7)
+Requirement already satisfied: dash==2.14.2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (2.14.2)
+Requirement already satisfied: datasets==2.16.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (2.16.1)
+Requirement already satisfied: fastapi==0.109.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (0.109.0)
+Requirement already satisfied: happytransformer==3.0.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (3.0.0)
+Requirement already satisfied: hydra-core==1.3.2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (1.3.2)
+Requirement already satisfied: Markdown==3.5.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (3.5.1)
+Requirement already satisfied: matplotlib==3.8.2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (3.8.2)
+Requirement already satisfied: numpy==1.26.3 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (1.26.3)
+Requirement already satisfied: omegaconf==2.3.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (2.3.0)
+Requirement already satisfied: prometheus-fastapi-instrumentator==6.1.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (6.1.0)
+Requirement already satisfied: pydantic==2.5.3 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (2.5.3)
+Requirement already satisfied: pytest==7.4.4 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (7.4.4)
+Requirement already satisfied: pytorch-lightning==2.1.3 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (2.1.3)
+Requirement already satisfied: Requests==2.31.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (2.31.0)
+Requirement already satisfied: scikit-learn==1.3.2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (1.3.2)
+Requirement already satisfied: torch==2.1.2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (2.1.2)
+Requirement already satisfied: Flask<3.1,>=1.0.4 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->src==0.0.1) (3.0.2)
+Requirement already satisfied: Werkzeug<3.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->src==0.0.1) (3.0.1)
+Requirement already satisfied: plotly>=5.0.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->src==0.0.1) (5.20.0)
+Requirement already satisfied: dash-html-components==2.0.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->src==0.0.1) (2.0.0)
+Requirement already satisfied: dash-core-components==2.0.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->src==0.0.1) (2.0.0)
+Requirement already satisfied: dash-table==5.0.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->src==0.0.1) (5.0.0)
+Requirement already satisfied: typing-extensions>=4.1.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->src==0.0.1) (4.10.0)
+Requirement already satisfied: retrying in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->src==0.0.1) (1.3.4)
+Requirement already satisfied: ansi2html in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->src==0.0.1) (1.9.1)
+Requirement already satisfied: nest-asyncio in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->src==0.0.1) (1.6.0)
+Requirement already satisfied: setuptools in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->src==0.0.1) (69.2.0)
+Requirement already satisfied: importlib-metadata in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->src==0.0.1) (7.0.2)
+Requirement already satisfied: filelock in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->src==0.0.1) (3.13.1)
+Requirement already satisfied: pyarrow>=8.0.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->src==0.0.1) (15.0.1)
+Requirement already satisfied: pyarrow-hotfix in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->src==0.0.1) (0.6)
+Requirement already satisfied: dill<0.3.8,>=0.3.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->src==0.0.1) (0.3.7)
+Requirement already satisfied: pandas in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->src==0.0.1) (2.2.1)
+Requirement already satisfied: tqdm>=4.62.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->src==0.0.1) (4.66.2)
+Requirement already satisfied: xxhash in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->src==0.0.1) (3.4.1)
+Requirement already satisfied: multiprocess in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->src==0.0.1) (0.70.15)
+Requirement already satisfied: fsspec<=2023.10.0,>=2023.1.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from fsspec[http]<=2023.10.0,>=2023.1.0->datasets==2.16.1->src==0.0.1) (2023.10.0)
+Requirement already satisfied: aiohttp in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->src==0.0.1) (3.9.3)
+Requirement already satisfied: huggingface-hub>=0.19.4 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->src==0.0.1) (0.21.4)
+Requirement already satisfied: packaging in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->src==0.0.1) (24.0)
+Requirement already satisfied: pyyaml>=5.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->src==0.0.1) (6.0.1)
+Requirement already satisfied: starlette<0.36.0,>=0.35.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from fastapi==0.109.0->src==0.0.1) (0.35.1)
+Requirement already satisfied: transformers<5.0.0,>=4.30.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from happytransformer==3.0.0->src==0.0.1) (4.38.2)
+Requirement already satisfied: sentencepiece in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from happytransformer==3.0.0->src==0.0.1) (0.2.0)
+Requirement already satisfied: protobuf in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from happytransformer==3.0.0->src==0.0.1) (4.25.3)
+Requirement already satisfied: accelerate<1.0.0,>=0.20.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from happytransformer==3.0.0->src==0.0.1) (0.28.0)
+Requirement already satisfied: tokenizers<1.0.0,>=0.13.3 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from happytransformer==3.0.0->src==0.0.1) (0.15.2)
+Requirement already satisfied: wandb in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from happytransformer==3.0.0->src==0.0.1) (0.16.4)
+Requirement already satisfied: antlr4-python3-runtime==4.9.* in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from hydra-core==1.3.2->src==0.0.1) (4.9.3)
+Requirement already satisfied: contourpy>=1.0.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from matplotlib==3.8.2->src==0.0.1) (1.2.0)
+Requirement already satisfied: cycler>=0.10 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from matplotlib==3.8.2->src==0.0.1) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from matplotlib==3.8.2->src==0.0.1) (4.49.0)
+Requirement already satisfied: kiwisolver>=1.3.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from matplotlib==3.8.2->src==0.0.1) (1.4.5)
+Requirement already satisfied: pillow>=8 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from matplotlib==3.8.2->src==0.0.1) (10.2.0)
+Requirement already satisfied: pyparsing>=2.3.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from matplotlib==3.8.2->src==0.0.1) (3.1.2)
+Requirement already satisfied: python-dateutil>=2.7 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from matplotlib==3.8.2->src==0.0.1) (2.9.0.post0)
+Requirement already satisfied: prometheus-client<1.0.0,>=0.8.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from prometheus-fastapi-instrumentator==6.1.0->src==0.0.1) (0.20.0)
+Requirement already satisfied: annotated-types>=0.4.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from pydantic==2.5.3->src==0.0.1) (0.6.0)
+Requirement already satisfied: pydantic-core==2.14.6 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from pydantic==2.5.3->src==0.0.1) (2.14.6)
+Requirement already satisfied: iniconfig in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from pytest==7.4.4->src==0.0.1) (2.0.0)
+Requirement already satisfied: pluggy<2.0,>=0.12 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from pytest==7.4.4->src==0.0.1) (1.4.0)
+Requirement already satisfied: torchmetrics>=0.7.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from pytorch-lightning==2.1.3->src==0.0.1) (1.3.1)
+Requirement already satisfied: lightning-utilities>=0.8.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from pytorch-lightning==2.1.3->src==0.0.1) (0.10.1)
+Requirement already satisfied: charset-normalizer<4,>=2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from Requests==2.31.0->src==0.0.1) (3.3.2)
+Requirement already satisfied: idna<4,>=2.5 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from Requests==2.31.0->src==0.0.1) (3.6)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from Requests==2.31.0->src==0.0.1) (2.2.1)
+Requirement already satisfied: certifi>=2017.4.17 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from Requests==2.31.0->src==0.0.1) (2024.2.2)
+Requirement already satisfied: scipy>=1.5.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from scikit-learn==1.3.2->src==0.0.1) (1.12.0)
+Requirement already satisfied: joblib>=1.1.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from scikit-learn==1.3.2->src==0.0.1) (1.3.2)
+Requirement already satisfied: threadpoolctl>=2.0.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from scikit-learn==1.3.2->src==0.0.1) (3.3.0)
+Requirement already satisfied: sympy in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (1.12)
+Requirement already satisfied: networkx in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (3.2.1)
+Requirement already satisfied: jinja2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (3.1.3)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.1.105 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (12.1.105)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.1.105 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (12.1.105)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.1.105 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (12.1.105)
+Requirement already satisfied: nvidia-cudnn-cu12==8.9.2.26 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (8.9.2.26)
+Requirement already satisfied: nvidia-cublas-cu12==12.1.3.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (12.1.3.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.0.2.54 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (11.0.2.54)
+Requirement already satisfied: nvidia-curand-cu12==10.3.2.106 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (10.3.2.106)
+Requirement already satisfied: nvidia-cusolver-cu12==11.4.5.107 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (11.4.5.107)
+Requirement already satisfied: nvidia-cusparse-cu12==12.1.0.106 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (12.1.0.106)
+Requirement already satisfied: nvidia-nccl-cu12==2.18.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (2.18.1)
+Requirement already satisfied: nvidia-nvtx-cu12==12.1.105 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (12.1.105)
+Requirement already satisfied: triton==2.1.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (2.1.0)
+Requirement already satisfied: nvidia-nvjitlink-cu12 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from nvidia-cusolver-cu12==11.4.5.107->torch==2.1.2->src==0.0.1) (12.4.99)
+Requirement already satisfied: psutil in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from accelerate<1.0.0,>=0.20.1->happytransformer==3.0.0->src==0.0.1) (5.9.8)
+Requirement already satisfied: safetensors>=0.3.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from accelerate<1.0.0,>=0.20.1->happytransformer==3.0.0->src==0.0.1) (0.4.2)
+Requirement already satisfied: itsdangerous>=2.1.2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from Flask<3.1,>=1.0.4->dash==2.14.2->src==0.0.1) (2.1.2)
+Requirement already satisfied: blinker>=1.6.2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from Flask<3.1,>=1.0.4->dash==2.14.2->src==0.0.1) (1.7.0)
+Requirement already satisfied: aiosignal>=1.1.2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from aiohttp->datasets==2.16.1->src==0.0.1) (1.3.1)
+Requirement already satisfied: attrs>=17.3.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from aiohttp->datasets==2.16.1->src==0.0.1) (23.2.0)
+Requirement already satisfied: frozenlist>=1.1.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from aiohttp->datasets==2.16.1->src==0.0.1) (1.4.1)
+Requirement already satisfied: multidict<7.0,>=4.5 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from aiohttp->datasets==2.16.1->src==0.0.1) (6.0.5)
+Requirement already satisfied: yarl<2.0,>=1.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from aiohttp->datasets==2.16.1->src==0.0.1) (1.9.4)
+Requirement already satisfied: MarkupSafe>=2.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from jinja2->torch==2.1.2->src==0.0.1) (2.1.5)
+Requirement already satisfied: tenacity>=6.2.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from plotly>=5.0.0->dash==2.14.2->src==0.0.1) (8.2.3)
+Requirement already satisfied: six>=1.5 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from python-dateutil>=2.7->matplotlib==3.8.2->src==0.0.1) (1.16.0)
+Requirement already satisfied: anyio<5,>=3.4.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from starlette<0.36.0,>=0.35.0->fastapi==0.109.0->src==0.0.1) (4.3.0)
+Requirement already satisfied: regex!=2019.12.17 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from transformers<5.0.0,>=4.30.1->happytransformer==3.0.0->src==0.0.1) (2023.12.25)
+Requirement already satisfied: zipp>=0.5 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from importlib-metadata->dash==2.14.2->src==0.0.1) (3.18.1)
+Requirement already satisfied: pytz>=2020.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from pandas->datasets==2.16.1->src==0.0.1) (2024.1)
+Requirement already satisfied: tzdata>=2022.7 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from pandas->datasets==2.16.1->src==0.0.1) (2024.1)
+Requirement already satisfied: mpmath>=0.19 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from sympy->torch==2.1.2->src==0.0.1) (1.3.0)
+Requirement already satisfied: GitPython!=3.1.29,>=1.0.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from wandb->happytransformer==3.0.0->src==0.0.1) (3.1.42)
+Requirement already satisfied: sentry-sdk>=1.0.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from wandb->happytransformer==3.0.0->src==0.0.1) (1.42.0)
+Requirement already satisfied: docker-pycreds>=0.4.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from wandb->happytransformer==3.0.0->src==0.0.1) (0.4.0)
+Requirement already satisfied: setproctitle in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from wandb->happytransformer==3.0.0->src==0.0.1) (1.3.3)
+Requirement already satisfied: appdirs>=1.4.3 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from wandb->happytransformer==3.0.0->src==0.0.1) (1.4.4)
+Requirement already satisfied: sniffio>=1.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from anyio<5,>=3.4.0->starlette<0.36.0,>=0.35.0->fastapi==0.109.0->src==0.0.1) (1.3.1)
+Requirement already satisfied: gitdb<5,>=4.0.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from GitPython!=3.1.29,>=1.0.0->wandb->happytransformer==3.0.0->src==0.0.1) (4.0.11)
+Requirement already satisfied: smmap<6,>=3.0.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from gitdb<5,>=4.0.1->GitPython!=3.1.29,>=1.0.0->wandb->happytransformer==3.0.0->src==0.0.1) (5.0.1)
+Building wheels for collected packages: src
+  Building editable for src (pyproject.toml): started
+  Building editable for src (pyproject.toml): finished with status 'done'
+  Created wheel for src: filename=src-0.0.1-0.editable-py3-none-any.whl size=5176 sha256=7f5300adaf582713518ab009ef117fdf05f6753ce2439e5875a3a38adfca9ca6
+  Stored in directory: /tmp/pip-ephem-wheel-cache-bhrk6h9r/wheels/ae/c7/09/8359ed311d0e920038a9546136bc0708deb92b3fc3104415bb
+Successfully built src
+Installing collected packages: src
+Successfully installed src-0.0.1
+python src/train_model.py
+[2024-03-15 10:50:18,663][happytransformer.happy_transformer][INFO] - Using device: cuda:0
+[2024-03-15 10:50:18,673][root][INFO] - Training model...
+[2024-03-15 10:50:19,395][happytransformer.happy_transformer][INFO] - Tokenizing training data...
+[2024-03-15 10:50:20,861][happytransformer.happy_transformer][INFO] - Moving model to cuda:0
+[2024-03-15 10:50:21,089][accelerate.utils.other][WARNING] - Detected kernel version 5.4.268, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+{'loss': 2.4232, 'grad_norm': 4.201502799987793, 'learning_rate': 0.0009901960784313726, 'epoch': 0.01}
+{'eval_loss': 2.0088768005371094, 'eval_runtime': 0.4809, 'eval_samples_per_second': 187.152, 'eval_steps_per_second': 24.954, 'epoch': 0.01}
+{'loss': 2.1021, 'grad_norm': 3.2852139472961426, 'learning_rate': 0.0008921568627450981, 'epoch': 0.11}
+{'eval_loss': 1.875555396080017, 'eval_runtime': 0.4787, 'eval_samples_per_second': 187.991, 'eval_steps_per_second': 25.065, 'epoch': 0.11}
+{'loss': 2.0437, 'grad_norm': 9.777562141418457, 'learning_rate': 0.000784313725490196, 'epoch': 0.22}
+{'eval_loss': 1.9473447799682617, 'eval_runtime': 0.4786, 'eval_samples_per_second': 188.06, 'eval_steps_per_second': 25.075, 'epoch': 0.22}
+{'loss': 1.6354, 'grad_norm': 3.3797519207000732, 'learning_rate': 0.0006764705882352942, 'epoch': 0.32}
+{'eval_loss': 1.909885287284851, 'eval_runtime': 0.4794, 'eval_samples_per_second': 187.725, 'eval_steps_per_second': 25.03, 'epoch': 0.32}
+{'loss': 1.6204, 'grad_norm': 4.571873664855957, 'learning_rate': 0.0005686274509803922, 'epoch': 0.43}
+{'eval_loss': 1.8459392786026, 'eval_runtime': 0.4853, 'eval_samples_per_second': 185.45, 'eval_steps_per_second': 24.727, 'epoch': 0.43}
+{'loss': 1.802, 'grad_norm': 4.301030158996582, 'learning_rate': 0.0004607843137254902, 'epoch': 0.54}
+{'eval_loss': 1.8208070993423462, 'eval_runtime': 0.4842, 'eval_samples_per_second': 185.881, 'eval_steps_per_second': 24.784, 'epoch': 0.54}
+{'loss': 1.8967, 'grad_norm': 2.5854427814483643, 'learning_rate': 0.00035294117647058826, 'epoch': 0.65}
+{'eval_loss': 1.7694958448410034, 'eval_runtime': 0.4811, 'eval_samples_per_second': 187.062, 'eval_steps_per_second': 24.942, 'epoch': 0.65}
+{'loss': 1.7279, 'grad_norm': 3.1510794162750244, 'learning_rate': 0.00024509803921568627, 'epoch': 0.75}
+{'eval_loss': 1.8165528774261475, 'eval_runtime': 0.4792, 'eval_samples_per_second': 187.818, 'eval_steps_per_second': 25.042, 'epoch': 0.75}
+{'loss': 1.7632, 'grad_norm': 3.406844139099121, 'learning_rate': 0.00013725490196078434, 'epoch': 0.86}
+{'eval_loss': 1.7744027376174927, 'eval_runtime': 0.4795, 'eval_samples_per_second': 187.708, 'eval_steps_per_second': 25.028, 'epoch': 0.86}
+{'loss': 1.7615, 'grad_norm': 3.2426559925079346, 'learning_rate': 2.9411764705882354e-05, 'epoch': 0.97}
+{'eval_loss': 1.7866836786270142, 'eval_runtime': 0.4794, 'eval_samples_per_second': 187.726, 'eval_steps_per_second': 25.03, 'epoch': 0.97}
+{'train_runtime': 15.1144, 'train_samples_per_second': 53.591, 'train_steps_per_second': 6.749, 'train_loss': 1.8329836621003992, 'epoch': 1.0}
+[2024-03-15 10:50:36,355][root][INFO] - Training complete.
+[2024-03-15 10:50:39,039][root][INFO] - Model saved to models/model/

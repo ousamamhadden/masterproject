@@ -1,0 +1,79 @@
+Loaded module: python3/3.6.2
+Loaded dependency [numpy/1.13.1-python-3.6.2-openblas-0.2.20]: openblas/0.2.20
+Loaded module: numpy/1.13.1-python-3.6.2-openblas-0.2.20
+
+Loading numpy/1.13.1-python-3.6.2-openblas-0.2.20
+  Loading requirement: openblas/0.2.20
+Loaded module: scipy/0.19.1-python-3.6.2
+Loaded module: matplotlib/2.0.2-python-3.6.2
+Loaded module: cuda/11.6
+The `load_in_4bit` and `load_in_8bit` arguments are deprecated and will be removed in the future versions. Please, pass a `BitsAndBytesConfig` object in `quantization_config` argument instead.
+`low_cpu_mem_usage` was None, now set to True since model is quantized.
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:03<00:03,  3.56s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.56s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.86s/it]
+Some weights of GemmaForSequenceClassification were not initialized from the model checkpoint at google/gemma-2b and are newly initialized: ['score.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/peft/utils/other.py:143: FutureWarning: prepare_model_for_int8_training is deprecated and will be removed in a future version. Use prepare_model_for_kbit_training instead.
+  warnings.warn(
+Detected kernel version 5.4.268, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/bitsandbytes/autograd/_functions.py:322: UserWarning: MatMul8bitLt: inputs will be cast from torch.float32 to float16 during quantization
+  warnings.warn(f"MatMul8bitLt: inputs will be cast from {A.dtype} to float16 during quantization")
+  0%|          | 0/56 [00:00<?, ?it/s]  4%|▎         | 2/56 [00:08<03:42,  4.12s/it]  5%|▌         | 3/56 [00:13<04:10,  4.72s/it]  7%|▋         | 4/56 [00:22<05:23,  6.22s/it]  9%|▉         | 5/56 [00:30<05:53,  6.94s/it] 11%|█         | 6/56 [00:40<06:34,  7.89s/it] 12%|█▎        | 7/56 [00:53<07:42,  9.43s/it] 14%|█▍        | 8/56 [00:58<06:35,  8.23s/it] 16%|█▌        | 9/56 [01:05<06:01,  7.70s/it] 18%|█▊        | 10/56 [01:14<06:18,  8.22s/it] 20%|█▉        | 11/56 [01:22<05:57,  7.95s/it] 21%|██▏       | 12/56 [01:31<06:01,  8.22s/it] 23%|██▎       | 13/56 [01:38<05:41,  7.94s/it] 25%|██▌       | 14/56 [01:46<05:33,  7.94s/it] 27%|██▋       | 15/56 [01:57<06:00,  8.79s/it] 29%|██▊       | 16/56 [02:06<06:02,  9.06s/it] 30%|███       | 17/56 [02:13<05:32,  8.52s/it] 32%|███▏      | 18/56 [02:22<05:28,  8.64s/it] 34%|███▍      | 19/56 [02:32<05:27,  8.84s/it] 36%|███▌      | 20/56 [02:40<05:10,  8.64s/it] 38%|███▊      | 21/56 [02:46<04:37,  7.93s/it] 39%|███▉      | 22/56 [02:53<04:14,  7.47s/it] 41%|████      | 23/56 [03:02<04:22,  7.95s/it] 43%|████▎     | 24/56 [03:10<04:16,  8.02s/it] 45%|████▍     | 25/56 [03:20<04:25,  8.56s/it] 46%|████▋     | 26/56 [03:32<04:52,  9.74s/it] 48%|████▊     | 27/56 [03:42<04:46,  9.89s/it] 50%|█████     | 28/56 [03:53<04:39,  9.99s/it] 52%|█████▏    | 29/56 [04:02<04:26,  9.88s/it] 54%|█████▎    | 30/56 [04:11<04:11,  9.67s/it] 55%|█████▌    | 31/56 [04:18<03:42,  8.90s/it] 57%|█████▋    | 32/56 [04:28<03:34,  8.95s/it] 59%|█████▉    | 33/56 [04:36<03:19,  8.66s/it] 61%|██████    | 34/56 [04:45<03:15,  8.88s/it] 62%|██████▎   | 35/56 [04:55<03:12,  9.15s/it] 64%|██████▍   | 36/56 [05:03<02:58,  8.92s/it] 66%|██████▌   | 37/56 [05:18<03:22, 10.64s/it]Traceback (most recent call last):
+  File "/zhome/8d/a/147395/masterproject/masterproject/src/finetunegemma.py", line 93, in <module>
+    train()
+  File "/zhome/8d/a/147395/masterproject/masterproject/src/finetunegemma.py", line 75, in train
+    print(trainer.evaluate())
+          ^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/transformers/trainer.py", line 3229, in evaluate
+    output = eval_loop(
+             ^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/transformers/trainer.py", line 3418, in evaluation_loop
+    loss, logits, labels = self.prediction_step(model, inputs, prediction_loss_only, ignore_keys=ignore_keys)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/transformers/trainer.py", line 3635, in prediction_step
+    loss, outputs = self.compute_loss(model, inputs, return_outputs=True)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/transformers/trainer.py", line 2925, in compute_loss
+    outputs = model(**inputs)
+              ^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/peft/peft_model.py", line 894, in forward
+    return self.base_model(
+           ^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/peft/tuners/tuners_utils.py", line 161, in forward
+    return self.model.forward(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/accelerate/hooks.py", line 165, in new_forward
+    output = module._old_forward(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/transformers/models/gemma/modeling_gemma.py", line 1244, in forward
+    transformer_outputs = self.model(
+                          ^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/accelerate/hooks.py", line 165, in new_forward
+    output = module._old_forward(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/transformers/models/gemma/modeling_gemma.py", line 876, in forward
+    causal_mask = self._update_causal_mask(attention_mask, inputs_embeds)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/transformers/models/gemma/modeling_gemma.py", line 960, in _update_causal_mask
+    self.causal_mask[None, None, :, :].repeat(batch_size, 1, 1, 1).to(dtype) * torch.finfo(dtype).min
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 10.00 GiB. GPU 0 has a total capacty of 31.73 GiB of which 5.91 GiB is free. Including non-PyTorch memory, this process has 25.82 GiB memory in use. Of the allocated memory 5.67 GiB is allocated by PyTorch, and 19.79 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+ 66%|██████▌   | 37/56 [05:18<02:43,  8.61s/it]
+make: *** [finetunegemma] Error 1

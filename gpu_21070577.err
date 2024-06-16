@@ -1,0 +1,14 @@
+Loaded module: python3/3.6.2
+Loaded dependency [numpy/1.13.1-python-3.6.2-openblas-0.2.20]: openblas/0.2.20
+Loaded module: numpy/1.13.1-python-3.6.2-openblas-0.2.20
+
+Loading numpy/1.13.1-python-3.6.2-openblas-0.2.20
+  Loading requirement: openblas/0.2.20
+Loaded module: scipy/0.19.1-python-3.6.2
+Loaded module: matplotlib/2.0.2-python-3.6.2
+Loaded module: cuda/11.6
+Traceback (most recent call last):
+  File "/zhome/8d/a/147395/masterproject/masterproject/src/finetunegemmaepoch2.py", line 10, in <module>
+    from peft.tuners.lora import mark_only_lora_as_trainable
+ImportError: cannot import name 'mark_only_lora_as_trainable' from 'peft.tuners.lora' (/zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages/peft/tuners/lora/__init__.py)
+make: *** [finetunegemmaepoch2] Error 1

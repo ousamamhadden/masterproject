@@ -1,0 +1,888 @@
+Thu Mar 28 16:48:32 2024       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 550.54.14              Driver Version: 550.54.14      CUDA Version: 12.4     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  Tesla V100-SXM2-32GB           On  |   00000000:15:00.0 Off |                    0 |
+| N/A   34C    P0             40W /  300W |       0MiB /  32768MiB |      0%   E. Process |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+/appl/cuda/11.6.0/samples/bin/x86_64/linux/release/deviceQuery Starting...
+
+ CUDA Device Query (Runtime API) version (CUDART static linking)
+
+Detected 1 CUDA Capable device(s)
+
+Device 0: "Tesla V100-SXM2-32GB"
+  CUDA Driver Version / Runtime Version          12.4 / 11.6
+  CUDA Capability Major/Minor version number:    7.0
+  Total amount of global memory:                 32494 MBytes (34072559616 bytes)
+  (080) Multiprocessors, (064) CUDA Cores/MP:    5120 CUDA Cores
+  GPU Max Clock rate:                            1530 MHz (1.53 GHz)
+  Memory Clock rate:                             877 Mhz
+  Memory Bus Width:                              4096-bit
+  L2 Cache Size:                                 6291456 bytes
+  Maximum Texture Dimension Size (x,y,z)         1D=(131072), 2D=(131072, 65536), 3D=(16384, 16384, 16384)
+  Maximum Layered 1D Texture Size, (num) layers  1D=(32768), 2048 layers
+  Maximum Layered 2D Texture Size, (num) layers  2D=(32768, 32768), 2048 layers
+  Total amount of constant memory:               65536 bytes
+  Total amount of shared memory per block:       49152 bytes
+  Total shared memory per multiprocessor:        98304 bytes
+  Total number of registers available per block: 65536
+  Warp size:                                     32
+  Maximum number of threads per multiprocessor:  2048
+  Maximum number of threads per block:           1024
+  Max dimension size of a thread block (x,y,z): (1024, 1024, 64)
+  Max dimension size of a grid size    (x,y,z): (2147483647, 65535, 65535)
+  Maximum memory pitch:                          2147483647 bytes
+  Texture alignment:                             512 bytes
+  Concurrent copy and kernel execution:          Yes with 5 copy engine(s)
+  Run time limit on kernels:                     No
+  Integrated GPU sharing Host Memory:            No
+  Support host page-locked memory mapping:       Yes
+  Alignment requirement for Surfaces:            Yes
+  Device has ECC support:                        Enabled
+  Device supports Unified Addressing (UVA):      Yes
+  Device supports Managed Memory:                Yes
+  Device supports Compute Preemption:            Yes
+  Supports Cooperative Kernel Launch:            Yes
+  Supports MultiDevice Co-op Kernel Launch:      Yes
+  Device PCI Domain ID / Bus ID / location ID:   0 / 21 / 0
+  Compute Mode:
+     < Exclusive Process (many threads in one process is able to use ::cudaSetDevice() with this device) >
+
+deviceQuery, CUDA Driver = CUDART, CUDA Driver Version = 12.4, CUDA Runtime Version = 11.6, NumDevs = 1
+Result = PASS
+Starting executable...
+Running: conda init and script
+python -m pip install -U pip setuptools wheel
+Requirement already satisfied: pip in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (24.0)
+Requirement already satisfied: setuptools in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (69.2.0)
+Requirement already satisfied: wheel in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (0.43.0)
+python -m pip install -r requirements.txt
+Requirement already satisfied: click==8.1.7 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from -r requirements.txt (line 1)) (8.1.7)
+Requirement already satisfied: dash==2.14.2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from -r requirements.txt (line 2)) (2.14.2)
+Requirement already satisfied: datasets==2.16.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from -r requirements.txt (line 3)) (2.16.1)
+Requirement already satisfied: fastapi==0.109.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from -r requirements.txt (line 4)) (0.109.0)
+Requirement already satisfied: happytransformer==3.0.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from -r requirements.txt (line 5)) (3.0.0)
+Requirement already satisfied: hydra-core==1.3.2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from -r requirements.txt (line 6)) (1.3.2)
+Requirement already satisfied: Markdown==3.5.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from -r requirements.txt (line 7)) (3.5.1)
+Requirement already satisfied: matplotlib==3.8.2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from -r requirements.txt (line 8)) (3.8.2)
+Requirement already satisfied: numpy==1.26.3 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from -r requirements.txt (line 9)) (1.26.3)
+Requirement already satisfied: omegaconf==2.3.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from -r requirements.txt (line 10)) (2.3.0)
+Requirement already satisfied: prometheus_fastapi_instrumentator==6.1.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from -r requirements.txt (line 11)) (6.1.0)
+Requirement already satisfied: pydantic==2.5.3 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from -r requirements.txt (line 12)) (2.5.3)
+Requirement already satisfied: pytest==7.4.4 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from -r requirements.txt (line 13)) (7.4.4)
+Requirement already satisfied: pytorch_lightning==2.1.3 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from -r requirements.txt (line 14)) (2.1.3)
+Requirement already satisfied: Requests==2.31.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from -r requirements.txt (line 15)) (2.31.0)
+Requirement already satisfied: scikit_learn==1.3.2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from -r requirements.txt (line 16)) (1.3.2)
+Requirement already satisfied: torch==2.1.2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from -r requirements.txt (line 17)) (2.1.2)
+Requirement already satisfied: Flask<3.1,>=1.0.4 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->-r requirements.txt (line 2)) (3.0.2)
+Requirement already satisfied: Werkzeug<3.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->-r requirements.txt (line 2)) (3.0.1)
+Requirement already satisfied: plotly>=5.0.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->-r requirements.txt (line 2)) (5.20.0)
+Requirement already satisfied: dash-html-components==2.0.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->-r requirements.txt (line 2)) (2.0.0)
+Requirement already satisfied: dash-core-components==2.0.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->-r requirements.txt (line 2)) (2.0.0)
+Requirement already satisfied: dash-table==5.0.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->-r requirements.txt (line 2)) (5.0.0)
+Requirement already satisfied: typing-extensions>=4.1.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->-r requirements.txt (line 2)) (4.10.0)
+Requirement already satisfied: retrying in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->-r requirements.txt (line 2)) (1.3.4)
+Requirement already satisfied: ansi2html in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->-r requirements.txt (line 2)) (1.9.1)
+Requirement already satisfied: nest-asyncio in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->-r requirements.txt (line 2)) (1.6.0)
+Requirement already satisfied: setuptools in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->-r requirements.txt (line 2)) (69.2.0)
+Requirement already satisfied: importlib-metadata in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->-r requirements.txt (line 2)) (7.0.2)
+Requirement already satisfied: filelock in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->-r requirements.txt (line 3)) (3.13.1)
+Requirement already satisfied: pyarrow>=8.0.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->-r requirements.txt (line 3)) (15.0.1)
+Requirement already satisfied: pyarrow-hotfix in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->-r requirements.txt (line 3)) (0.6)
+Requirement already satisfied: dill<0.3.8,>=0.3.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->-r requirements.txt (line 3)) (0.3.7)
+Requirement already satisfied: pandas in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->-r requirements.txt (line 3)) (2.2.1)
+Requirement already satisfied: tqdm>=4.62.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->-r requirements.txt (line 3)) (4.66.2)
+Requirement already satisfied: xxhash in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->-r requirements.txt (line 3)) (3.4.1)
+Requirement already satisfied: multiprocess in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->-r requirements.txt (line 3)) (0.70.15)
+Requirement already satisfied: fsspec<=2023.10.0,>=2023.1.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from fsspec[http]<=2023.10.0,>=2023.1.0->datasets==2.16.1->-r requirements.txt (line 3)) (2023.10.0)
+Requirement already satisfied: aiohttp in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->-r requirements.txt (line 3)) (3.9.3)
+Requirement already satisfied: huggingface-hub>=0.19.4 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->-r requirements.txt (line 3)) (0.21.4)
+Requirement already satisfied: packaging in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->-r requirements.txt (line 3)) (24.0)
+Requirement already satisfied: pyyaml>=5.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->-r requirements.txt (line 3)) (6.0.1)
+Requirement already satisfied: starlette<0.36.0,>=0.35.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from fastapi==0.109.0->-r requirements.txt (line 4)) (0.35.1)
+Requirement already satisfied: transformers<5.0.0,>=4.30.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from happytransformer==3.0.0->-r requirements.txt (line 5)) (4.38.0)
+Requirement already satisfied: sentencepiece in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from happytransformer==3.0.0->-r requirements.txt (line 5)) (0.2.0)
+Requirement already satisfied: protobuf in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from happytransformer==3.0.0->-r requirements.txt (line 5)) (4.25.3)
+Requirement already satisfied: accelerate<1.0.0,>=0.20.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from happytransformer==3.0.0->-r requirements.txt (line 5)) (0.26.1)
+Requirement already satisfied: tokenizers<1.0.0,>=0.13.3 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from happytransformer==3.0.0->-r requirements.txt (line 5)) (0.15.2)
+Requirement already satisfied: wandb in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from happytransformer==3.0.0->-r requirements.txt (line 5)) (0.16.4)
+Requirement already satisfied: antlr4-python3-runtime==4.9.* in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from hydra-core==1.3.2->-r requirements.txt (line 6)) (4.9.3)
+Requirement already satisfied: contourpy>=1.0.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from matplotlib==3.8.2->-r requirements.txt (line 8)) (1.2.0)
+Requirement already satisfied: cycler>=0.10 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from matplotlib==3.8.2->-r requirements.txt (line 8)) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from matplotlib==3.8.2->-r requirements.txt (line 8)) (4.49.0)
+Requirement already satisfied: kiwisolver>=1.3.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from matplotlib==3.8.2->-r requirements.txt (line 8)) (1.4.5)
+Requirement already satisfied: pillow>=8 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from matplotlib==3.8.2->-r requirements.txt (line 8)) (10.2.0)
+Requirement already satisfied: pyparsing>=2.3.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from matplotlib==3.8.2->-r requirements.txt (line 8)) (3.1.2)
+Requirement already satisfied: python-dateutil>=2.7 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from matplotlib==3.8.2->-r requirements.txt (line 8)) (2.9.0.post0)
+Requirement already satisfied: prometheus-client<1.0.0,>=0.8.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from prometheus_fastapi_instrumentator==6.1.0->-r requirements.txt (line 11)) (0.20.0)
+Requirement already satisfied: annotated-types>=0.4.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from pydantic==2.5.3->-r requirements.txt (line 12)) (0.6.0)
+Requirement already satisfied: pydantic-core==2.14.6 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from pydantic==2.5.3->-r requirements.txt (line 12)) (2.14.6)
+Requirement already satisfied: iniconfig in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from pytest==7.4.4->-r requirements.txt (line 13)) (2.0.0)
+Requirement already satisfied: pluggy<2.0,>=0.12 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from pytest==7.4.4->-r requirements.txt (line 13)) (1.4.0)
+Requirement already satisfied: torchmetrics>=0.7.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from pytorch_lightning==2.1.3->-r requirements.txt (line 14)) (1.3.1)
+Requirement already satisfied: lightning-utilities>=0.8.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from pytorch_lightning==2.1.3->-r requirements.txt (line 14)) (0.10.1)
+Requirement already satisfied: charset-normalizer<4,>=2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from Requests==2.31.0->-r requirements.txt (line 15)) (3.3.2)
+Requirement already satisfied: idna<4,>=2.5 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from Requests==2.31.0->-r requirements.txt (line 15)) (3.6)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from Requests==2.31.0->-r requirements.txt (line 15)) (2.2.1)
+Requirement already satisfied: certifi>=2017.4.17 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from Requests==2.31.0->-r requirements.txt (line 15)) (2024.2.2)
+Requirement already satisfied: scipy>=1.5.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from scikit_learn==1.3.2->-r requirements.txt (line 16)) (1.12.0)
+Requirement already satisfied: joblib>=1.1.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from scikit_learn==1.3.2->-r requirements.txt (line 16)) (1.3.2)
+Requirement already satisfied: threadpoolctl>=2.0.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from scikit_learn==1.3.2->-r requirements.txt (line 16)) (3.3.0)
+Requirement already satisfied: sympy in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->-r requirements.txt (line 17)) (1.12)
+Requirement already satisfied: networkx in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->-r requirements.txt (line 17)) (3.2.1)
+Requirement already satisfied: jinja2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->-r requirements.txt (line 17)) (3.1.3)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.1.105 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->-r requirements.txt (line 17)) (12.1.105)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.1.105 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->-r requirements.txt (line 17)) (12.1.105)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.1.105 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->-r requirements.txt (line 17)) (12.1.105)
+Requirement already satisfied: nvidia-cudnn-cu12==8.9.2.26 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->-r requirements.txt (line 17)) (8.9.2.26)
+Requirement already satisfied: nvidia-cublas-cu12==12.1.3.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->-r requirements.txt (line 17)) (12.1.3.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.0.2.54 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->-r requirements.txt (line 17)) (11.0.2.54)
+Requirement already satisfied: nvidia-curand-cu12==10.3.2.106 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->-r requirements.txt (line 17)) (10.3.2.106)
+Requirement already satisfied: nvidia-cusolver-cu12==11.4.5.107 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->-r requirements.txt (line 17)) (11.4.5.107)
+Requirement already satisfied: nvidia-cusparse-cu12==12.1.0.106 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->-r requirements.txt (line 17)) (12.1.0.106)
+Requirement already satisfied: nvidia-nccl-cu12==2.18.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->-r requirements.txt (line 17)) (2.18.1)
+Requirement already satisfied: nvidia-nvtx-cu12==12.1.105 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->-r requirements.txt (line 17)) (12.1.105)
+Requirement already satisfied: triton==2.1.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->-r requirements.txt (line 17)) (2.1.0)
+Requirement already satisfied: nvidia-nvjitlink-cu12 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from nvidia-cusolver-cu12==11.4.5.107->torch==2.1.2->-r requirements.txt (line 17)) (12.4.99)
+Requirement already satisfied: psutil in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from accelerate<1.0.0,>=0.20.1->happytransformer==3.0.0->-r requirements.txt (line 5)) (5.9.8)
+Requirement already satisfied: safetensors>=0.3.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from accelerate<1.0.0,>=0.20.1->happytransformer==3.0.0->-r requirements.txt (line 5)) (0.4.2)
+Requirement already satisfied: itsdangerous>=2.1.2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from Flask<3.1,>=1.0.4->dash==2.14.2->-r requirements.txt (line 2)) (2.1.2)
+Requirement already satisfied: blinker>=1.6.2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from Flask<3.1,>=1.0.4->dash==2.14.2->-r requirements.txt (line 2)) (1.7.0)
+Requirement already satisfied: aiosignal>=1.1.2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from aiohttp->datasets==2.16.1->-r requirements.txt (line 3)) (1.3.1)
+Requirement already satisfied: attrs>=17.3.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from aiohttp->datasets==2.16.1->-r requirements.txt (line 3)) (23.2.0)
+Requirement already satisfied: frozenlist>=1.1.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from aiohttp->datasets==2.16.1->-r requirements.txt (line 3)) (1.4.1)
+Requirement already satisfied: multidict<7.0,>=4.5 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from aiohttp->datasets==2.16.1->-r requirements.txt (line 3)) (6.0.5)
+Requirement already satisfied: yarl<2.0,>=1.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from aiohttp->datasets==2.16.1->-r requirements.txt (line 3)) (1.9.4)
+Requirement already satisfied: MarkupSafe>=2.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from jinja2->torch==2.1.2->-r requirements.txt (line 17)) (2.1.5)
+Requirement already satisfied: tenacity>=6.2.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from plotly>=5.0.0->dash==2.14.2->-r requirements.txt (line 2)) (8.2.3)
+Requirement already satisfied: six>=1.5 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from python-dateutil>=2.7->matplotlib==3.8.2->-r requirements.txt (line 8)) (1.16.0)
+Requirement already satisfied: anyio<5,>=3.4.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from starlette<0.36.0,>=0.35.0->fastapi==0.109.0->-r requirements.txt (line 4)) (4.3.0)
+Requirement already satisfied: regex!=2019.12.17 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from transformers<5.0.0,>=4.30.1->happytransformer==3.0.0->-r requirements.txt (line 5)) (2023.12.25)
+Requirement already satisfied: zipp>=0.5 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from importlib-metadata->dash==2.14.2->-r requirements.txt (line 2)) (3.18.1)
+Requirement already satisfied: pytz>=2020.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from pandas->datasets==2.16.1->-r requirements.txt (line 3)) (2024.1)
+Requirement already satisfied: tzdata>=2022.7 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from pandas->datasets==2.16.1->-r requirements.txt (line 3)) (2024.1)
+Requirement already satisfied: mpmath>=0.19 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from sympy->torch==2.1.2->-r requirements.txt (line 17)) (1.3.0)
+Requirement already satisfied: GitPython!=3.1.29,>=1.0.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from wandb->happytransformer==3.0.0->-r requirements.txt (line 5)) (3.1.42)
+Requirement already satisfied: sentry-sdk>=1.0.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from wandb->happytransformer==3.0.0->-r requirements.txt (line 5)) (1.42.0)
+Requirement already satisfied: docker-pycreds>=0.4.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from wandb->happytransformer==3.0.0->-r requirements.txt (line 5)) (0.4.0)
+Requirement already satisfied: setproctitle in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from wandb->happytransformer==3.0.0->-r requirements.txt (line 5)) (1.3.3)
+Requirement already satisfied: appdirs>=1.4.3 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from wandb->happytransformer==3.0.0->-r requirements.txt (line 5)) (1.4.4)
+Requirement already satisfied: sniffio>=1.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from anyio<5,>=3.4.0->starlette<0.36.0,>=0.35.0->fastapi==0.109.0->-r requirements.txt (line 4)) (1.3.1)
+Requirement already satisfied: gitdb<5,>=4.0.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from GitPython!=3.1.29,>=1.0.0->wandb->happytransformer==3.0.0->-r requirements.txt (line 5)) (4.0.11)
+Requirement already satisfied: smmap<6,>=3.0.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from gitdb<5,>=4.0.1->GitPython!=3.1.29,>=1.0.0->wandb->happytransformer==3.0.0->-r requirements.txt (line 5)) (5.0.1)
+python -m pip install -r requirementsgemma.txt
+Requirement already satisfied: peft==0.8.2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from -r requirementsgemma.txt (line 1)) (0.8.2)
+Requirement already satisfied: bitsandbytes==0.42.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from -r requirementsgemma.txt (line 2)) (0.42.0)
+Requirement already satisfied: accelerate==0.26.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from -r requirementsgemma.txt (line 3)) (0.26.1)
+Requirement already satisfied: datasets==2.16.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from -r requirementsgemma.txt (line 4)) (2.16.1)
+Requirement already satisfied: GPUtil in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from -r requirementsgemma.txt (line 5)) (1.4.0)
+Requirement already satisfied: transformers==4.38.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from -r requirementsgemma.txt (line 6)) (4.38.0)
+Requirement already satisfied: numpy>=1.17 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from peft==0.8.2->-r requirementsgemma.txt (line 1)) (1.26.3)
+Requirement already satisfied: packaging>=20.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from peft==0.8.2->-r requirementsgemma.txt (line 1)) (24.0)
+Requirement already satisfied: psutil in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from peft==0.8.2->-r requirementsgemma.txt (line 1)) (5.9.8)
+Requirement already satisfied: pyyaml in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from peft==0.8.2->-r requirementsgemma.txt (line 1)) (6.0.1)
+Requirement already satisfied: torch>=1.13.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from peft==0.8.2->-r requirementsgemma.txt (line 1)) (2.1.2)
+Requirement already satisfied: tqdm in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from peft==0.8.2->-r requirementsgemma.txt (line 1)) (4.66.2)
+Requirement already satisfied: safetensors in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from peft==0.8.2->-r requirementsgemma.txt (line 1)) (0.4.2)
+Requirement already satisfied: huggingface-hub>=0.17.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from peft==0.8.2->-r requirementsgemma.txt (line 1)) (0.21.4)
+Requirement already satisfied: scipy in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from bitsandbytes==0.42.0->-r requirementsgemma.txt (line 2)) (1.12.0)
+Requirement already satisfied: filelock in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->-r requirementsgemma.txt (line 4)) (3.13.1)
+Requirement already satisfied: pyarrow>=8.0.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->-r requirementsgemma.txt (line 4)) (15.0.1)
+Requirement already satisfied: pyarrow-hotfix in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->-r requirementsgemma.txt (line 4)) (0.6)
+Requirement already satisfied: dill<0.3.8,>=0.3.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->-r requirementsgemma.txt (line 4)) (0.3.7)
+Requirement already satisfied: pandas in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->-r requirementsgemma.txt (line 4)) (2.2.1)
+Requirement already satisfied: requests>=2.19.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->-r requirementsgemma.txt (line 4)) (2.31.0)
+Requirement already satisfied: xxhash in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->-r requirementsgemma.txt (line 4)) (3.4.1)
+Requirement already satisfied: multiprocess in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->-r requirementsgemma.txt (line 4)) (0.70.15)
+Requirement already satisfied: fsspec<=2023.10.0,>=2023.1.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from fsspec[http]<=2023.10.0,>=2023.1.0->datasets==2.16.1->-r requirementsgemma.txt (line 4)) (2023.10.0)
+Requirement already satisfied: aiohttp in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->-r requirementsgemma.txt (line 4)) (3.9.3)
+Requirement already satisfied: regex!=2019.12.17 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from transformers==4.38.0->-r requirementsgemma.txt (line 6)) (2023.12.25)
+Requirement already satisfied: tokenizers<0.19,>=0.14 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from transformers==4.38.0->-r requirementsgemma.txt (line 6)) (0.15.2)
+Requirement already satisfied: aiosignal>=1.1.2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from aiohttp->datasets==2.16.1->-r requirementsgemma.txt (line 4)) (1.3.1)
+Requirement already satisfied: attrs>=17.3.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from aiohttp->datasets==2.16.1->-r requirementsgemma.txt (line 4)) (23.2.0)
+Requirement already satisfied: frozenlist>=1.1.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from aiohttp->datasets==2.16.1->-r requirementsgemma.txt (line 4)) (1.4.1)
+Requirement already satisfied: multidict<7.0,>=4.5 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from aiohttp->datasets==2.16.1->-r requirementsgemma.txt (line 4)) (6.0.5)
+Requirement already satisfied: yarl<2.0,>=1.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from aiohttp->datasets==2.16.1->-r requirementsgemma.txt (line 4)) (1.9.4)
+Requirement already satisfied: typing-extensions>=3.7.4.3 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from huggingface-hub>=0.17.0->peft==0.8.2->-r requirementsgemma.txt (line 1)) (4.10.0)
+Requirement already satisfied: charset-normalizer<4,>=2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from requests>=2.19.0->datasets==2.16.1->-r requirementsgemma.txt (line 4)) (3.3.2)
+Requirement already satisfied: idna<4,>=2.5 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from requests>=2.19.0->datasets==2.16.1->-r requirementsgemma.txt (line 4)) (3.6)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from requests>=2.19.0->datasets==2.16.1->-r requirementsgemma.txt (line 4)) (2.2.1)
+Requirement already satisfied: certifi>=2017.4.17 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from requests>=2.19.0->datasets==2.16.1->-r requirementsgemma.txt (line 4)) (2024.2.2)
+Requirement already satisfied: sympy in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch>=1.13.0->peft==0.8.2->-r requirementsgemma.txt (line 1)) (1.12)
+Requirement already satisfied: networkx in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch>=1.13.0->peft==0.8.2->-r requirementsgemma.txt (line 1)) (3.2.1)
+Requirement already satisfied: jinja2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch>=1.13.0->peft==0.8.2->-r requirementsgemma.txt (line 1)) (3.1.3)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.1.105 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch>=1.13.0->peft==0.8.2->-r requirementsgemma.txt (line 1)) (12.1.105)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.1.105 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch>=1.13.0->peft==0.8.2->-r requirementsgemma.txt (line 1)) (12.1.105)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.1.105 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch>=1.13.0->peft==0.8.2->-r requirementsgemma.txt (line 1)) (12.1.105)
+Requirement already satisfied: nvidia-cudnn-cu12==8.9.2.26 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch>=1.13.0->peft==0.8.2->-r requirementsgemma.txt (line 1)) (8.9.2.26)
+Requirement already satisfied: nvidia-cublas-cu12==12.1.3.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch>=1.13.0->peft==0.8.2->-r requirementsgemma.txt (line 1)) (12.1.3.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.0.2.54 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch>=1.13.0->peft==0.8.2->-r requirementsgemma.txt (line 1)) (11.0.2.54)
+Requirement already satisfied: nvidia-curand-cu12==10.3.2.106 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch>=1.13.0->peft==0.8.2->-r requirementsgemma.txt (line 1)) (10.3.2.106)
+Requirement already satisfied: nvidia-cusolver-cu12==11.4.5.107 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch>=1.13.0->peft==0.8.2->-r requirementsgemma.txt (line 1)) (11.4.5.107)
+Requirement already satisfied: nvidia-cusparse-cu12==12.1.0.106 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch>=1.13.0->peft==0.8.2->-r requirementsgemma.txt (line 1)) (12.1.0.106)
+Requirement already satisfied: nvidia-nccl-cu12==2.18.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch>=1.13.0->peft==0.8.2->-r requirementsgemma.txt (line 1)) (2.18.1)
+Requirement already satisfied: nvidia-nvtx-cu12==12.1.105 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch>=1.13.0->peft==0.8.2->-r requirementsgemma.txt (line 1)) (12.1.105)
+Requirement already satisfied: triton==2.1.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch>=1.13.0->peft==0.8.2->-r requirementsgemma.txt (line 1)) (2.1.0)
+Requirement already satisfied: nvidia-nvjitlink-cu12 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from nvidia-cusolver-cu12==11.4.5.107->torch>=1.13.0->peft==0.8.2->-r requirementsgemma.txt (line 1)) (12.4.99)
+Requirement already satisfied: python-dateutil>=2.8.2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from pandas->datasets==2.16.1->-r requirementsgemma.txt (line 4)) (2.9.0.post0)
+Requirement already satisfied: pytz>=2020.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from pandas->datasets==2.16.1->-r requirementsgemma.txt (line 4)) (2024.1)
+Requirement already satisfied: tzdata>=2022.7 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from pandas->datasets==2.16.1->-r requirementsgemma.txt (line 4)) (2024.1)
+Requirement already satisfied: six>=1.5 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from python-dateutil>=2.8.2->pandas->datasets==2.16.1->-r requirementsgemma.txt (line 4)) (1.16.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from jinja2->torch>=1.13.0->peft==0.8.2->-r requirementsgemma.txt (line 1)) (2.1.5)
+Requirement already satisfied: mpmath>=0.19 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from sympy->torch>=1.13.0->peft==0.8.2->-r requirementsgemma.txt (line 1)) (1.3.0)
+python -m pip install -e .
+Obtaining file:///zhome/8d/a/147395/masterproject/masterproject
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Installing backend dependencies: started
+  Installing backend dependencies: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: click==8.1.7 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (8.1.7)
+Requirement already satisfied: dash==2.14.2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (2.14.2)
+Requirement already satisfied: datasets==2.16.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (2.16.1)
+Requirement already satisfied: fastapi==0.109.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (0.109.0)
+Requirement already satisfied: happytransformer==3.0.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (3.0.0)
+Requirement already satisfied: hydra-core==1.3.2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (1.3.2)
+Requirement already satisfied: Markdown==3.5.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (3.5.1)
+Requirement already satisfied: matplotlib==3.8.2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (3.8.2)
+Requirement already satisfied: numpy==1.26.3 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (1.26.3)
+Requirement already satisfied: omegaconf==2.3.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (2.3.0)
+Requirement already satisfied: prometheus-fastapi-instrumentator==6.1.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (6.1.0)
+Requirement already satisfied: pydantic==2.5.3 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (2.5.3)
+Requirement already satisfied: pytest==7.4.4 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (7.4.4)
+Requirement already satisfied: pytorch-lightning==2.1.3 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (2.1.3)
+Requirement already satisfied: Requests==2.31.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (2.31.0)
+Requirement already satisfied: scikit-learn==1.3.2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (1.3.2)
+Requirement already satisfied: torch==2.1.2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from src==0.0.1) (2.1.2)
+Requirement already satisfied: Flask<3.1,>=1.0.4 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->src==0.0.1) (3.0.2)
+Requirement already satisfied: Werkzeug<3.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->src==0.0.1) (3.0.1)
+Requirement already satisfied: plotly>=5.0.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->src==0.0.1) (5.20.0)
+Requirement already satisfied: dash-html-components==2.0.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->src==0.0.1) (2.0.0)
+Requirement already satisfied: dash-core-components==2.0.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->src==0.0.1) (2.0.0)
+Requirement already satisfied: dash-table==5.0.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->src==0.0.1) (5.0.0)
+Requirement already satisfied: typing-extensions>=4.1.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->src==0.0.1) (4.10.0)
+Requirement already satisfied: retrying in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->src==0.0.1) (1.3.4)
+Requirement already satisfied: ansi2html in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->src==0.0.1) (1.9.1)
+Requirement already satisfied: nest-asyncio in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->src==0.0.1) (1.6.0)
+Requirement already satisfied: setuptools in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->src==0.0.1) (69.2.0)
+Requirement already satisfied: importlib-metadata in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from dash==2.14.2->src==0.0.1) (7.0.2)
+Requirement already satisfied: filelock in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->src==0.0.1) (3.13.1)
+Requirement already satisfied: pyarrow>=8.0.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->src==0.0.1) (15.0.1)
+Requirement already satisfied: pyarrow-hotfix in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->src==0.0.1) (0.6)
+Requirement already satisfied: dill<0.3.8,>=0.3.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->src==0.0.1) (0.3.7)
+Requirement already satisfied: pandas in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->src==0.0.1) (2.2.1)
+Requirement already satisfied: tqdm>=4.62.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->src==0.0.1) (4.66.2)
+Requirement already satisfied: xxhash in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->src==0.0.1) (3.4.1)
+Requirement already satisfied: multiprocess in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->src==0.0.1) (0.70.15)
+Requirement already satisfied: fsspec<=2023.10.0,>=2023.1.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from fsspec[http]<=2023.10.0,>=2023.1.0->datasets==2.16.1->src==0.0.1) (2023.10.0)
+Requirement already satisfied: aiohttp in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->src==0.0.1) (3.9.3)
+Requirement already satisfied: huggingface-hub>=0.19.4 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->src==0.0.1) (0.21.4)
+Requirement already satisfied: packaging in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->src==0.0.1) (24.0)
+Requirement already satisfied: pyyaml>=5.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from datasets==2.16.1->src==0.0.1) (6.0.1)
+Requirement already satisfied: starlette<0.36.0,>=0.35.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from fastapi==0.109.0->src==0.0.1) (0.35.1)
+Requirement already satisfied: transformers<5.0.0,>=4.30.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from happytransformer==3.0.0->src==0.0.1) (4.38.0)
+Requirement already satisfied: sentencepiece in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from happytransformer==3.0.0->src==0.0.1) (0.2.0)
+Requirement already satisfied: protobuf in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from happytransformer==3.0.0->src==0.0.1) (4.25.3)
+Requirement already satisfied: accelerate<1.0.0,>=0.20.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from happytransformer==3.0.0->src==0.0.1) (0.26.1)
+Requirement already satisfied: tokenizers<1.0.0,>=0.13.3 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from happytransformer==3.0.0->src==0.0.1) (0.15.2)
+Requirement already satisfied: wandb in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from happytransformer==3.0.0->src==0.0.1) (0.16.4)
+Requirement already satisfied: antlr4-python3-runtime==4.9.* in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from hydra-core==1.3.2->src==0.0.1) (4.9.3)
+Requirement already satisfied: contourpy>=1.0.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from matplotlib==3.8.2->src==0.0.1) (1.2.0)
+Requirement already satisfied: cycler>=0.10 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from matplotlib==3.8.2->src==0.0.1) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from matplotlib==3.8.2->src==0.0.1) (4.49.0)
+Requirement already satisfied: kiwisolver>=1.3.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from matplotlib==3.8.2->src==0.0.1) (1.4.5)
+Requirement already satisfied: pillow>=8 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from matplotlib==3.8.2->src==0.0.1) (10.2.0)
+Requirement already satisfied: pyparsing>=2.3.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from matplotlib==3.8.2->src==0.0.1) (3.1.2)
+Requirement already satisfied: python-dateutil>=2.7 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from matplotlib==3.8.2->src==0.0.1) (2.9.0.post0)
+Requirement already satisfied: prometheus-client<1.0.0,>=0.8.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from prometheus-fastapi-instrumentator==6.1.0->src==0.0.1) (0.20.0)
+Requirement already satisfied: annotated-types>=0.4.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from pydantic==2.5.3->src==0.0.1) (0.6.0)
+Requirement already satisfied: pydantic-core==2.14.6 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from pydantic==2.5.3->src==0.0.1) (2.14.6)
+Requirement already satisfied: iniconfig in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from pytest==7.4.4->src==0.0.1) (2.0.0)
+Requirement already satisfied: pluggy<2.0,>=0.12 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from pytest==7.4.4->src==0.0.1) (1.4.0)
+Requirement already satisfied: torchmetrics>=0.7.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from pytorch-lightning==2.1.3->src==0.0.1) (1.3.1)
+Requirement already satisfied: lightning-utilities>=0.8.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from pytorch-lightning==2.1.3->src==0.0.1) (0.10.1)
+Requirement already satisfied: charset-normalizer<4,>=2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from Requests==2.31.0->src==0.0.1) (3.3.2)
+Requirement already satisfied: idna<4,>=2.5 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from Requests==2.31.0->src==0.0.1) (3.6)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from Requests==2.31.0->src==0.0.1) (2.2.1)
+Requirement already satisfied: certifi>=2017.4.17 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from Requests==2.31.0->src==0.0.1) (2024.2.2)
+Requirement already satisfied: scipy>=1.5.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from scikit-learn==1.3.2->src==0.0.1) (1.12.0)
+Requirement already satisfied: joblib>=1.1.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from scikit-learn==1.3.2->src==0.0.1) (1.3.2)
+Requirement already satisfied: threadpoolctl>=2.0.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from scikit-learn==1.3.2->src==0.0.1) (3.3.0)
+Requirement already satisfied: sympy in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (1.12)
+Requirement already satisfied: networkx in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (3.2.1)
+Requirement already satisfied: jinja2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (3.1.3)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.1.105 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (12.1.105)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.1.105 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (12.1.105)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.1.105 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (12.1.105)
+Requirement already satisfied: nvidia-cudnn-cu12==8.9.2.26 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (8.9.2.26)
+Requirement already satisfied: nvidia-cublas-cu12==12.1.3.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (12.1.3.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.0.2.54 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (11.0.2.54)
+Requirement already satisfied: nvidia-curand-cu12==10.3.2.106 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (10.3.2.106)
+Requirement already satisfied: nvidia-cusolver-cu12==11.4.5.107 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (11.4.5.107)
+Requirement already satisfied: nvidia-cusparse-cu12==12.1.0.106 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (12.1.0.106)
+Requirement already satisfied: nvidia-nccl-cu12==2.18.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (2.18.1)
+Requirement already satisfied: nvidia-nvtx-cu12==12.1.105 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (12.1.105)
+Requirement already satisfied: triton==2.1.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from torch==2.1.2->src==0.0.1) (2.1.0)
+Requirement already satisfied: nvidia-nvjitlink-cu12 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from nvidia-cusolver-cu12==11.4.5.107->torch==2.1.2->src==0.0.1) (12.4.99)
+Requirement already satisfied: psutil in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from accelerate<1.0.0,>=0.20.1->happytransformer==3.0.0->src==0.0.1) (5.9.8)
+Requirement already satisfied: safetensors>=0.3.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from accelerate<1.0.0,>=0.20.1->happytransformer==3.0.0->src==0.0.1) (0.4.2)
+Requirement already satisfied: itsdangerous>=2.1.2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from Flask<3.1,>=1.0.4->dash==2.14.2->src==0.0.1) (2.1.2)
+Requirement already satisfied: blinker>=1.6.2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from Flask<3.1,>=1.0.4->dash==2.14.2->src==0.0.1) (1.7.0)
+Requirement already satisfied: aiosignal>=1.1.2 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from aiohttp->datasets==2.16.1->src==0.0.1) (1.3.1)
+Requirement already satisfied: attrs>=17.3.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from aiohttp->datasets==2.16.1->src==0.0.1) (23.2.0)
+Requirement already satisfied: frozenlist>=1.1.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from aiohttp->datasets==2.16.1->src==0.0.1) (1.4.1)
+Requirement already satisfied: multidict<7.0,>=4.5 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from aiohttp->datasets==2.16.1->src==0.0.1) (6.0.5)
+Requirement already satisfied: yarl<2.0,>=1.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from aiohttp->datasets==2.16.1->src==0.0.1) (1.9.4)
+Requirement already satisfied: MarkupSafe>=2.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from jinja2->torch==2.1.2->src==0.0.1) (2.1.5)
+Requirement already satisfied: tenacity>=6.2.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from plotly>=5.0.0->dash==2.14.2->src==0.0.1) (8.2.3)
+Requirement already satisfied: six>=1.5 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from python-dateutil>=2.7->matplotlib==3.8.2->src==0.0.1) (1.16.0)
+Requirement already satisfied: anyio<5,>=3.4.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from starlette<0.36.0,>=0.35.0->fastapi==0.109.0->src==0.0.1) (4.3.0)
+Requirement already satisfied: regex!=2019.12.17 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from transformers<5.0.0,>=4.30.1->happytransformer==3.0.0->src==0.0.1) (2023.12.25)
+Requirement already satisfied: zipp>=0.5 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from importlib-metadata->dash==2.14.2->src==0.0.1) (3.18.1)
+Requirement already satisfied: pytz>=2020.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from pandas->datasets==2.16.1->src==0.0.1) (2024.1)
+Requirement already satisfied: tzdata>=2022.7 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from pandas->datasets==2.16.1->src==0.0.1) (2024.1)
+Requirement already satisfied: mpmath>=0.19 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from sympy->torch==2.1.2->src==0.0.1) (1.3.0)
+Requirement already satisfied: GitPython!=3.1.29,>=1.0.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from wandb->happytransformer==3.0.0->src==0.0.1) (3.1.42)
+Requirement already satisfied: sentry-sdk>=1.0.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from wandb->happytransformer==3.0.0->src==0.0.1) (1.42.0)
+Requirement already satisfied: docker-pycreds>=0.4.0 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from wandb->happytransformer==3.0.0->src==0.0.1) (0.4.0)
+Requirement already satisfied: setproctitle in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from wandb->happytransformer==3.0.0->src==0.0.1) (1.3.3)
+Requirement already satisfied: appdirs>=1.4.3 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from wandb->happytransformer==3.0.0->src==0.0.1) (1.4.4)
+Requirement already satisfied: sniffio>=1.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from anyio<5,>=3.4.0->starlette<0.36.0,>=0.35.0->fastapi==0.109.0->src==0.0.1) (1.3.1)
+Requirement already satisfied: gitdb<5,>=4.0.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from GitPython!=3.1.29,>=1.0.0->wandb->happytransformer==3.0.0->src==0.0.1) (4.0.11)
+Requirement already satisfied: smmap<6,>=3.0.1 in /zhome/8d/a/147395/miniconda3/envs/src/lib/python3.11/site-packages (from gitdb<5,>=4.0.1->GitPython!=3.1.29,>=1.0.0->wandb->happytransformer==3.0.0->src==0.0.1) (5.0.1)
+Building wheels for collected packages: src
+  Building editable for src (pyproject.toml): started
+  Building editable for src (pyproject.toml): finished with status 'done'
+  Created wheel for src: filename=src-0.0.1-0.editable-py3-none-any.whl size=5176 sha256=141c54cdbf8f429ce5ca103e8030b0b0b2366817d44b29c9b517841297701bd0
+  Stored in directory: /tmp/pip-ephem-wheel-cache-8kho74jm/wheels/ae/c7/09/8359ed311d0e920038a9546136bc0708deb92b3fc3104415bb
+Successfully built src
+Installing collected packages: src
+  Attempting uninstall: src
+    Found existing installation: src 0.0.1
+    Uninstalling src-0.0.1:
+      Successfully uninstalled src-0.0.1
+Successfully installed src-0.0.1
+python src/finetunegemma.py
+trainable params: 78,586,112 || all params: 2,584,898,048 || trainable%: 3.0402016072086107
+Evaluating the Model Before Training!
+Training the Model
+{'loss': 1.7481, 'grad_norm': 94.14683532714844, 'learning_rate': 1.9992e-05, 'epoch': 0.0}
+{'loss': 1.5524, 'grad_norm': 109.90771484375, 'learning_rate': 1.9984e-05, 'epoch': 0.0}
+{'loss': 1.8597, 'grad_norm': 72.6094970703125, 'learning_rate': 1.9976000000000003e-05, 'epoch': 0.01}
+{'loss': 1.5025, 'grad_norm': 57.82453155517578, 'learning_rate': 1.9968e-05, 'epoch': 0.01}
+{'loss': 1.8694, 'grad_norm': 36.420143127441406, 'learning_rate': 1.9960000000000002e-05, 'epoch': 0.01}
+{'loss': 1.5675, 'grad_norm': 67.39411163330078, 'learning_rate': 1.9952e-05, 'epoch': 0.01}
+{'loss': 1.7055, 'grad_norm': 82.80696105957031, 'learning_rate': 1.9944e-05, 'epoch': 0.01}
+{'loss': 1.4767, 'grad_norm': 48.305641174316406, 'learning_rate': 1.9936000000000004e-05, 'epoch': 0.02}
+{'loss': 1.5812, 'grad_norm': 57.5920524597168, 'learning_rate': 1.9928e-05, 'epoch': 0.02}
+{'loss': 1.6566, 'grad_norm': 45.311119079589844, 'learning_rate': 1.9920000000000002e-05, 'epoch': 0.02}
+{'loss': 1.3557, 'grad_norm': 59.18703842163086, 'learning_rate': 1.9912000000000002e-05, 'epoch': 0.02}
+{'loss': 1.4166, 'grad_norm': 53.46053695678711, 'learning_rate': 1.9904e-05, 'epoch': 0.02}
+{'loss': 1.66, 'grad_norm': 44.47926712036133, 'learning_rate': 1.9896e-05, 'epoch': 0.03}
+{'loss': 1.2699, 'grad_norm': 40.074256896972656, 'learning_rate': 1.9888e-05, 'epoch': 0.03}
+{'loss': 1.6026, 'grad_norm': 53.33736038208008, 'learning_rate': 1.9880000000000003e-05, 'epoch': 0.03}
+{'loss': 1.5911, 'grad_norm': 84.5559310913086, 'learning_rate': 1.9872000000000002e-05, 'epoch': 0.03}
+{'loss': 1.417, 'grad_norm': 36.62723159790039, 'learning_rate': 1.9864e-05, 'epoch': 0.03}
+{'loss': 1.6123, 'grad_norm': 52.664955139160156, 'learning_rate': 1.9856e-05, 'epoch': 0.04}
+{'loss': 1.4246, 'grad_norm': 47.65040588378906, 'learning_rate': 1.9848e-05, 'epoch': 0.04}
+{'loss': 1.2413, 'grad_norm': 43.73344802856445, 'learning_rate': 1.9840000000000003e-05, 'epoch': 0.04}
+{'loss': 1.4521, 'grad_norm': 76.88704681396484, 'learning_rate': 1.9832000000000003e-05, 'epoch': 0.04}
+{'loss': 1.4908, 'grad_norm': 42.291072845458984, 'learning_rate': 1.9824000000000002e-05, 'epoch': 0.04}
+{'loss': 1.3607, 'grad_norm': 39.238929748535156, 'learning_rate': 1.9816e-05, 'epoch': 0.05}
+{'loss': 1.2946, 'grad_norm': 48.618003845214844, 'learning_rate': 1.9808e-05, 'epoch': 0.05}
+{'loss': 1.6816, 'grad_norm': 57.61182403564453, 'learning_rate': 1.98e-05, 'epoch': 0.05}
+{'loss': 1.2793, 'grad_norm': 55.59977722167969, 'learning_rate': 1.9792000000000003e-05, 'epoch': 0.05}
+{'loss': 1.6601, 'grad_norm': 60.71488952636719, 'learning_rate': 1.9784000000000002e-05, 'epoch': 0.05}
+{'loss': 1.6589, 'grad_norm': 60.77891540527344, 'learning_rate': 1.9776000000000002e-05, 'epoch': 0.06}
+{'loss': 1.5294, 'grad_norm': 60.431419372558594, 'learning_rate': 1.9768e-05, 'epoch': 0.06}
+{'loss': 1.5527, 'grad_norm': 53.301856994628906, 'learning_rate': 1.976e-05, 'epoch': 0.06}
+{'loss': 1.3848, 'grad_norm': 60.46944808959961, 'learning_rate': 1.9752000000000003e-05, 'epoch': 0.06}
+{'loss': 1.288, 'grad_norm': 39.29654312133789, 'learning_rate': 1.9744e-05, 'epoch': 0.06}
+{'loss': 1.2236, 'grad_norm': 59.23675537109375, 'learning_rate': 1.9736000000000002e-05, 'epoch': 0.07}
+{'loss': 1.4194, 'grad_norm': 40.570613861083984, 'learning_rate': 1.9728e-05, 'epoch': 0.07}
+{'loss': 1.7442, 'grad_norm': 73.82218933105469, 'learning_rate': 1.972e-05, 'epoch': 0.07}
+{'loss': 1.4307, 'grad_norm': 64.13992309570312, 'learning_rate': 1.9712000000000004e-05, 'epoch': 0.07}
+{'loss': 1.3639, 'grad_norm': 87.1614990234375, 'learning_rate': 1.9704e-05, 'epoch': 0.07}
+{'loss': 1.2683, 'grad_norm': 53.95468521118164, 'learning_rate': 1.9696000000000003e-05, 'epoch': 0.08}
+{'loss': 1.3559, 'grad_norm': 51.948673248291016, 'learning_rate': 1.9688000000000002e-05, 'epoch': 0.08}
+{'loss': 1.5566, 'grad_norm': 32.14522171020508, 'learning_rate': 1.968e-05, 'epoch': 0.08}
+{'loss': 1.3675, 'grad_norm': 56.43687438964844, 'learning_rate': 1.9672e-05, 'epoch': 0.08}
+{'loss': 1.3648, 'grad_norm': 41.242835998535156, 'learning_rate': 1.9664e-05, 'epoch': 0.08}
+{'loss': 1.5443, 'grad_norm': 49.105838775634766, 'learning_rate': 1.9656000000000003e-05, 'epoch': 0.09}
+{'loss': 1.5059, 'grad_norm': 33.254127502441406, 'learning_rate': 1.9648000000000002e-05, 'epoch': 0.09}
+{'loss': 1.382, 'grad_norm': 75.09890747070312, 'learning_rate': 1.9640000000000002e-05, 'epoch': 0.09}
+{'loss': 1.4001, 'grad_norm': 54.515628814697266, 'learning_rate': 1.9632e-05, 'epoch': 0.09}
+{'loss': 1.7859, 'grad_norm': 76.50531005859375, 'learning_rate': 1.9624e-05, 'epoch': 0.09}
+{'loss': 1.224, 'grad_norm': 51.417640686035156, 'learning_rate': 1.9616000000000003e-05, 'epoch': 0.1}
+{'loss': 1.3179, 'grad_norm': 44.21835708618164, 'learning_rate': 1.9608000000000003e-05, 'epoch': 0.1}
+{'loss': 1.3187, 'grad_norm': 84.61337280273438, 'learning_rate': 1.9600000000000002e-05, 'epoch': 0.1}
+{'loss': 1.5501, 'grad_norm': 45.60805130004883, 'learning_rate': 1.9592e-05, 'epoch': 0.1}
+{'loss': 1.4686, 'grad_norm': 56.294132232666016, 'learning_rate': 1.9584e-05, 'epoch': 0.1}
+{'loss': 1.372, 'grad_norm': 57.19187545776367, 'learning_rate': 1.9576e-05, 'epoch': 0.11}
+{'loss': 1.4836, 'grad_norm': 51.79819107055664, 'learning_rate': 1.9568000000000003e-05, 'epoch': 0.11}
+{'loss': 1.5492, 'grad_norm': 60.9503288269043, 'learning_rate': 1.9560000000000002e-05, 'epoch': 0.11}
+{'loss': 1.4024, 'grad_norm': 52.84999084472656, 'learning_rate': 1.9552000000000002e-05, 'epoch': 0.11}
+{'loss': 1.6267, 'grad_norm': 53.78926086425781, 'learning_rate': 1.9544e-05, 'epoch': 0.11}
+{'loss': 1.3859, 'grad_norm': 65.32048797607422, 'learning_rate': 1.9536e-05, 'epoch': 0.12}
+{'loss': 1.3246, 'grad_norm': 53.59623718261719, 'learning_rate': 1.9528000000000003e-05, 'epoch': 0.12}
+{'loss': 1.2832, 'grad_norm': 67.5477523803711, 'learning_rate': 1.9520000000000003e-05, 'epoch': 0.12}
+{'loss': 1.3855, 'grad_norm': 74.51484680175781, 'learning_rate': 1.9512000000000002e-05, 'epoch': 0.12}
+{'loss': 1.5057, 'grad_norm': 33.08732223510742, 'learning_rate': 1.9504e-05, 'epoch': 0.12}
+{'loss': 1.5133, 'grad_norm': 26.797027587890625, 'learning_rate': 1.9496e-05, 'epoch': 0.13}
+{'loss': 1.5054, 'grad_norm': 36.486270904541016, 'learning_rate': 1.9488000000000004e-05, 'epoch': 0.13}
+{'loss': 1.3756, 'grad_norm': 53.56856155395508, 'learning_rate': 1.948e-05, 'epoch': 0.13}
+{'loss': 1.4229, 'grad_norm': 85.5167007446289, 'learning_rate': 1.9472000000000003e-05, 'epoch': 0.13}
+{'loss': 1.3769, 'grad_norm': 38.73011779785156, 'learning_rate': 1.9464000000000002e-05, 'epoch': 0.13}
+{'loss': 1.3911, 'grad_norm': 61.76899337768555, 'learning_rate': 1.9456e-05, 'epoch': 0.14}
+{'loss': 1.3805, 'grad_norm': 47.84894561767578, 'learning_rate': 1.9448e-05, 'epoch': 0.14}
+{'loss': 1.5237, 'grad_norm': 42.92333984375, 'learning_rate': 1.944e-05, 'epoch': 0.14}
+{'loss': 1.6761, 'grad_norm': 45.80339431762695, 'learning_rate': 1.9432000000000003e-05, 'epoch': 0.14}
+{'loss': 1.5172, 'grad_norm': 86.22984313964844, 'learning_rate': 1.9424e-05, 'epoch': 0.14}
+{'loss': 1.6822, 'grad_norm': 47.290794372558594, 'learning_rate': 1.9416000000000002e-05, 'epoch': 0.15}
+{'loss': 1.1647, 'grad_norm': 39.843902587890625, 'learning_rate': 1.9408e-05, 'epoch': 0.15}
+{'loss': 1.3084, 'grad_norm': 80.72331237792969, 'learning_rate': 1.94e-05, 'epoch': 0.15}
+{'loss': 1.349, 'grad_norm': 47.54490280151367, 'learning_rate': 1.9392000000000003e-05, 'epoch': 0.15}
+{'loss': 1.2307, 'grad_norm': 43.282958984375, 'learning_rate': 1.9384e-05, 'epoch': 0.15}
+{'loss': 1.6451, 'grad_norm': 62.83108139038086, 'learning_rate': 1.9376000000000002e-05, 'epoch': 0.16}
+{'loss': 1.5169, 'grad_norm': 38.07454299926758, 'learning_rate': 1.9368e-05, 'epoch': 0.16}
+{'loss': 1.3147, 'grad_norm': 30.374507904052734, 'learning_rate': 1.936e-05, 'epoch': 0.16}
+{'loss': 1.2418, 'grad_norm': 89.94725799560547, 'learning_rate': 1.9352e-05, 'epoch': 0.16}
+{'loss': 1.2599, 'grad_norm': 52.4326057434082, 'learning_rate': 1.9344e-05, 'epoch': 0.16}
+{'loss': 1.4196, 'grad_norm': 51.76870346069336, 'learning_rate': 1.9336000000000003e-05, 'epoch': 0.17}
+{'loss': 1.3282, 'grad_norm': 93.04305267333984, 'learning_rate': 1.9328000000000002e-05, 'epoch': 0.17}
+{'loss': 1.3105, 'grad_norm': 49.990806579589844, 'learning_rate': 1.932e-05, 'epoch': 0.17}
+{'loss': 1.2337, 'grad_norm': 41.911895751953125, 'learning_rate': 1.9312e-05, 'epoch': 0.17}
+{'loss': 1.4228, 'grad_norm': 76.9427261352539, 'learning_rate': 1.9304e-05, 'epoch': 0.17}
+{'loss': 1.5837, 'grad_norm': 32.64385223388672, 'learning_rate': 1.9296000000000003e-05, 'epoch': 0.18}
+{'loss': 1.5332, 'grad_norm': 53.740562438964844, 'learning_rate': 1.9288000000000002e-05, 'epoch': 0.18}
+{'loss': 1.4736, 'grad_norm': 49.18804168701172, 'learning_rate': 1.9280000000000002e-05, 'epoch': 0.18}
+{'loss': 1.2401, 'grad_norm': 58.8585319519043, 'learning_rate': 1.9272e-05, 'epoch': 0.18}
+{'loss': 1.4378, 'grad_norm': 52.10594177246094, 'learning_rate': 1.9264e-05, 'epoch': 0.18}
+{'loss': 1.1768, 'grad_norm': 68.197998046875, 'learning_rate': 1.9256e-05, 'epoch': 0.19}
+{'loss': 1.5802, 'grad_norm': 63.33155822753906, 'learning_rate': 1.9248000000000003e-05, 'epoch': 0.19}
+{'loss': 1.2842, 'grad_norm': 51.65840148925781, 'learning_rate': 1.9240000000000002e-05, 'epoch': 0.19}
+{'loss': 1.1197, 'grad_norm': 51.662410736083984, 'learning_rate': 1.9232e-05, 'epoch': 0.19}
+{'loss': 1.3609, 'grad_norm': 45.95963668823242, 'learning_rate': 1.9224000000000004e-05, 'epoch': 0.19}
+{'loss': 1.3916, 'grad_norm': 70.69867706298828, 'learning_rate': 1.9216e-05, 'epoch': 0.2}
+{'loss': 1.3871, 'grad_norm': 56.99386978149414, 'learning_rate': 1.9208000000000003e-05, 'epoch': 0.2}
+{'loss': 1.4407, 'grad_norm': 57.90363311767578, 'learning_rate': 1.9200000000000003e-05, 'epoch': 0.2}
+{'loss': 1.722, 'grad_norm': 58.68037796020508, 'learning_rate': 1.9192000000000002e-05, 'epoch': 0.2}
+{'loss': 1.5018, 'grad_norm': 46.142032623291016, 'learning_rate': 1.9184e-05, 'epoch': 0.2}
+{'loss': 1.2998, 'grad_norm': 51.91583251953125, 'learning_rate': 1.9176e-05, 'epoch': 0.21}
+{'loss': 1.307, 'grad_norm': 74.96198272705078, 'learning_rate': 1.9168000000000004e-05, 'epoch': 0.21}
+{'loss': 1.3894, 'grad_norm': 64.00218963623047, 'learning_rate': 1.916e-05, 'epoch': 0.21}
+{'loss': 1.3731, 'grad_norm': 55.87912368774414, 'learning_rate': 1.9152000000000002e-05, 'epoch': 0.21}
+{'loss': 1.2707, 'grad_norm': 48.574398040771484, 'learning_rate': 1.9144000000000002e-05, 'epoch': 0.21}
+{'loss': 1.6522, 'grad_norm': 44.026702880859375, 'learning_rate': 1.9136e-05, 'epoch': 0.22}
+{'loss': 1.2888, 'grad_norm': 74.7396469116211, 'learning_rate': 1.9128e-05, 'epoch': 0.22}
+{'loss': 1.4149, 'grad_norm': 45.371212005615234, 'learning_rate': 1.912e-05, 'epoch': 0.22}
+{'loss': 1.4822, 'grad_norm': 55.117279052734375, 'learning_rate': 1.9112000000000003e-05, 'epoch': 0.22}
+{'loss': 1.5853, 'grad_norm': 75.37635040283203, 'learning_rate': 1.9104000000000002e-05, 'epoch': 0.22}
+{'loss': 1.448, 'grad_norm': 47.021240234375, 'learning_rate': 1.9096e-05, 'epoch': 0.23}
+{'loss': 1.4472, 'grad_norm': 59.31733703613281, 'learning_rate': 1.9088e-05, 'epoch': 0.23}
+{'loss': 1.3061, 'grad_norm': 65.08016204833984, 'learning_rate': 1.908e-05, 'epoch': 0.23}
+{'loss': 1.5729, 'grad_norm': 40.61671829223633, 'learning_rate': 1.9072000000000003e-05, 'epoch': 0.23}
+{'loss': 1.2985, 'grad_norm': 60.601497650146484, 'learning_rate': 1.9064000000000002e-05, 'epoch': 0.23}
+{'loss': 1.456, 'grad_norm': 50.56727600097656, 'learning_rate': 1.9056000000000002e-05, 'epoch': 0.24}
+{'loss': 1.2557, 'grad_norm': 51.270877838134766, 'learning_rate': 1.9048e-05, 'epoch': 0.24}
+{'loss': 1.4022, 'grad_norm': 70.82412719726562, 'learning_rate': 1.904e-05, 'epoch': 0.24}
+{'loss': 1.2909, 'grad_norm': 64.75872039794922, 'learning_rate': 1.9032e-05, 'epoch': 0.24}
+{'loss': 1.4064, 'grad_norm': 82.13134002685547, 'learning_rate': 1.9024000000000003e-05, 'epoch': 0.24}
+{'loss': 1.4247, 'grad_norm': 52.312171936035156, 'learning_rate': 1.9016000000000002e-05, 'epoch': 0.25}
+{'loss': 1.141, 'grad_norm': 40.65769577026367, 'learning_rate': 1.9008e-05, 'epoch': 0.25}
+{'loss': 1.4164, 'grad_norm': 95.4612808227539, 'learning_rate': 1.9e-05, 'epoch': 0.25}
+{'loss': 1.3341, 'grad_norm': 50.83390426635742, 'learning_rate': 1.8992e-05, 'epoch': 0.25}
+{'loss': 1.413, 'grad_norm': 47.633121490478516, 'learning_rate': 1.8984000000000003e-05, 'epoch': 0.25}
+{'loss': 1.3552, 'grad_norm': 50.03193664550781, 'learning_rate': 1.8976000000000003e-05, 'epoch': 0.26}
+{'loss': 1.3603, 'grad_norm': 83.9111557006836, 'learning_rate': 1.8968000000000002e-05, 'epoch': 0.26}
+{'loss': 1.2451, 'grad_norm': 38.91383361816406, 'learning_rate': 1.896e-05, 'epoch': 0.26}
+{'loss': 1.4931, 'grad_norm': 45.42548751831055, 'learning_rate': 1.8952e-05, 'epoch': 0.26}
+{'loss': 1.4067, 'grad_norm': 64.4400634765625, 'learning_rate': 1.8944000000000004e-05, 'epoch': 0.26}
+{'loss': 1.6224, 'grad_norm': 63.04764938354492, 'learning_rate': 1.8936e-05, 'epoch': 0.27}
+{'loss': 1.4315, 'grad_norm': 74.19754791259766, 'learning_rate': 1.8928000000000002e-05, 'epoch': 0.27}
+{'loss': 1.3565, 'grad_norm': 52.08343505859375, 'learning_rate': 1.8920000000000002e-05, 'epoch': 0.27}
+{'loss': 1.4408, 'grad_norm': 52.71900939941406, 'learning_rate': 1.8912e-05, 'epoch': 0.27}
+{'loss': 1.2407, 'grad_norm': 67.60719299316406, 'learning_rate': 1.8904000000000004e-05, 'epoch': 0.27}
+{'loss': 1.3011, 'grad_norm': 62.84539794921875, 'learning_rate': 1.8896e-05, 'epoch': 0.28}
+{'loss': 1.451, 'grad_norm': 63.64866256713867, 'learning_rate': 1.8888000000000003e-05, 'epoch': 0.28}
+{'loss': 1.4699, 'grad_norm': 52.35003662109375, 'learning_rate': 1.8880000000000002e-05, 'epoch': 0.28}
+{'loss': 1.4457, 'grad_norm': 49.587730407714844, 'learning_rate': 1.8872e-05, 'epoch': 0.28}
+{'loss': 1.4041, 'grad_norm': 29.74510383605957, 'learning_rate': 1.8864e-05, 'epoch': 0.28}
+{'loss': 1.4673, 'grad_norm': 79.29926300048828, 'learning_rate': 1.8856e-05, 'epoch': 0.29}
+{'loss': 1.5708, 'grad_norm': 99.44231414794922, 'learning_rate': 1.8848000000000003e-05, 'epoch': 0.29}
+{'loss': 1.4609, 'grad_norm': 55.024391174316406, 'learning_rate': 1.884e-05, 'epoch': 0.29}
+{'loss': 1.4128, 'grad_norm': 60.85976028442383, 'learning_rate': 1.8832000000000002e-05, 'epoch': 0.29}
+{'loss': 1.2282, 'grad_norm': 50.1729736328125, 'learning_rate': 1.8824e-05, 'epoch': 0.29}
+{'loss': 1.4802, 'grad_norm': 61.100215911865234, 'learning_rate': 1.8816e-05, 'epoch': 0.3}
+{'loss': 1.5006, 'grad_norm': 66.55940246582031, 'learning_rate': 1.8808e-05, 'epoch': 0.3}
+{'loss': 1.2661, 'grad_norm': 49.21337890625, 'learning_rate': 1.88e-05, 'epoch': 0.3}
+{'loss': 1.4171, 'grad_norm': 96.25237274169922, 'learning_rate': 1.8792000000000002e-05, 'epoch': 0.3}
+{'loss': 1.2119, 'grad_norm': 48.62167739868164, 'learning_rate': 1.8784000000000002e-05, 'epoch': 0.3}
+{'loss': 1.4154, 'grad_norm': 66.08661651611328, 'learning_rate': 1.8776e-05, 'epoch': 0.31}
+{'loss': 1.2115, 'grad_norm': 36.363548278808594, 'learning_rate': 1.8768e-05, 'epoch': 0.31}
+{'loss': 1.2922, 'grad_norm': 50.865596771240234, 'learning_rate': 1.876e-05, 'epoch': 0.31}
+{'loss': 1.4315, 'grad_norm': 49.43756103515625, 'learning_rate': 1.8752000000000003e-05, 'epoch': 0.31}
+{'loss': 1.3895, 'grad_norm': 49.07815170288086, 'learning_rate': 1.8744000000000002e-05, 'epoch': 0.31}
+{'loss': 1.205, 'grad_norm': 73.49495697021484, 'learning_rate': 1.8736e-05, 'epoch': 0.32}
+{'loss': 1.3695, 'grad_norm': 38.30121612548828, 'learning_rate': 1.8728e-05, 'epoch': 0.32}
+{'loss': 1.4278, 'grad_norm': 44.47917175292969, 'learning_rate': 1.8720000000000004e-05, 'epoch': 0.32}
+{'loss': 1.5458, 'grad_norm': 93.21930694580078, 'learning_rate': 1.8712e-05, 'epoch': 0.32}
+{'loss': 1.5207, 'grad_norm': 90.6861801147461, 'learning_rate': 1.8704000000000003e-05, 'epoch': 0.32}
+{'loss': 1.2464, 'grad_norm': 31.56837272644043, 'learning_rate': 1.8696000000000002e-05, 'epoch': 0.33}
+{'loss': 1.2301, 'grad_norm': 68.8294677734375, 'learning_rate': 1.8688e-05, 'epoch': 0.33}
+{'loss': 1.2875, 'grad_norm': 54.32371139526367, 'learning_rate': 1.8680000000000004e-05, 'epoch': 0.33}
+{'loss': 1.1401, 'grad_norm': 39.72826385498047, 'learning_rate': 1.8672e-05, 'epoch': 0.33}
+{'loss': 1.3773, 'grad_norm': 42.22100067138672, 'learning_rate': 1.8664000000000003e-05, 'epoch': 0.33}
+{'loss': 1.2617, 'grad_norm': 40.181739807128906, 'learning_rate': 1.8656000000000002e-05, 'epoch': 0.34}
+{'loss': 1.4167, 'grad_norm': 69.1729965209961, 'learning_rate': 1.8648000000000002e-05, 'epoch': 0.34}
+{'loss': 1.4567, 'grad_norm': 43.70274353027344, 'learning_rate': 1.864e-05, 'epoch': 0.34}
+{'loss': 1.4291, 'grad_norm': 46.01441955566406, 'learning_rate': 1.8632e-05, 'epoch': 0.34}
+{'loss': 1.4264, 'grad_norm': 77.51969909667969, 'learning_rate': 1.8624000000000003e-05, 'epoch': 0.34}
+{'loss': 1.461, 'grad_norm': 95.76910400390625, 'learning_rate': 1.8616e-05, 'epoch': 0.35}
+{'loss': 1.463, 'grad_norm': 45.33386993408203, 'learning_rate': 1.8608000000000002e-05, 'epoch': 0.35}
+{'loss': 1.3251, 'grad_norm': 54.92932891845703, 'learning_rate': 1.86e-05, 'epoch': 0.35}
+{'loss': 1.2456, 'grad_norm': 62.31614303588867, 'learning_rate': 1.8592e-05, 'epoch': 0.35}
+{'loss': 1.1671, 'grad_norm': 49.51176071166992, 'learning_rate': 1.8584000000000004e-05, 'epoch': 0.35}
+{'loss': 1.2374, 'grad_norm': 52.267242431640625, 'learning_rate': 1.8576e-05, 'epoch': 0.36}
+{'loss': 1.3036, 'grad_norm': 43.72923278808594, 'learning_rate': 1.8568000000000002e-05, 'epoch': 0.36}
+{'loss': 1.2456, 'grad_norm': 32.48408889770508, 'learning_rate': 1.8560000000000002e-05, 'epoch': 0.36}
+{'loss': 1.3035, 'grad_norm': 43.92871856689453, 'learning_rate': 1.8552e-05, 'epoch': 0.36}
+{'loss': 1.3418, 'grad_norm': 55.59259033203125, 'learning_rate': 1.8544e-05, 'epoch': 0.36}
+{'loss': 1.3282, 'grad_norm': 49.02359390258789, 'learning_rate': 1.8536e-05, 'epoch': 0.37}
+{'loss': 1.2349, 'grad_norm': 73.93240356445312, 'learning_rate': 1.8528000000000003e-05, 'epoch': 0.37}
+{'loss': 1.5452, 'grad_norm': 35.672359466552734, 'learning_rate': 1.8520000000000002e-05, 'epoch': 0.37}
+{'loss': 1.3078, 'grad_norm': 74.38965606689453, 'learning_rate': 1.8512e-05, 'epoch': 0.37}
+{'loss': 1.4864, 'grad_norm': 66.18368530273438, 'learning_rate': 1.8504e-05, 'epoch': 0.37}
+{'loss': 1.3642, 'grad_norm': 41.46757125854492, 'learning_rate': 1.8496e-05, 'epoch': 0.38}
+{'loss': 1.0696, 'grad_norm': 47.34740447998047, 'learning_rate': 1.8488e-05, 'epoch': 0.38}
+{'loss': 1.2312, 'grad_norm': 56.85419845581055, 'learning_rate': 1.8480000000000003e-05, 'epoch': 0.38}
+{'loss': 1.7524, 'grad_norm': 88.39114379882812, 'learning_rate': 1.8472000000000002e-05, 'epoch': 0.38}
+{'loss': 1.2525, 'grad_norm': 42.346588134765625, 'learning_rate': 1.8464e-05, 'epoch': 0.38}
+{'loss': 1.4184, 'grad_norm': 52.665557861328125, 'learning_rate': 1.8456e-05, 'epoch': 0.39}
+{'loss': 1.6371, 'grad_norm': 91.97735595703125, 'learning_rate': 1.8448e-05, 'epoch': 0.39}
+{'loss': 1.2368, 'grad_norm': 46.23154830932617, 'learning_rate': 1.8440000000000003e-05, 'epoch': 0.39}
+{'loss': 1.3513, 'grad_norm': 39.80818176269531, 'learning_rate': 1.8432000000000002e-05, 'epoch': 0.39}
+{'loss': 1.4411, 'grad_norm': 82.91840362548828, 'learning_rate': 1.8424000000000002e-05, 'epoch': 0.39}
+{'loss': 1.4857, 'grad_norm': 96.11456298828125, 'learning_rate': 1.8416e-05, 'epoch': 0.4}
+{'loss': 1.1595, 'grad_norm': 69.42868041992188, 'learning_rate': 1.8408e-05, 'epoch': 0.4}
+{'loss': 1.7119, 'grad_norm': 53.716617584228516, 'learning_rate': 1.8400000000000003e-05, 'epoch': 0.4}
+{'loss': 1.2987, 'grad_norm': 49.63813400268555, 'learning_rate': 1.8392e-05, 'epoch': 0.4}
+{'loss': 1.3107, 'grad_norm': 52.76150131225586, 'learning_rate': 1.8384000000000002e-05, 'epoch': 0.4}
+{'loss': 1.3065, 'grad_norm': 42.40237045288086, 'learning_rate': 1.8376e-05, 'epoch': 0.41}
+{'loss': 1.261, 'grad_norm': 38.149410247802734, 'learning_rate': 1.8368e-05, 'epoch': 0.41}
+{'loss': 1.3334, 'grad_norm': 26.775680541992188, 'learning_rate': 1.8360000000000004e-05, 'epoch': 0.41}
+{'loss': 1.2843, 'grad_norm': 42.5149040222168, 'learning_rate': 1.8352e-05, 'epoch': 0.41}
+{'loss': 1.4233, 'grad_norm': 38.63006591796875, 'learning_rate': 1.8344000000000003e-05, 'epoch': 0.41}
+{'loss': 1.3496, 'grad_norm': 53.38378143310547, 'learning_rate': 1.8336000000000002e-05, 'epoch': 0.42}
+{'loss': 1.309, 'grad_norm': 78.83088684082031, 'learning_rate': 1.8328e-05, 'epoch': 0.42}
+{'loss': 1.4969, 'grad_norm': 85.88851165771484, 'learning_rate': 1.832e-05, 'epoch': 0.42}
+{'loss': 1.4488, 'grad_norm': 40.37605667114258, 'learning_rate': 1.8312e-05, 'epoch': 0.42}
+{'loss': 1.4308, 'grad_norm': 45.957027435302734, 'learning_rate': 1.8304000000000003e-05, 'epoch': 0.42}
+{'loss': 1.3261, 'grad_norm': 58.206478118896484, 'learning_rate': 1.8296e-05, 'epoch': 0.43}
+{'loss': 1.3871, 'grad_norm': 52.2347526550293, 'learning_rate': 1.8288000000000002e-05, 'epoch': 0.43}
+{'loss': 1.0995, 'grad_norm': 27.49418830871582, 'learning_rate': 1.828e-05, 'epoch': 0.43}
+{'loss': 1.2702, 'grad_norm': 45.21589660644531, 'learning_rate': 1.8272e-05, 'epoch': 0.43}
+{'loss': 1.2493, 'grad_norm': 84.07510375976562, 'learning_rate': 1.8264000000000003e-05, 'epoch': 0.43}
+{'loss': 1.427, 'grad_norm': 22.739397048950195, 'learning_rate': 1.8256e-05, 'epoch': 0.44}
+{'loss': 1.0, 'grad_norm': 34.457340240478516, 'learning_rate': 1.8248000000000002e-05, 'epoch': 0.44}
+{'loss': 1.2715, 'grad_norm': 36.67987823486328, 'learning_rate': 1.824e-05, 'epoch': 0.44}
+{'loss': 1.2694, 'grad_norm': 104.2197265625, 'learning_rate': 1.8232e-05, 'epoch': 0.44}
+{'loss': 1.4213, 'grad_norm': 44.11427307128906, 'learning_rate': 1.8224e-05, 'epoch': 0.44}
+{'loss': 1.5077, 'grad_norm': 66.80177307128906, 'learning_rate': 1.8216000000000003e-05, 'epoch': 0.45}
+{'loss': 1.3635, 'grad_norm': 51.05653762817383, 'learning_rate': 1.8208000000000003e-05, 'epoch': 0.45}
+{'loss': 1.2551, 'grad_norm': 40.29026794433594, 'learning_rate': 1.8200000000000002e-05, 'epoch': 0.45}
+{'loss': 1.3782, 'grad_norm': 51.45541763305664, 'learning_rate': 1.8192e-05, 'epoch': 0.45}
+{'loss': 1.1981, 'grad_norm': 42.722652435302734, 'learning_rate': 1.8184e-05, 'epoch': 0.45}
+{'loss': 1.3493, 'grad_norm': 31.673322677612305, 'learning_rate': 1.8176000000000004e-05, 'epoch': 0.46}
+{'loss': 1.5437, 'grad_norm': 54.70926284790039, 'learning_rate': 1.8168e-05, 'epoch': 0.46}
+{'loss': 1.3231, 'grad_norm': 40.407840728759766, 'learning_rate': 1.8160000000000002e-05, 'epoch': 0.46}
+{'loss': 1.279, 'grad_norm': 78.93339538574219, 'learning_rate': 1.8152000000000002e-05, 'epoch': 0.46}
+{'loss': 1.3241, 'grad_norm': 92.07909393310547, 'learning_rate': 1.8144e-05, 'epoch': 0.46}
+{'loss': 1.4315, 'grad_norm': 56.86042022705078, 'learning_rate': 1.8136000000000004e-05, 'epoch': 0.47}
+{'loss': 1.3251, 'grad_norm': 67.29004669189453, 'learning_rate': 1.8128e-05, 'epoch': 0.47}
+{'loss': 1.4741, 'grad_norm': 64.43513488769531, 'learning_rate': 1.8120000000000003e-05, 'epoch': 0.47}
+{'loss': 1.5818, 'grad_norm': 43.28899383544922, 'learning_rate': 1.8112000000000002e-05, 'epoch': 0.47}
+{'loss': 1.3528, 'grad_norm': 43.39441680908203, 'learning_rate': 1.8104e-05, 'epoch': 0.47}
+{'loss': 1.4601, 'grad_norm': 88.65653991699219, 'learning_rate': 1.8096e-05, 'epoch': 0.48}
+{'loss': 1.258, 'grad_norm': 57.39494323730469, 'learning_rate': 1.8088e-05, 'epoch': 0.48}
+{'loss': 1.3418, 'grad_norm': 49.60274887084961, 'learning_rate': 1.8080000000000003e-05, 'epoch': 0.48}
+{'loss': 1.5005, 'grad_norm': 32.192317962646484, 'learning_rate': 1.8072e-05, 'epoch': 0.48}
+{'loss': 1.5007, 'grad_norm': 35.938323974609375, 'learning_rate': 1.8064000000000002e-05, 'epoch': 0.48}
+{'loss': 1.4615, 'grad_norm': 50.01539993286133, 'learning_rate': 1.8056e-05, 'epoch': 0.49}
+{'loss': 1.3601, 'grad_norm': 65.54363250732422, 'learning_rate': 1.8048e-05, 'epoch': 0.49}
+{'loss': 1.4468, 'grad_norm': 61.7457160949707, 'learning_rate': 1.8040000000000003e-05, 'epoch': 0.49}
+{'loss': 1.3396, 'grad_norm': 35.2551155090332, 'learning_rate': 1.8032e-05, 'epoch': 0.49}
+{'loss': 1.5033, 'grad_norm': 81.05148315429688, 'learning_rate': 1.8024000000000002e-05, 'epoch': 0.49}
+{'loss': 1.4034, 'grad_norm': 49.732757568359375, 'learning_rate': 1.8016e-05, 'epoch': 0.5}
+{'loss': 1.3903, 'grad_norm': 48.460716247558594, 'learning_rate': 1.8008e-05, 'epoch': 0.5}
+{'loss': 1.2548, 'grad_norm': 69.38555908203125, 'learning_rate': 1.8e-05, 'epoch': 0.5}
+{'loss': 1.2713, 'grad_norm': 46.129791259765625, 'learning_rate': 1.7992e-05, 'epoch': 0.5}
+{'loss': 1.4474, 'grad_norm': 57.32856750488281, 'learning_rate': 1.7984000000000003e-05, 'epoch': 0.5}
+{'loss': 1.4237, 'grad_norm': 58.44324493408203, 'learning_rate': 1.7976000000000002e-05, 'epoch': 0.51}
+{'loss': 1.4381, 'grad_norm': 43.303279876708984, 'learning_rate': 1.7968e-05, 'epoch': 0.51}
+{'loss': 1.1428, 'grad_norm': 72.54119873046875, 'learning_rate': 1.796e-05, 'epoch': 0.51}
+{'loss': 1.0512, 'grad_norm': 51.16718292236328, 'learning_rate': 1.7952e-05, 'epoch': 0.51}
+{'loss': 1.3255, 'grad_norm': 56.94942092895508, 'learning_rate': 1.7944000000000003e-05, 'epoch': 0.51}
+{'loss': 1.3662, 'grad_norm': 44.96229934692383, 'learning_rate': 1.7936000000000002e-05, 'epoch': 0.52}
+{'loss': 1.4057, 'grad_norm': 58.084869384765625, 'learning_rate': 1.7928000000000002e-05, 'epoch': 0.52}
+{'loss': 1.3379, 'grad_norm': 69.76911926269531, 'learning_rate': 1.792e-05, 'epoch': 0.52}
+{'loss': 1.2035, 'grad_norm': 50.16445541381836, 'learning_rate': 1.7912e-05, 'epoch': 0.52}
+{'loss': 1.5848, 'grad_norm': 45.135597229003906, 'learning_rate': 1.7904e-05, 'epoch': 0.52}
+{'loss': 1.3057, 'grad_norm': 58.78407669067383, 'learning_rate': 1.7896000000000003e-05, 'epoch': 0.53}
+{'loss': 1.2647, 'grad_norm': 39.08009719848633, 'learning_rate': 1.7888000000000002e-05, 'epoch': 0.53}
+{'loss': 1.5352, 'grad_norm': 66.49783325195312, 'learning_rate': 1.788e-05, 'epoch': 0.53}
+{'loss': 1.3324, 'grad_norm': 50.95669174194336, 'learning_rate': 1.7872e-05, 'epoch': 0.53}
+{'loss': 1.1583, 'grad_norm': 88.9149169921875, 'learning_rate': 1.7864e-05, 'epoch': 0.53}
+{'loss': 1.3336, 'grad_norm': 36.39063262939453, 'learning_rate': 1.7856000000000003e-05, 'epoch': 0.54}
+{'loss': 1.2941, 'grad_norm': 75.01399993896484, 'learning_rate': 1.7848e-05, 'epoch': 0.54}
+{'loss': 1.1559, 'grad_norm': 42.98875427246094, 'learning_rate': 1.7840000000000002e-05, 'epoch': 0.54}
+{'loss': 1.2578, 'grad_norm': 62.020748138427734, 'learning_rate': 1.7832e-05, 'epoch': 0.54}
+{'loss': 1.2237, 'grad_norm': 43.75241470336914, 'learning_rate': 1.7824e-05, 'epoch': 0.54}
+{'loss': 1.2728, 'grad_norm': 50.227046966552734, 'learning_rate': 1.7816000000000004e-05, 'epoch': 0.55}
+{'loss': 1.2562, 'grad_norm': 46.66551971435547, 'learning_rate': 1.7808e-05, 'epoch': 0.55}
+{'loss': 1.1761, 'grad_norm': 70.24188995361328, 'learning_rate': 1.7800000000000002e-05, 'epoch': 0.55}
+{'loss': 1.2609, 'grad_norm': 39.36648178100586, 'learning_rate': 1.7792000000000002e-05, 'epoch': 0.55}
+{'loss': 1.2123, 'grad_norm': 21.35106086730957, 'learning_rate': 1.7784e-05, 'epoch': 0.55}
+{'loss': 1.7373, 'grad_norm': 53.19193649291992, 'learning_rate': 1.7776e-05, 'epoch': 0.56}
+{'loss': 1.3508, 'grad_norm': 64.26840209960938, 'learning_rate': 1.7768e-05, 'epoch': 0.56}
+{'loss': 1.3959, 'grad_norm': 66.5536117553711, 'learning_rate': 1.7760000000000003e-05, 'epoch': 0.56}
+{'loss': 1.1999, 'grad_norm': 51.14370346069336, 'learning_rate': 1.7752e-05, 'epoch': 0.56}
+{'loss': 1.3011, 'grad_norm': 62.751190185546875, 'learning_rate': 1.7744e-05, 'epoch': 0.56}
+{'loss': 1.366, 'grad_norm': 59.68721008300781, 'learning_rate': 1.7736e-05, 'epoch': 0.57}
+{'loss': 1.4847, 'grad_norm': 57.63811492919922, 'learning_rate': 1.7728e-05, 'epoch': 0.57}
+{'loss': 1.5966, 'grad_norm': 82.46686553955078, 'learning_rate': 1.7720000000000003e-05, 'epoch': 0.57}
+{'loss': 1.2468, 'grad_norm': 44.06867599487305, 'learning_rate': 1.7712000000000003e-05, 'epoch': 0.57}
+{'loss': 1.2925, 'grad_norm': 56.99812316894531, 'learning_rate': 1.7704000000000002e-05, 'epoch': 0.57}
+{'loss': 1.3802, 'grad_norm': 39.28868103027344, 'learning_rate': 1.7696e-05, 'epoch': 0.58}
+{'loss': 1.3854, 'grad_norm': 87.47504425048828, 'learning_rate': 1.7688e-05, 'epoch': 0.58}
+{'loss': 1.4375, 'grad_norm': 49.89326095581055, 'learning_rate': 1.768e-05, 'epoch': 0.58}
+{'loss': 1.2189, 'grad_norm': 84.00099182128906, 'learning_rate': 1.7672000000000003e-05, 'epoch': 0.58}
+{'loss': 1.443, 'grad_norm': 40.5336799621582, 'learning_rate': 1.7664000000000002e-05, 'epoch': 0.58}
+{'loss': 1.4029, 'grad_norm': 90.9283447265625, 'learning_rate': 1.7656000000000002e-05, 'epoch': 0.59}
+{'loss': 1.2822, 'grad_norm': 45.14094543457031, 'learning_rate': 1.7648e-05, 'epoch': 0.59}
+{'loss': 1.2758, 'grad_norm': 50.59331130981445, 'learning_rate': 1.764e-05, 'epoch': 0.59}
+{'loss': 1.3649, 'grad_norm': 41.39558792114258, 'learning_rate': 1.7632000000000003e-05, 'epoch': 0.59}
+{'loss': 1.1448, 'grad_norm': 59.528343200683594, 'learning_rate': 1.7624000000000003e-05, 'epoch': 0.59}
+{'loss': 1.3093, 'grad_norm': 76.36149597167969, 'learning_rate': 1.7616000000000002e-05, 'epoch': 0.6}
+{'loss': 1.1891, 'grad_norm': 39.24162673950195, 'learning_rate': 1.7608e-05, 'epoch': 0.6}
+{'loss': 1.396, 'grad_norm': 86.5331802368164, 'learning_rate': 1.76e-05, 'epoch': 0.6}
+{'loss': 1.2941, 'grad_norm': 68.75697326660156, 'learning_rate': 1.7592000000000004e-05, 'epoch': 0.6}
+{'loss': 1.4825, 'grad_norm': 74.296630859375, 'learning_rate': 1.7584e-05, 'epoch': 0.6}
+{'loss': 1.2392, 'grad_norm': 81.8587417602539, 'learning_rate': 1.7576000000000002e-05, 'epoch': 0.61}
+{'loss': 1.3144, 'grad_norm': 25.346397399902344, 'learning_rate': 1.7568000000000002e-05, 'epoch': 0.61}
+{'loss': 1.2794, 'grad_norm': 53.71164321899414, 'learning_rate': 1.756e-05, 'epoch': 0.61}
+{'loss': 1.026, 'grad_norm': 90.322998046875, 'learning_rate': 1.7552e-05, 'epoch': 0.61}
+{'loss': 1.4054, 'grad_norm': 49.64075469970703, 'learning_rate': 1.7544e-05, 'epoch': 0.61}
+{'loss': 1.4783, 'grad_norm': 91.66896057128906, 'learning_rate': 1.7536000000000003e-05, 'epoch': 0.62}
+{'loss': 1.1948, 'grad_norm': 75.3338394165039, 'learning_rate': 1.7528e-05, 'epoch': 0.62}
+{'loss': 1.5184, 'grad_norm': 51.42359161376953, 'learning_rate': 1.752e-05, 'epoch': 0.62}
+{'loss': 1.4665, 'grad_norm': 50.80546188354492, 'learning_rate': 1.7512e-05, 'epoch': 0.62}
+{'loss': 1.0815, 'grad_norm': 52.48075485229492, 'learning_rate': 1.7504e-05, 'epoch': 0.62}
+{'loss': 1.3353, 'grad_norm': 92.48439025878906, 'learning_rate': 1.7496000000000003e-05, 'epoch': 0.63}
+{'loss': 1.2944, 'grad_norm': 46.011043548583984, 'learning_rate': 1.7488e-05, 'epoch': 0.63}
+{'loss': 1.1862, 'grad_norm': 81.00436401367188, 'learning_rate': 1.7480000000000002e-05, 'epoch': 0.63}
+{'loss': 1.3456, 'grad_norm': 48.73764419555664, 'learning_rate': 1.7472e-05, 'epoch': 0.63}
+{'loss': 1.5756, 'grad_norm': 94.11883544921875, 'learning_rate': 1.7464e-05, 'epoch': 0.63}
+{'loss': 1.3068, 'grad_norm': 88.96955871582031, 'learning_rate': 1.7456e-05, 'epoch': 0.64}
+{'loss': 1.3234, 'grad_norm': 43.66511154174805, 'learning_rate': 1.7448e-05, 'epoch': 0.64}
+{'loss': 1.3181, 'grad_norm': 33.10298156738281, 'learning_rate': 1.7440000000000002e-05, 'epoch': 0.64}
+{'loss': 0.9722, 'grad_norm': 36.09553909301758, 'learning_rate': 1.7432000000000002e-05, 'epoch': 0.64}
+{'loss': 1.0441, 'grad_norm': 47.059452056884766, 'learning_rate': 1.7424e-05, 'epoch': 0.64}
+{'loss': 1.5121, 'grad_norm': 73.76099395751953, 'learning_rate': 1.7416e-05, 'epoch': 0.65}
+{'loss': 1.0641, 'grad_norm': 65.66284942626953, 'learning_rate': 1.7408e-05, 'epoch': 0.65}
+{'loss': 1.1864, 'grad_norm': 35.80350112915039, 'learning_rate': 1.7400000000000003e-05, 'epoch': 0.65}
+{'loss': 1.2959, 'grad_norm': 39.96973419189453, 'learning_rate': 1.7392000000000002e-05, 'epoch': 0.65}
+{'loss': 1.2705, 'grad_norm': 72.43805694580078, 'learning_rate': 1.7384e-05, 'epoch': 0.65}
+{'loss': 1.5642, 'grad_norm': 68.89189910888672, 'learning_rate': 1.7376e-05, 'epoch': 0.66}
+{'loss': 1.3772, 'grad_norm': 63.920555114746094, 'learning_rate': 1.7368e-05, 'epoch': 0.66}
+{'loss': 1.4448, 'grad_norm': 26.97085189819336, 'learning_rate': 1.736e-05, 'epoch': 0.66}
+{'loss': 1.2488, 'grad_norm': 43.41285705566406, 'learning_rate': 1.7352000000000003e-05, 'epoch': 0.66}
+{'loss': 1.4552, 'grad_norm': 56.55759811401367, 'learning_rate': 1.7344000000000002e-05, 'epoch': 0.66}
+{'loss': 1.3227, 'grad_norm': 78.41809844970703, 'learning_rate': 1.7336e-05, 'epoch': 0.67}
+{'loss': 1.4332, 'grad_norm': 57.0505485534668, 'learning_rate': 1.7328e-05, 'epoch': 0.67}
+{'loss': 1.3612, 'grad_norm': 43.29607391357422, 'learning_rate': 1.732e-05, 'epoch': 0.67}
+{'loss': 1.3262, 'grad_norm': 65.25544738769531, 'learning_rate': 1.7312000000000003e-05, 'epoch': 0.67}
+{'loss': 1.1534, 'grad_norm': 26.557273864746094, 'learning_rate': 1.7304000000000002e-05, 'epoch': 0.67}
+{'loss': 1.5252, 'grad_norm': 84.68846893310547, 'learning_rate': 1.7296000000000002e-05, 'epoch': 0.68}
+{'loss': 1.2487, 'grad_norm': 57.29430389404297, 'learning_rate': 1.7288e-05, 'epoch': 0.68}
+{'loss': 1.3904, 'grad_norm': 49.16902542114258, 'learning_rate': 1.728e-05, 'epoch': 0.68}
+{'loss': 1.4081, 'grad_norm': 45.57682418823242, 'learning_rate': 1.7272000000000003e-05, 'epoch': 0.68}
+{'loss': 1.2626, 'grad_norm': 87.56519317626953, 'learning_rate': 1.7264e-05, 'epoch': 0.68}
+{'loss': 0.99, 'grad_norm': 41.698795318603516, 'learning_rate': 1.7256000000000002e-05, 'epoch': 0.69}
+{'loss': 1.1182, 'grad_norm': 82.87960815429688, 'learning_rate': 1.7248e-05, 'epoch': 0.69}
+{'loss': 1.2307, 'grad_norm': 57.02367401123047, 'learning_rate': 1.724e-05, 'epoch': 0.69}
+{'loss': 1.231, 'grad_norm': 24.611492156982422, 'learning_rate': 1.7232000000000004e-05, 'epoch': 0.69}
+{'loss': 1.5306, 'grad_norm': 43.77777099609375, 'learning_rate': 1.7224e-05, 'epoch': 0.69}
+{'loss': 1.2172, 'grad_norm': 45.57355880737305, 'learning_rate': 1.7216000000000003e-05, 'epoch': 0.7}
+{'loss': 1.4552, 'grad_norm': 76.81808471679688, 'learning_rate': 1.7208000000000002e-05, 'epoch': 0.7}
+{'loss': 1.2723, 'grad_norm': 46.688140869140625, 'learning_rate': 1.72e-05, 'epoch': 0.7}
+{'loss': 1.3041, 'grad_norm': 61.16465759277344, 'learning_rate': 1.7192e-05, 'epoch': 0.7}
+{'loss': 1.424, 'grad_norm': 66.70210266113281, 'learning_rate': 1.7184e-05, 'epoch': 0.7}
+{'loss': 1.3402, 'grad_norm': 57.780643463134766, 'learning_rate': 1.7176000000000003e-05, 'epoch': 0.71}
+{'loss': 1.2968, 'grad_norm': 22.110898971557617, 'learning_rate': 1.7168000000000002e-05, 'epoch': 0.71}
+{'loss': 1.2407, 'grad_norm': 53.03862380981445, 'learning_rate': 1.7160000000000002e-05, 'epoch': 0.71}
+{'loss': 1.3078, 'grad_norm': 97.63013458251953, 'learning_rate': 1.7152e-05, 'epoch': 0.71}
+{'loss': 1.297, 'grad_norm': 90.91128540039062, 'learning_rate': 1.7144e-05, 'epoch': 0.71}
+{'loss': 1.2724, 'grad_norm': 41.1345329284668, 'learning_rate': 1.7136e-05, 'epoch': 0.72}
+{'loss': 1.0804, 'grad_norm': 46.379905700683594, 'learning_rate': 1.7128000000000003e-05, 'epoch': 0.72}
+{'loss': 1.2925, 'grad_norm': 68.94495391845703, 'learning_rate': 1.7120000000000002e-05, 'epoch': 0.72}
+{'loss': 1.3818, 'grad_norm': 71.51094818115234, 'learning_rate': 1.7112e-05, 'epoch': 0.72}
+{'loss': 1.42, 'grad_norm': 40.6379508972168, 'learning_rate': 1.7104e-05, 'epoch': 0.72}
+{'loss': 1.2713, 'grad_norm': 31.8181095123291, 'learning_rate': 1.7096e-05, 'epoch': 0.73}
+{'loss': 1.1322, 'grad_norm': 41.211326599121094, 'learning_rate': 1.7088000000000003e-05, 'epoch': 0.73}
+{'loss': 1.3299, 'grad_norm': 35.49441909790039, 'learning_rate': 1.7080000000000002e-05, 'epoch': 0.73}
+{'loss': 1.1544, 'grad_norm': 53.03836441040039, 'learning_rate': 1.7072000000000002e-05, 'epoch': 0.73}
+{'loss': 1.5497, 'grad_norm': 43.44970703125, 'learning_rate': 1.7064e-05, 'epoch': 0.73}
+{'loss': 1.602, 'grad_norm': 89.08268737792969, 'learning_rate': 1.7056e-05, 'epoch': 0.74}
+{'loss': 1.1956, 'grad_norm': 29.790037155151367, 'learning_rate': 1.7048000000000003e-05, 'epoch': 0.74}
+{'loss': 1.2695, 'grad_norm': 56.7021598815918, 'learning_rate': 1.704e-05, 'epoch': 0.74}
+{'loss': 1.3885, 'grad_norm': 49.61711883544922, 'learning_rate': 1.7032000000000002e-05, 'epoch': 0.74}
+{'loss': 1.1829, 'grad_norm': 61.43918991088867, 'learning_rate': 1.7024e-05, 'epoch': 0.74}
+{'loss': 1.1861, 'grad_norm': 45.90537643432617, 'learning_rate': 1.7016e-05, 'epoch': 0.75}
+{'loss': 1.2699, 'grad_norm': 50.61006164550781, 'learning_rate': 1.7008000000000004e-05, 'epoch': 0.75}
+{'loss': 1.2425, 'grad_norm': 71.31896209716797, 'learning_rate': 1.7e-05, 'epoch': 0.75}
+{'loss': 1.2351, 'grad_norm': 41.93843078613281, 'learning_rate': 1.6992000000000003e-05, 'epoch': 0.75}
+{'loss': 1.2426, 'grad_norm': 17.634132385253906, 'learning_rate': 1.6984000000000002e-05, 'epoch': 0.75}
+{'loss': 1.3634, 'grad_norm': 35.81813430786133, 'learning_rate': 1.6976e-05, 'epoch': 0.76}
+{'loss': 1.3237, 'grad_norm': 41.6409797668457, 'learning_rate': 1.6968e-05, 'epoch': 0.76}
+{'loss': 1.4591, 'grad_norm': 55.83755111694336, 'learning_rate': 1.696e-05, 'epoch': 0.76}
+{'loss': 1.4116, 'grad_norm': 55.60468673706055, 'learning_rate': 1.6952000000000003e-05, 'epoch': 0.76}
+{'loss': 1.2551, 'grad_norm': 78.5707778930664, 'learning_rate': 1.6944e-05, 'epoch': 0.76}
+{'loss': 1.1454, 'grad_norm': 50.79957962036133, 'learning_rate': 1.6936000000000002e-05, 'epoch': 0.77}
+{'loss': 1.1816, 'grad_norm': 36.0026741027832, 'learning_rate': 1.6928e-05, 'epoch': 0.77}
+{'loss': 1.3385, 'grad_norm': 51.32182693481445, 'learning_rate': 1.692e-05, 'epoch': 0.77}
+{'loss': 1.1926, 'grad_norm': 63.51739501953125, 'learning_rate': 1.6912000000000003e-05, 'epoch': 0.77}
+{'loss': 1.4133, 'grad_norm': 67.88036346435547, 'learning_rate': 1.6904e-05, 'epoch': 0.77}
+{'loss': 1.2485, 'grad_norm': 87.7673568725586, 'learning_rate': 1.6896000000000002e-05, 'epoch': 0.78}
+{'loss': 1.3173, 'grad_norm': 53.26057434082031, 'learning_rate': 1.6888e-05, 'epoch': 0.78}
+{'loss': 1.4366, 'grad_norm': 82.1866683959961, 'learning_rate': 1.688e-05, 'epoch': 0.78}
+{'loss': 1.3165, 'grad_norm': 52.52675247192383, 'learning_rate': 1.6872e-05, 'epoch': 0.78}
+{'loss': 1.0729, 'grad_norm': 49.25635528564453, 'learning_rate': 1.6864e-05, 'epoch': 0.78}
+{'loss': 1.4114, 'grad_norm': 87.68972778320312, 'learning_rate': 1.6856000000000003e-05, 'epoch': 0.79}
+{'loss': 1.3647, 'grad_norm': 50.77653121948242, 'learning_rate': 1.6848000000000002e-05, 'epoch': 0.79}
+{'loss': 1.3205, 'grad_norm': 51.36333084106445, 'learning_rate': 1.684e-05, 'epoch': 0.79}
+{'loss': 1.4052, 'grad_norm': 88.9719467163086, 'learning_rate': 1.6832e-05, 'epoch': 0.79}
+{'loss': 1.4208, 'grad_norm': 51.344390869140625, 'learning_rate': 1.6824e-05, 'epoch': 0.79}
+{'loss': 1.1765, 'grad_norm': 40.75041961669922, 'learning_rate': 1.6816e-05, 'epoch': 0.8}
+{'loss': 1.3647, 'grad_norm': 37.782470703125, 'learning_rate': 1.6808000000000002e-05, 'epoch': 0.8}
+{'loss': 1.3131, 'grad_norm': 54.81960678100586, 'learning_rate': 1.6800000000000002e-05, 'epoch': 0.8}
+{'loss': 1.3553, 'grad_norm': 96.90689849853516, 'learning_rate': 1.6792e-05, 'epoch': 0.8}
+{'loss': 1.1588, 'grad_norm': 69.50394439697266, 'learning_rate': 1.6784e-05, 'epoch': 0.8}
+{'loss': 1.3719, 'grad_norm': 55.06292724609375, 'learning_rate': 1.6776e-05, 'epoch': 0.81}
+{'loss': 1.3951, 'grad_norm': 53.430660247802734, 'learning_rate': 1.6768000000000003e-05, 'epoch': 0.81}
+{'loss': 1.0024, 'grad_norm': 40.53313064575195, 'learning_rate': 1.6760000000000002e-05, 'epoch': 0.81}
+{'loss': 1.0753, 'grad_norm': 29.85816764831543, 'learning_rate': 1.6752e-05, 'epoch': 0.81}
+{'loss': 1.3756, 'grad_norm': 69.93974304199219, 'learning_rate': 1.6744e-05, 'epoch': 0.81}
+{'loss': 1.5887, 'grad_norm': 40.575042724609375, 'learning_rate': 1.6736e-05, 'epoch': 0.82}
+{'loss': 1.3698, 'grad_norm': 61.16258239746094, 'learning_rate': 1.6728000000000003e-05, 'epoch': 0.82}
+{'loss': 1.1804, 'grad_norm': 28.101348876953125, 'learning_rate': 1.672e-05, 'epoch': 0.82}
+{'loss': 1.2591, 'grad_norm': 65.01315307617188, 'learning_rate': 1.6712000000000002e-05, 'epoch': 0.82}
+{'loss': 1.2669, 'grad_norm': 50.83396911621094, 'learning_rate': 1.6704e-05, 'epoch': 0.82}
+{'loss': 1.5867, 'grad_norm': 60.2920036315918, 'learning_rate': 1.6696e-05, 'epoch': 0.83}
+{'loss': 1.2437, 'grad_norm': 52.52806854248047, 'learning_rate': 1.6688000000000004e-05, 'epoch': 0.83}
+{'loss': 1.4309, 'grad_norm': 53.536903381347656, 'learning_rate': 1.668e-05, 'epoch': 0.83}
+{'loss': 1.2371, 'grad_norm': 44.04537582397461, 'learning_rate': 1.6672000000000002e-05, 'epoch': 0.83}
+{'loss': 1.4731, 'grad_norm': 73.20438385009766, 'learning_rate': 1.6664000000000002e-05, 'epoch': 0.83}
+{'loss': 1.1819, 'grad_norm': 53.43992233276367, 'learning_rate': 1.6656e-05, 'epoch': 0.84}
+{'loss': 1.3562, 'grad_norm': 73.05936431884766, 'learning_rate': 1.6648e-05, 'epoch': 0.84}
+{'loss': 1.2936, 'grad_norm': 51.58322525024414, 'learning_rate': 1.664e-05, 'epoch': 0.84}
+{'loss': 1.5915, 'grad_norm': 44.08585739135742, 'learning_rate': 1.6632000000000003e-05, 'epoch': 0.84}
+{'loss': 1.363, 'grad_norm': 66.17411804199219, 'learning_rate': 1.6624000000000002e-05, 'epoch': 0.84}
+{'loss': 1.3018, 'grad_norm': 51.161827087402344, 'learning_rate': 1.6616e-05, 'epoch': 0.85}
+{'loss': 1.2321, 'grad_norm': 45.38212966918945, 'learning_rate': 1.6608e-05, 'epoch': 0.85}
+{'loss': 1.1693, 'grad_norm': 56.828731536865234, 'learning_rate': 1.66e-05, 'epoch': 0.85}
+{'loss': 1.3542, 'grad_norm': 28.67235565185547, 'learning_rate': 1.6592000000000003e-05, 'epoch': 0.85}
+{'loss': 1.1785, 'grad_norm': 71.38662719726562, 'learning_rate': 1.6584000000000002e-05, 'epoch': 0.85}
+{'loss': 1.2283, 'grad_norm': 59.12001037597656, 'learning_rate': 1.6576000000000002e-05, 'epoch': 0.86}
+{'loss': 1.1909, 'grad_norm': 56.3126220703125, 'learning_rate': 1.6568e-05, 'epoch': 0.86}
+{'loss': 1.4606, 'grad_norm': 51.4083366394043, 'learning_rate': 1.656e-05, 'epoch': 0.86}
+{'loss': 1.3246, 'grad_norm': 54.40028762817383, 'learning_rate': 1.6552e-05, 'epoch': 0.86}
+{'loss': 1.0436, 'grad_norm': 41.6043586730957, 'learning_rate': 1.6544000000000003e-05, 'epoch': 0.86}
+{'loss': 1.4801, 'grad_norm': 65.2233657836914, 'learning_rate': 1.6536000000000002e-05, 'epoch': 0.87}
+{'loss': 1.1789, 'grad_norm': 49.15241622924805, 'learning_rate': 1.6528e-05, 'epoch': 0.87}
+{'loss': 1.4371, 'grad_norm': 43.33790969848633, 'learning_rate': 1.652e-05, 'epoch': 0.87}
+{'loss': 1.4078, 'grad_norm': 46.56074523925781, 'learning_rate': 1.6512e-05, 'epoch': 0.87}
+{'loss': 1.1544, 'grad_norm': 67.60501098632812, 'learning_rate': 1.6504000000000003e-05, 'epoch': 0.87}
+{'loss': 1.3945, 'grad_norm': 66.0018539428711, 'learning_rate': 1.6496e-05, 'epoch': 0.88}
+{'loss': 1.4625, 'grad_norm': 48.189937591552734, 'learning_rate': 1.6488000000000002e-05, 'epoch': 0.88}
+{'loss': 1.7234, 'grad_norm': 77.26466369628906, 'learning_rate': 1.648e-05, 'epoch': 0.88}
+{'loss': 1.1301, 'grad_norm': 39.726661682128906, 'learning_rate': 1.6472e-05, 'epoch': 0.88}
+{'loss': 1.1682, 'grad_norm': 52.48069763183594, 'learning_rate': 1.6464000000000004e-05, 'epoch': 0.88}
+{'loss': 1.1757, 'grad_norm': 36.870819091796875, 'learning_rate': 1.6456e-05, 'epoch': 0.89}
+{'loss': 1.1464, 'grad_norm': 38.44974899291992, 'learning_rate': 1.6448000000000002e-05, 'epoch': 0.89}
+{'loss': 1.2551, 'grad_norm': 56.85829544067383, 'learning_rate': 1.6440000000000002e-05, 'epoch': 0.89}
+{'loss': 1.3611, 'grad_norm': 55.00107955932617, 'learning_rate': 1.6432e-05, 'epoch': 0.89}
+{'loss': 1.3117, 'grad_norm': 45.13197708129883, 'learning_rate': 1.6424e-05, 'epoch': 0.89}
+{'loss': 1.4049, 'grad_norm': 65.34579467773438, 'learning_rate': 1.6416e-05, 'epoch': 0.9}
+{'loss': 1.2351, 'grad_norm': 49.30158615112305, 'learning_rate': 1.6408000000000003e-05, 'epoch': 0.9}
+{'loss': 1.4804, 'grad_norm': 46.14605712890625, 'learning_rate': 1.64e-05, 'epoch': 0.9}
+{'loss': 1.6473, 'grad_norm': 52.731327056884766, 'learning_rate': 1.6392e-05, 'epoch': 0.9}
+{'loss': 1.0482, 'grad_norm': 32.706417083740234, 'learning_rate': 1.6384e-05, 'epoch': 0.9}
+{'loss': 1.3342, 'grad_norm': 74.15057373046875, 'learning_rate': 1.6376e-05, 'epoch': 0.91}
+{'loss': 1.2193, 'grad_norm': 43.737518310546875, 'learning_rate': 1.6368000000000003e-05, 'epoch': 0.91}
+{'loss': 1.4826, 'grad_norm': 56.59633255004883, 'learning_rate': 1.636e-05, 'epoch': 0.91}
+{'loss': 1.0879, 'grad_norm': 56.812843322753906, 'learning_rate': 1.6352000000000002e-05, 'epoch': 0.91}
+{'loss': 1.431, 'grad_norm': 41.867122650146484, 'learning_rate': 1.6344e-05, 'epoch': 0.91}
+{'loss': 1.2099, 'grad_norm': 46.77213668823242, 'learning_rate': 1.6336e-05, 'epoch': 0.92}
+{'loss': 1.2604, 'grad_norm': 89.6067886352539, 'learning_rate': 1.6328e-05, 'epoch': 0.92}
+{'loss': 1.3711, 'grad_norm': 31.64955711364746, 'learning_rate': 1.632e-05, 'epoch': 0.92}
+{'loss': 1.1762, 'grad_norm': 53.89254379272461, 'learning_rate': 1.6312000000000002e-05, 'epoch': 0.92}
+{'loss': 1.408, 'grad_norm': 63.508819580078125, 'learning_rate': 1.6304000000000002e-05, 'epoch': 0.92}
+{'loss': 1.3362, 'grad_norm': 39.50255584716797, 'learning_rate': 1.6296e-05, 'epoch': 0.93}
+{'loss': 1.3243, 'grad_norm': 68.44200897216797, 'learning_rate': 1.6288e-05, 'epoch': 0.93}
+{'loss': 1.2081, 'grad_norm': 41.146549224853516, 'learning_rate': 1.628e-05, 'epoch': 0.93}
+{'loss': 1.3071, 'grad_norm': 51.48481750488281, 'learning_rate': 1.6272000000000003e-05, 'epoch': 0.93}
+{'loss': 1.3451, 'grad_norm': 43.7934684753418, 'learning_rate': 1.6264000000000002e-05, 'epoch': 0.93}
+{'loss': 1.2859, 'grad_norm': 40.48566436767578, 'learning_rate': 1.6256e-05, 'epoch': 0.94}
+{'loss': 1.1272, 'grad_norm': 71.12525939941406, 'learning_rate': 1.6248e-05, 'epoch': 0.94}
+{'loss': 1.2848, 'grad_norm': 38.84193801879883, 'learning_rate': 1.6240000000000004e-05, 'epoch': 0.94}
+{'loss': 1.6088, 'grad_norm': 57.28859329223633, 'learning_rate': 1.6232e-05, 'epoch': 0.94}
+{'loss': 1.3399, 'grad_norm': 85.33658599853516, 'learning_rate': 1.6224000000000003e-05, 'epoch': 0.94}
+{'loss': 1.0659, 'grad_norm': 44.889896392822266, 'learning_rate': 1.6216000000000002e-05, 'epoch': 0.95}
+{'loss': 1.372, 'grad_norm': 76.53241729736328, 'learning_rate': 1.6208e-05, 'epoch': 0.95}
+{'loss': 1.4619, 'grad_norm': 43.07966613769531, 'learning_rate': 1.62e-05, 'epoch': 0.95}
+{'loss': 1.2456, 'grad_norm': 45.94980239868164, 'learning_rate': 1.6192e-05, 'epoch': 0.95}
+{'loss': 1.2844, 'grad_norm': 46.08341979980469, 'learning_rate': 1.6184000000000003e-05, 'epoch': 0.95}
+{'loss': 1.45, 'grad_norm': 85.37972259521484, 'learning_rate': 1.6176e-05, 'epoch': 0.96}
+{'loss': 1.2758, 'grad_norm': 45.234214782714844, 'learning_rate': 1.6168000000000002e-05, 'epoch': 0.96}
+{'loss': 1.3676, 'grad_norm': 51.71453094482422, 'learning_rate': 1.616e-05, 'epoch': 0.96}
+{'loss': 1.2893, 'grad_norm': 38.73775863647461, 'learning_rate': 1.6152e-05, 'epoch': 0.96}
+{'loss': 1.2493, 'grad_norm': 57.69316482543945, 'learning_rate': 1.6144000000000003e-05, 'epoch': 0.96}
+{'loss': 1.1888, 'grad_norm': 48.69936752319336, 'learning_rate': 1.6136e-05, 'epoch': 0.97}
+{'loss': 1.2732, 'grad_norm': 49.36051940917969, 'learning_rate': 1.6128000000000002e-05, 'epoch': 0.97}
+{'loss': 1.3578, 'grad_norm': 25.648082733154297, 'learning_rate': 1.612e-05, 'epoch': 0.97}
+{'loss': 1.2725, 'grad_norm': 48.020286560058594, 'learning_rate': 1.6112e-05, 'epoch': 0.97}
+{'loss': 1.4204, 'grad_norm': 63.55075454711914, 'learning_rate': 1.6104e-05, 'epoch': 0.97}
+{'loss': 1.2236, 'grad_norm': 62.861141204833984, 'learning_rate': 1.6096e-05, 'epoch': 0.98}
+{'loss': 1.4185, 'grad_norm': 63.76673889160156, 'learning_rate': 1.6088000000000002e-05, 'epoch': 0.98}
+{'loss': 1.3269, 'grad_norm': 92.71479034423828, 'learning_rate': 1.6080000000000002e-05, 'epoch': 0.98}
+{'loss': 1.4763, 'grad_norm': 46.88262939453125, 'learning_rate': 1.6072e-05, 'epoch': 0.98}
+{'loss': 1.2426, 'grad_norm': 69.3346939086914, 'learning_rate': 1.6064e-05, 'epoch': 0.98}
+{'loss': 1.3785, 'grad_norm': 50.96664810180664, 'learning_rate': 1.6056e-05, 'epoch': 0.99}
+{'loss': 1.1484, 'grad_norm': 55.92033386230469, 'learning_rate': 1.6048000000000003e-05, 'epoch': 0.99}
+{'loss': 1.542, 'grad_norm': 39.04408264160156, 'learning_rate': 1.6040000000000002e-05, 'epoch': 0.99}
+{'loss': 1.2437, 'grad_norm': 34.162437438964844, 'learning_rate': 1.6032e-05, 'epoch': 0.99}
+{'loss': 1.1301, 'grad_norm': 48.26722717285156, 'learning_rate': 1.6024e-05, 'epoch': 0.99}
+{'loss': 1.3734, 'grad_norm': 90.12760925292969, 'learning_rate': 1.6016e-05, 'epoch': 1.0}
+{'loss': 1.2602, 'grad_norm': 49.52943801879883, 'learning_rate': 1.6008e-05, 'epoch': 1.0}
+{'loss': 1.2611, 'grad_norm': 53.93406677246094, 'learning_rate': 1.6000000000000003e-05, 'epoch': 1.0}
+{'eval_loss': 1.2069146633148193, 'eval_accuracy': 0.4351, 'eval_runtime': 2795.921, 'eval_samples_per_second': 3.577, 'eval_steps_per_second': 1.788, 'epoch': 1.0}
